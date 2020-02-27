@@ -1,0 +1,135 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Track</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">track</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Track (track)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Track</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package track;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * Immutable Object
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class Track implements Comparable&lt;Track&gt;{
+<i>10</i>&nbsp;//    AF(radius) = 一条以radius为半径的圆形轨道
+<i>11</i>&nbsp;//    RI：radius&gt;=0
+<i>12</i>&nbsp;//    Rep Explosure : 没有暴露对象的方法
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    double radius;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public static Track getInstance(double radius) {
+<b class="fc"><i>18</i>&nbsp;        return new Track(radius);</b>
+<i>19</i>&nbsp;    }
+<b class="fc"><i>20</i>&nbsp;    public Track(double radius) {</b>
+<b class="fc"><i>21</i>&nbsp;        this.radius = radius;</b>
+<b class="fc"><i>22</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>23</i>&nbsp;    }</b>
+<i>24</i>&nbsp;    private void checkRep() {
+<b class="fc"><i>25</i>&nbsp;        UncheckedException.assertTrue(radius&gt;=0,&quot;Track Radiu 不满足&gt;=0&quot;);</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public double getRadius() {
+<b class="fc"><i>29</i>&nbsp;        return radius;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override
+<i>33</i>&nbsp;    public int compareTo(Track that) {
+<b class="fc"><i>34</i>&nbsp;        return Double.compare(this.radius,that.radius);</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Override
+<i>38</i>&nbsp;    public int hashCode() {
+<b class="fc"><i>39</i>&nbsp;        return (int)this.radius;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    @Override
+<i>43</i>&nbsp;    public boolean equals(Object obj) {
+<b class="fc"><i>44</i>&nbsp;        if(obj==null) return false;</b>
+<b class="fc"><i>45</i>&nbsp;        if(obj instanceof Track) {</b>
+<b class="fc"><i>46</i>&nbsp;            Track that = (Track) obj;</b>
+<b class="fc"><i>47</i>&nbsp;            return that.radius == this.radius;</b>
+<i>48</i>&nbsp;        } else {
+<b class="nc"><i>49</i>&nbsp;            return false;</b>
+<i>50</i>&nbsp;        }
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

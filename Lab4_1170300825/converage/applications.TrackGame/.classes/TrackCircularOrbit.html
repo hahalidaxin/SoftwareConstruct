@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TrackCircularOrbit</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.TrackGame</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TrackCircularOrbit (applications.TrackGame)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackCircularOrbit</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.3%
+  </span>
+  <span class="absValue">
+    (28/ 31)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrackCircularOrbit$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/ 27)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.8%
+  </span>
+  <span class="absValue">
+    (55/ 58)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.TrackGame;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import centralObject.CentralObject;
+<i>4</i>&nbsp;import circularOrbit.ConcreteCircularOrbit;
+<i>5</i>&nbsp;import org.apache.log4j.Logger;
+<i>6</i>&nbsp;import otherDirectory.GraphicsPainter;
+<i>7</i>&nbsp;import otherDirectory.Relation;
+<i>8</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>9</i>&nbsp;import track.Track;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.swing.*;
+<i>12</i>&nbsp;import java.awt.*;
+<i>13</i>&nbsp;import java.util.List;
+<i>14</i>&nbsp;import java.util.Map;
+<i>15</i>&nbsp;import java.util.stream.Collectors;
+<i>16</i>&nbsp;
+<b class="fc"><i>17</i>&nbsp;public class TrackCircularOrbit extends ConcreteCircularOrbit&lt;CentralObject,Runner&gt; {</b>
+<i>18</i>&nbsp;//  AF(*) = TrackGame轨道系统
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;//  RI : 无中心点物体；跑道数为 无中心点物体；
+<i>21</i>&nbsp;//  跑道数为 4-10 之间；每一组的人数不能超 过跑道数、每一组的条里最多 1位运动员（但可以没有）；
+<i>22</i>&nbsp;//  如果第 n组的人数少于跑道数，则第 0到第 n-1各组的人数必须等于跑 道数。
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;// Rep Explosure ：与ConcreteCircularOrbit相同
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;    private static Logger logger = Logger.getLogger(TrackCircularOrbit.class.getName());</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public TrackCircularOrbit(CentralObject co, Map&lt;Track, List&lt;Runner&gt;&gt; pm, List&lt;Relation&lt;CentralObject, Runner&gt;&gt; rel1, Map&lt;Runner, List&lt;Relation&lt;Runner, Runner&gt;&gt;&gt; rel2) {
+<b class="fc"><i>29</i>&nbsp;        super(co, pm, rel1, rel2);</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override
+<i>33</i>&nbsp;    protected void checkRep() {
+<b class="fc"><i>34</i>&nbsp;        super.checkRep();</b>
+<i>35</i>&nbsp;        try {
+<b class="fc"><i>36</i>&nbsp;            UncheckedException.assertTrue(checkOribitAvailable(), &quot;不满足轨道系统合法的循环不变性&quot;);</b>
+<b class="nc"><i>37</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>38</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>39</i>&nbsp;            throw e;</b>
+<b class="fc"><i>40</i>&nbsp;        }</b>
+<b class="fc"><i>41</i>&nbsp;    }</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @Override
+<i>44</i>&nbsp;    public boolean checkOribitAvailable() {
+<b class="fc"><i>45</i>&nbsp;        boolean ans = true;</b>
+<i>46</i>&nbsp;//        无中心点物体
+<b class="fc"><i>47</i>&nbsp;        ans = ans &amp;&amp; centralObject==null;</b>
+<i>48</i>&nbsp;//        跑道数在4-10之间
+<b class="fc"><i>49</i>&nbsp;        int numOfTrack = physicalObjectMap.keySet().size();</b>
+<b class="fc"><i>50</i>&nbsp;        ans = ans &amp;&amp; numOfTrack&gt;=4 &amp;&amp; numOfTrack&lt;=10;</b>
+<i>51</i>&nbsp;//        每组人数不超过跑道数
+<b class="fc"><i>52</i>&nbsp;        int numOfRunner = physicalObjectMap.values().stream()</b>
+<b class="fc"><i>53</i>&nbsp;                .mapToInt(List::size).sum();</b>
+<b class="fc"><i>54</i>&nbsp;        ans = ans &amp;&amp; numOfRunner&lt;=numOfTrack;</b>
+<b class="fc"><i>55</i>&nbsp;        for(Map.Entry&lt;Track,List&lt;Runner&gt;&gt; entry:physicalObjectMap.entrySet()) {</b>
+<b class="fc"><i>56</i>&nbsp;            ans = ans &amp;&amp; physicalObjectMap.get(entry.getKey()).size()&lt;=1;</b>
+<b class="fc"><i>57</i>&nbsp;        }</b>
+<b class="fc"><i>58</i>&nbsp;        return ans;</b>
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    @Override
+<i>62</i>&nbsp;    public JPanel visualizeContentPanel() {
+<b class="fc"><i>63</i>&nbsp;        logger.info(&quot;将TrackGame轨道系统可视化&quot;);</b>
+<b class="fc"><i>64</i>&nbsp;        return new JPanel() {</b>
+<i>65</i>&nbsp;            //序列号（可省略）
+<i>66</i>&nbsp;            private static final long serialVersionUID = 1L;
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;            // 重写paint方法
+<i>69</i>&nbsp;            @Override
+<i>70</i>&nbsp;            public void paint(Graphics graphics) {
+<b class="fc"><i>71</i>&nbsp;                final int pnLength = 800;</b>
+<b class="fc"><i>72</i>&nbsp;                final int padding = 100;</b>
+<b class="fc"><i>73</i>&nbsp;                int trasz  = physicalObjectMap.size();</b>
+<b class="fc"><i>74</i>&nbsp;                int[] trackRadius = new int[trasz];</b>
+<b class="fc"><i>75</i>&nbsp;                for(int i=0;i&lt;trasz;i++) {</b>
+<b class="fc"><i>76</i>&nbsp;                    trackRadius[i] = (pnLength-padding)/(2*trasz)*(i+1);</b>
+<i>77</i>&nbsp;                }
+<i>78</i>&nbsp;                // 必须先调用父类的paint方法
+<b class="fc"><i>79</i>&nbsp;                super.paint(graphics);</b>
+<i>80</i>&nbsp;                // 用画笔Graphics，在画板JPanel上画一个小人
+<b class="fc"><i>81</i>&nbsp;                int centerX = pnLength/2,centerY = pnLength/2;</b>
+<i>82</i>&nbsp;
+<b class="fc"><i>83</i>&nbsp;                List&lt;Track&gt; trackList = physicalObjectMap.keySet().stream()</b>
+<b class="fc"><i>84</i>&nbsp;                        .sorted().collect(Collectors.toList());</b>
+<b class="fc"><i>85</i>&nbsp;                for(int idx=1;idx&lt;=trasz;idx++) {</b>
+<b class="fc"><i>86</i>&nbsp;                    Track track = trackList.get(idx-1);</b>
+<b class="fc"><i>87</i>&nbsp;                    int tr = trackRadius[idx-1];</b>
+<b class="fc"><i>88</i>&nbsp;                    int width = 2*tr,height = 2*tr;</b>
+<b class="fc"><i>89</i>&nbsp;                    graphics.drawOval(centerX-tr,centerY-tr,</b>
+<i>90</i>&nbsp;                            width,height);
+<i>91</i>&nbsp;
+<b class="fc"><i>92</i>&nbsp;                    List&lt;Runner&gt; poList = physicalObjectMap.get(track);</b>
+<b class="fc"><i>93</i>&nbsp;                    int sz = poList.size();</b>
+<b class="fc"><i>94</i>&nbsp;                    for(int i=0;i&lt;sz;i++) {</b>
+<b class="fc"><i>95</i>&nbsp;                        Runner runner = poList.get(i);</b>
+<b class="fc"><i>96</i>&nbsp;                        GraphicsPainter painter = new GraphicsPainter();</b>
+<b class="fc"><i>97</i>&nbsp;                        double theta = i*(2*Math.PI/(sz));</b>
+<b class="fc"><i>98</i>&nbsp;                        int cx = (int)(tr*Math.cos(theta))+centerX,cy = (int)(tr*Math.sin(theta))+centerY;</b>
+<b class="fc"><i>99</i>&nbsp;                        painter.setX(cx); painter.setY(cy);</b>
+<b class="fc"><i>100</i>&nbsp;                        painter.setRadius(10);</b>
+<b class="fc"><i>101</i>&nbsp;                        runner.drawGraphics(graphics,painter);</b>
+<i>102</i>&nbsp;                    }
+<i>103</i>&nbsp;                }
+<b class="fc"><i>104</i>&nbsp;            }</b>
+<i>105</i>&nbsp;        };
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    @Override
+<i>109</i>&nbsp;    public void visualize(JPanel panel) {
+<b class="fc"><i>110</i>&nbsp;        JPanel contentPanel = visualizeContentPanel();</b>
+<b class="fc"><i>111</i>&nbsp;        panel.removeAll();</b>
+<b class="fc"><i>112</i>&nbsp;        contentPanel.setPreferredSize(new Dimension(800,800));</b>
+<b class="fc"><i>113</i>&nbsp;        panel.add(contentPanel);</b>
+<b class="fc"><i>114</i>&nbsp;        panel.validate();</b>
+<b class="fc"><i>115</i>&nbsp;        panel.repaint();</b>
+<b class="fc"><i>116</i>&nbsp;    }</b>
+<i>117</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

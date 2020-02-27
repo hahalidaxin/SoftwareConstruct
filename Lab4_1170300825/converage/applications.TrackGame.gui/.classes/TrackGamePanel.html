@@ -1,0 +1,811 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TrackGamePanel</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.TrackGame.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TrackGamePanel (applications.TrackGame.gui)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackGamePanel</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.8%
+  </span>
+  <span class="absValue">
+    (178/ 226)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrackGamePanel$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TrackGamePanel$7</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (16/ 32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.9%
+  </span>
+  <span class="absValue">
+    (185/ 247)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Created by JFormDesigner on Sat Apr 20 08:53:36 CST 2019
+<i>3</i>&nbsp; */
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;package applications.TrackGame.gui;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import APIs.gui.LoggerFrame;
+<i>8</i>&nbsp;import applications.TrackGame.TrackGame;
+<i>9</i>&nbsp;import net.miginfocom.swing.MigLayout;
+<i>10</i>&nbsp;import org.apache.log4j.Logger;
+<i>11</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import javax.swing.*;
+<i>14</i>&nbsp;import java.awt.*;
+<i>15</i>&nbsp;import java.awt.event.ItemEvent;
+<i>16</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>17</i>&nbsp;import java.awt.event.MouseEvent;
+<i>18</i>&nbsp;import java.util.List;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;/**
+<i>21</i>&nbsp; * @author Brainrain
+<i>22</i>&nbsp; */
+<b class="nc"><i>23</i>&nbsp;public class TrackGamePanel extends JPanel {</b>
+<b class="fc"><i>24</i>&nbsp;    private static Logger logger = Logger.getLogger(TrackGamePanel.class.getName());</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    TrackGame trackGame;
+<i>27</i>&nbsp;    List&lt;String&gt; trackList;
+<b class="fc"><i>28</i>&nbsp;    public TrackGamePanel(TrackGame trackGame) {</b>
+<b class="fc"><i>29</i>&nbsp;        this.trackGame = trackGame;</b>
+<b class="fc"><i>30</i>&nbsp;        initComponents();</b>
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public void reloadGameInfo(boolean state, double entropy, List&lt;String&gt; trackList, List&lt;String&gt; poList,List&lt;String&gt; otherPoList) {
+<b class="fc"><i>34</i>&nbsp;        this.trackList = trackList;</b>
+<b class="fc"><i>35</i>&nbsp;        String sysState = state?&quot;合法&quot;:&quot;不合法&quot;;</b>
+<b class="fc"><i>36</i>&nbsp;        this.labelState.setText(sysState);</b>
+<b class="fc"><i>37</i>&nbsp;        this.labelEntropy.setText(Double.toString(entropy));</b>
+<b class="fc"><i>38</i>&nbsp;        this.comboBoxRemoveTrack.removeAllItems();</b>
+<b class="fc"><i>39</i>&nbsp;        for(String str:trackList) {</b>
+<b class="fc"><i>40</i>&nbsp;            this.comboBoxRemoveTrack.addItem(str);</b>
+<b class="fc"><i>41</i>&nbsp;        }</b>
+<i>42</i>&nbsp;
+<b class="fc"><i>43</i>&nbsp;        this.comboBoxRemovePO.removeAllItems();</b>
+<b class="fc"><i>44</i>&nbsp;        this.comboBoxPOTrack1.removeAllItems();</b>
+<b class="fc"><i>45</i>&nbsp;        this.comboBoxPOTrack2.removeAllItems();</b>
+<b class="fc"><i>46</i>&nbsp;        this.comboBoxPOGroup1.removeAllItems();</b>
+<b class="fc"><i>47</i>&nbsp;        this.comboBoxPOGroup2.removeAllItems();</b>
+<b class="fc"><i>48</i>&nbsp;        for(String str:poList) {</b>
+<b class="fc"><i>49</i>&nbsp;            this.comboBoxRemovePO.addItem(str);</b>
+<b class="fc"><i>50</i>&nbsp;            this.comboBoxPOTrack1.addItem(str);</b>
+<b class="fc"><i>51</i>&nbsp;            this.comboBoxPOTrack2.addItem(str);</b>
+<b class="fc"><i>52</i>&nbsp;            this.comboBoxPOGroup1.addItem(str);</b>
+<b class="fc"><i>53</i>&nbsp;        }</b>
+<b class="fc"><i>54</i>&nbsp;        for(String str:otherPoList) {</b>
+<b class="fc"><i>55</i>&nbsp;            this.comboBoxPOGroup2.addItem(str);</b>
+<b class="fc"><i>56</i>&nbsp;        }</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    private void processException(UncheckedException exept) {
+<b class="nc"><i>60</i>&nbsp;        logger.error(exept);</b>
+<b class="nc"><i>61</i>&nbsp;        JOptionPane.showMessageDialog(this,exept);</b>
+<b class="nc"><i>62</i>&nbsp;        trackGame.reLoadAll();</b>
+<b class="nc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    private void comboBoxStrategyItemStateChanged(ItemEvent e) {
+<i>66</i>&nbsp;        try {
+<b class="fc"><i>67</i>&nbsp;            switch (e.getStateChange()) {</b>
+<i>68</i>&nbsp;                case ItemEvent.SELECTED:
+<b class="fc"><i>69</i>&nbsp;                    trackGame.selecttedGameStrategy((String) e.getItem());</b>
+<b class="fc"><i>70</i>&nbsp;                    break;</b>
+<i>71</i>&nbsp;                default:
+<i>72</i>&nbsp;                    break;
+<i>73</i>&nbsp;            }
+<b class="nc"><i>74</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>75</i>&nbsp;            processException(exept);</b>
+<b class="fc"><i>76</i>&nbsp;        }</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    private void comboBoxGroupSelectItemStateChanged(ItemEvent e) {
+<i>80</i>&nbsp;        try {
+<b class="fc"><i>81</i>&nbsp;            switch (e.getStateChange()) {</b>
+<i>82</i>&nbsp;                case ItemEvent.SELECTED:
+<b class="fc"><i>83</i>&nbsp;                    trackGame.visualizeOrbit(Integer.parseInt((String) e.getItem()));</b>
+<b class="fc"><i>84</i>&nbsp;                    break;</b>
+<i>85</i>&nbsp;                default:
+<i>86</i>&nbsp;                    break;
+<i>87</i>&nbsp;            }
+<b class="nc"><i>88</i>&nbsp;        }catch(UncheckedException exept) {</b>
+<b class="nc"><i>89</i>&nbsp;            processException(exept);</b>
+<b class="fc"><i>90</i>&nbsp;        }</b>
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    public void initComboBoxGroupSelectItems(List&lt;String&gt; items) {
+<b class="fc"><i>94</i>&nbsp;        comboBoxGroupSelect.removeAllItems();</b>
+<b class="fc"><i>95</i>&nbsp;        for(String item:items) {</b>
+<b class="fc"><i>96</i>&nbsp;            comboBoxGroupSelect.addItem(item);</b>
+<b class="fc"><i>97</i>&nbsp;        }</b>
+<b class="fc"><i>98</i>&nbsp;    }</b>
+<i>99</i>&nbsp;    public void initComboBoxStrategyItems(List&lt;String&gt; items) {
+<b class="fc"><i>100</i>&nbsp;        comboBoxStrategy.removeAllItems();</b>
+<b class="fc"><i>101</i>&nbsp;        for(String item:items) {</b>
+<b class="fc"><i>102</i>&nbsp;            comboBoxStrategy.addItem(item);</b>
+<b class="fc"><i>103</i>&nbsp;        }</b>
+<b class="fc"><i>104</i>&nbsp;    }</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    public JPanel getDrawPanel() {
+<b class="fc"><i>107</i>&nbsp;        return drawPanel;</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    private void buttonRemoveTrackMousePressed(MouseEvent e) {
+<i>111</i>&nbsp;        try {
+<b class="nc"><i>112</i>&nbsp;            double rmRadius = Double.parseDouble((String) this.comboBoxRemoveTrack.getSelectedItem());</b>
+<b class="nc"><i>113</i>&nbsp;            trackGame.removeTrack(rmRadius);</b>
+<b class="nc"><i>114</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>115</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>116</i>&nbsp;        }</b>
+<b class="nc"><i>117</i>&nbsp;    }</b>
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    private void buttonAddTrackMousePressed(MouseEvent e) {
+<i>120</i>&nbsp;        try {
+<b class="nc"><i>121</i>&nbsp;            double addRadius = Double.parseDouble(this.textFieldAddTrack.getText());</b>
+<b class="nc"><i>122</i>&nbsp;            trackGame.addTrack(addRadius);</b>
+<b class="nc"><i>123</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>124</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>125</i>&nbsp;        }</b>
+<b class="nc"><i>126</i>&nbsp;    }</b>
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    private void buttonAddPOMousePressed(MouseEvent e) {
+<b class="nc"><i>129</i>&nbsp;        JFrame inputframe = new RunnerInfoFrame(this.trackGame,this.trackList);</b>
+<b class="nc"><i>130</i>&nbsp;        inputframe.setVisible(true);</b>
+<i>131</i>&nbsp;//        inputframe = null;
+<b class="nc"><i>132</i>&nbsp;    }</b>
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    private void buttonRemovePOMousePressed(MouseEvent e) {
+<i>135</i>&nbsp;        try {
+<b class="nc"><i>136</i>&nbsp;            String rmPO = (String) this.comboBoxRemovePO.getSelectedItem();</b>
+<b class="nc"><i>137</i>&nbsp;            trackGame.removePhysicalObject(rmPO);</b>
+<b class="nc"><i>138</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>139</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>140</i>&nbsp;        }</b>
+<b class="nc"><i>141</i>&nbsp;    }</b>
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    private void buttonChangePOTrackMousePressed(MouseEvent e) {
+<i>144</i>&nbsp;        try {
+<b class="nc"><i>145</i>&nbsp;            String raName = (String) this.comboBoxPOTrack1.getSelectedItem();</b>
+<b class="nc"><i>146</i>&nbsp;            String rbName = (String) this.comboBoxPOTrack2.getSelectedItem();</b>
+<b class="nc"><i>147</i>&nbsp;            trackGame.exchangeTrack(raName, rbName);</b>
+<b class="nc"><i>148</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>149</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>150</i>&nbsp;        }</b>
+<b class="nc"><i>151</i>&nbsp;    }</b>
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    private void buttonChangePOGroupMousePressed(MouseEvent e) {
+<i>154</i>&nbsp;        try {
+<b class="nc"><i>155</i>&nbsp;            String raName = (String) this.comboBoxPOGroup1.getSelectedItem();</b>
+<b class="nc"><i>156</i>&nbsp;            String rbName = (String) this.comboBoxPOGroup2.getSelectedItem();</b>
+<b class="nc"><i>157</i>&nbsp;            trackGame.exchangeGroup(raName, rbName);</b>
+<b class="nc"><i>158</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>159</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>160</i>&nbsp;        }</b>
+<b class="nc"><i>161</i>&nbsp;    }</b>
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    private void buttonLogMousePressed(MouseEvent e) {
+<b class="nc"><i>164</i>&nbsp;        LoggerFrame frame = new LoggerFrame();</b>
+<b class="nc"><i>165</i>&nbsp;        frame.setSize(750,800);</b>
+<b class="nc"><i>166</i>&nbsp;        frame.setVisible(true);</b>
+<b class="nc"><i>167</i>&nbsp;    }</b>
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    private void initComponents() {
+<i>170</i>&nbsp;        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+<b class="fc"><i>171</i>&nbsp;        labelTitle = new JLabel();</b>
+<b class="fc"><i>172</i>&nbsp;        buttonLog = new JButton();</b>
+<b class="fc"><i>173</i>&nbsp;        labelStrategy = new JLabel();</b>
+<b class="fc"><i>174</i>&nbsp;        comboBoxStrategy = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>175</i>&nbsp;        labelChangeGroup = new JLabel();</b>
+<b class="fc"><i>176</i>&nbsp;        comboBoxGroupSelect = new JComboBox();</b>
+<b class="fc"><i>177</i>&nbsp;        drawPanel = new JPanel();</b>
+<b class="fc"><i>178</i>&nbsp;        rightPanel = new JPanel();</b>
+<b class="fc"><i>179</i>&nbsp;        infoPanel = new JPanel();</b>
+<b class="fc"><i>180</i>&nbsp;        label2 = new JLabel();</b>
+<b class="fc"><i>181</i>&nbsp;        labelState = new JLabel();</b>
+<b class="fc"><i>182</i>&nbsp;        label1 = new JLabel();</b>
+<b class="fc"><i>183</i>&nbsp;        labelEntropy = new JLabel();</b>
+<b class="fc"><i>184</i>&nbsp;        opratepanel = new JPanel();</b>
+<b class="fc"><i>185</i>&nbsp;        label11 = new JLabel();</b>
+<b class="fc"><i>186</i>&nbsp;        separator2 = new JSeparator();</b>
+<b class="fc"><i>187</i>&nbsp;        label4 = new JLabel();</b>
+<b class="fc"><i>188</i>&nbsp;        comboBoxRemoveTrack = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>189</i>&nbsp;        buttonRemoveTrack = new JButton();</b>
+<b class="fc"><i>190</i>&nbsp;        label5 = new JLabel();</b>
+<b class="fc"><i>191</i>&nbsp;        textFieldAddTrack = new JTextField();</b>
+<b class="fc"><i>192</i>&nbsp;        buttonAddTrack = new JButton();</b>
+<b class="fc"><i>193</i>&nbsp;        label6 = new JLabel();</b>
+<b class="fc"><i>194</i>&nbsp;        buttonAddPO = new JButton();</b>
+<b class="fc"><i>195</i>&nbsp;        label7 = new JLabel();</b>
+<b class="fc"><i>196</i>&nbsp;        comboBoxRemovePO = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>197</i>&nbsp;        buttonRemovePO = new JButton();</b>
+<b class="fc"><i>198</i>&nbsp;        label10 = new JLabel();</b>
+<b class="fc"><i>199</i>&nbsp;        separator1 = new JSeparator();</b>
+<b class="fc"><i>200</i>&nbsp;        label8 = new JLabel();</b>
+<b class="fc"><i>201</i>&nbsp;        comboBoxPOTrack1 = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>202</i>&nbsp;        comboBoxPOTrack2 = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>203</i>&nbsp;        buttonChangePOTrack = new JButton();</b>
+<b class="fc"><i>204</i>&nbsp;        label9 = new JLabel();</b>
+<b class="fc"><i>205</i>&nbsp;        comboBoxPOGroup1 = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>206</i>&nbsp;        comboBoxPOGroup2 = new JComboBox&lt;&gt;();</b>
+<b class="fc"><i>207</i>&nbsp;        buttonChangePOGroup = new JButton();</b>
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;        //======== this ========
+<b class="fc"><i>210</i>&nbsp;        setLayout(new MigLayout(</b>
+<i>211</i>&nbsp;            &quot;hidemode 3&quot;,
+<i>212</i>&nbsp;            // columns
+<i>213</i>&nbsp;            &quot;[fill]&quot; +
+<i>214</i>&nbsp;            &quot;[fill]&quot; +
+<i>215</i>&nbsp;            &quot;[fill]&quot; +
+<i>216</i>&nbsp;            &quot;[fill]&quot; +
+<i>217</i>&nbsp;            &quot;[fill]&quot; +
+<i>218</i>&nbsp;            &quot;[fill]&quot; +
+<i>219</i>&nbsp;            &quot;[fill]&quot; +
+<i>220</i>&nbsp;            &quot;[fill]&quot; +
+<i>221</i>&nbsp;            &quot;[fill]&quot; +
+<i>222</i>&nbsp;            &quot;[fill]&quot; +
+<i>223</i>&nbsp;            &quot;[fill]&quot; +
+<i>224</i>&nbsp;            &quot;[fill]&quot; +
+<i>225</i>&nbsp;            &quot;[fill]&quot; +
+<i>226</i>&nbsp;            &quot;[fill]&quot; +
+<i>227</i>&nbsp;            &quot;[fill]&quot; +
+<i>228</i>&nbsp;            &quot;[fill]&quot; +
+<i>229</i>&nbsp;            &quot;[fill]&quot; +
+<i>230</i>&nbsp;            &quot;[fill]&quot; +
+<i>231</i>&nbsp;            &quot;[fill]&quot; +
+<i>232</i>&nbsp;            &quot;[fill]&quot; +
+<i>233</i>&nbsp;            &quot;[fill]&quot; +
+<i>234</i>&nbsp;            &quot;[fill]&quot; +
+<i>235</i>&nbsp;            &quot;[fill]&quot; +
+<i>236</i>&nbsp;            &quot;[fill]&quot; +
+<i>237</i>&nbsp;            &quot;[fill]&quot; +
+<i>238</i>&nbsp;            &quot;[fill]&quot; +
+<i>239</i>&nbsp;            &quot;[fill]&quot; +
+<i>240</i>&nbsp;            &quot;[fill]&quot; +
+<i>241</i>&nbsp;            &quot;[fill]&quot; +
+<i>242</i>&nbsp;            &quot;[fill]&quot; +
+<i>243</i>&nbsp;            &quot;[fill]&quot; +
+<i>244</i>&nbsp;            &quot;[fill]&quot; +
+<i>245</i>&nbsp;            &quot;[fill]&quot;,
+<i>246</i>&nbsp;            // rows
+<i>247</i>&nbsp;            &quot;[]&quot; +
+<i>248</i>&nbsp;            &quot;[]&quot; +
+<i>249</i>&nbsp;            &quot;[]&quot; +
+<i>250</i>&nbsp;            &quot;[]&quot; +
+<i>251</i>&nbsp;            &quot;[]&quot; +
+<i>252</i>&nbsp;            &quot;[]&quot; +
+<i>253</i>&nbsp;            &quot;[]&quot; +
+<i>254</i>&nbsp;            &quot;[]&quot; +
+<i>255</i>&nbsp;            &quot;[]&quot; +
+<i>256</i>&nbsp;            &quot;[]&quot; +
+<i>257</i>&nbsp;            &quot;[]&quot; +
+<i>258</i>&nbsp;            &quot;[]&quot; +
+<i>259</i>&nbsp;            &quot;[]&quot; +
+<i>260</i>&nbsp;            &quot;[]&quot; +
+<i>261</i>&nbsp;            &quot;[]&quot; +
+<i>262</i>&nbsp;            &quot;[]&quot; +
+<i>263</i>&nbsp;            &quot;[]&quot; +
+<i>264</i>&nbsp;            &quot;[]&quot; +
+<i>265</i>&nbsp;            &quot;[]&quot; +
+<i>266</i>&nbsp;            &quot;[]&quot; +
+<i>267</i>&nbsp;            &quot;[]&quot; +
+<i>268</i>&nbsp;            &quot;[]&quot; +
+<i>269</i>&nbsp;            &quot;[]&quot; +
+<i>270</i>&nbsp;            &quot;[]&quot; +
+<i>271</i>&nbsp;            &quot;[]&quot; +
+<i>272</i>&nbsp;            &quot;[]&quot; +
+<i>273</i>&nbsp;            &quot;[]&quot; +
+<i>274</i>&nbsp;            &quot;[]&quot; +
+<i>275</i>&nbsp;            &quot;[]&quot; +
+<i>276</i>&nbsp;            &quot;[]&quot; +
+<i>277</i>&nbsp;            &quot;[]&quot; +
+<i>278</i>&nbsp;            &quot;[]&quot; +
+<i>279</i>&nbsp;            &quot;[]&quot; +
+<i>280</i>&nbsp;            &quot;[]&quot; +
+<i>281</i>&nbsp;            &quot;[]&quot; +
+<i>282</i>&nbsp;            &quot;[]&quot; +
+<i>283</i>&nbsp;            &quot;[]&quot; +
+<i>284</i>&nbsp;            &quot;[]&quot; +
+<i>285</i>&nbsp;            &quot;[]&quot; +
+<i>286</i>&nbsp;            &quot;[]&quot; +
+<i>287</i>&nbsp;            &quot;[]&quot; +
+<i>288</i>&nbsp;            &quot;[]&quot; +
+<i>289</i>&nbsp;            &quot;[]&quot;));
+<i>290</i>&nbsp;
+<i>291</i>&nbsp;        //---- labelTitle ----
+<b class="fc"><i>292</i>&nbsp;        labelTitle.setText(&quot;TrackGame-\u8f68\u9053\u7cfb\u7edf&quot;);</b>
+<b class="fc"><i>293</i>&nbsp;        labelTitle.setFont(labelTitle.getFont().deriveFont(labelTitle.getFont().getStyle() | Font.BOLD, labelTitle.getFont().getSize() + 9f));</b>
+<b class="fc"><i>294</i>&nbsp;        add(labelTitle, &quot;cell 7 5 3 4&quot;);</b>
+<i>295</i>&nbsp;
+<i>296</i>&nbsp;        //---- buttonLog ----
+<b class="fc"><i>297</i>&nbsp;        buttonLog.setText(&quot;\u67e5\u770b\u65e5\u5fd7&quot;);</b>
+<b class="fc"><i>298</i>&nbsp;        buttonLog.addMouseListener(new MouseAdapter() {</b>
+<i>299</i>&nbsp;            @Override
+<i>300</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>301</i>&nbsp;                buttonLogMousePressed(e);</b>
+<b class="nc"><i>302</i>&nbsp;            }</b>
+<i>303</i>&nbsp;        });
+<b class="fc"><i>304</i>&nbsp;        add(buttonLog, &quot;cell 11 7&quot;);</b>
+<i>305</i>&nbsp;
+<i>306</i>&nbsp;        //---- labelStrategy ----
+<b class="fc"><i>307</i>&nbsp;        labelStrategy.setText(&quot;\u7f16\u6392\u7b56\u7565\uff08\u91cd\u7f16\uff09\uff1a&quot;);</b>
+<b class="fc"><i>308</i>&nbsp;        add(labelStrategy, &quot;cell 19 7&quot;);</b>
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;        //---- comboBoxStrategy ----
+<b class="fc"><i>311</i>&nbsp;        comboBoxStrategy.addItemListener(e -&gt; comboBoxStrategyItemStateChanged(e));</b>
+<b class="fc"><i>312</i>&nbsp;        add(comboBoxStrategy, &quot;cell 21 7&quot;);</b>
+<i>313</i>&nbsp;
+<i>314</i>&nbsp;        //---- labelChangeGroup ----
+<b class="fc"><i>315</i>&nbsp;        labelChangeGroup.setText(&quot;\u9009\u62e9\u5c0f\u7ec4\uff1a&quot;);</b>
+<b class="fc"><i>316</i>&nbsp;        add(labelChangeGroup, &quot;cell 24 7&quot;);</b>
+<i>317</i>&nbsp;
+<i>318</i>&nbsp;        //---- comboBoxGroupSelect ----
+<b class="fc"><i>319</i>&nbsp;        comboBoxGroupSelect.addItemListener(e -&gt; comboBoxGroupSelectItemStateChanged(e));</b>
+<b class="fc"><i>320</i>&nbsp;        add(comboBoxGroupSelect, &quot;cell 26 7&quot;);</b>
+<i>321</i>&nbsp;
+<i>322</i>&nbsp;        //======== drawPanel ========
+<i>323</i>&nbsp;        {
+<b class="fc"><i>324</i>&nbsp;            drawPanel.setPreferredSize(new Dimension(800, 800));</b>
+<b class="fc"><i>325</i>&nbsp;            drawPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));</b>
+<i>326</i>&nbsp;        }
+<b class="fc"><i>327</i>&nbsp;        add(drawPanel, &quot;cell 0 15 32 28&quot;);</b>
+<i>328</i>&nbsp;
+<i>329</i>&nbsp;        //======== rightPanel ========
+<i>330</i>&nbsp;        {
+<b class="fc"><i>331</i>&nbsp;            rightPanel.setPreferredSize(new Dimension(400, 800));</b>
+<b class="fc"><i>332</i>&nbsp;            rightPanel.setBackground(new Color(204, 204, 204));</b>
+<b class="fc"><i>333</i>&nbsp;            rightPanel.setLayout(new MigLayout(</b>
+<i>334</i>&nbsp;                &quot;hidemode 3&quot;,
+<i>335</i>&nbsp;                // columns
+<i>336</i>&nbsp;                &quot;[fill]&quot; +
+<i>337</i>&nbsp;                &quot;[fill]&quot;,
+<i>338</i>&nbsp;                // rows
+<i>339</i>&nbsp;                &quot;[]&quot; +
+<i>340</i>&nbsp;                &quot;[]&quot; +
+<i>341</i>&nbsp;                &quot;[]&quot; +
+<i>342</i>&nbsp;                &quot;[]&quot; +
+<i>343</i>&nbsp;                &quot;[]&quot;));
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;            //======== infoPanel ========
+<i>346</i>&nbsp;            {
+<b class="fc"><i>347</i>&nbsp;                infoPanel.setPreferredSize(new Dimension(400, 200));</b>
+<b class="fc"><i>348</i>&nbsp;                infoPanel.setBackground(new Color(153, 153, 153));</b>
+<b class="fc"><i>349</i>&nbsp;                infoPanel.setLayout(new MigLayout(</b>
+<i>350</i>&nbsp;                    &quot;hidemode 3&quot;,
+<i>351</i>&nbsp;                    // columns
+<i>352</i>&nbsp;                    &quot;[fill]&quot; +
+<i>353</i>&nbsp;                    &quot;[fill]&quot; +
+<i>354</i>&nbsp;                    &quot;[fill]&quot; +
+<i>355</i>&nbsp;                    &quot;[fill]&quot; +
+<i>356</i>&nbsp;                    &quot;[fill]&quot;,
+<i>357</i>&nbsp;                    // rows
+<i>358</i>&nbsp;                    &quot;[]&quot; +
+<i>359</i>&nbsp;                    &quot;[]&quot; +
+<i>360</i>&nbsp;                    &quot;[]&quot; +
+<i>361</i>&nbsp;                    &quot;[]&quot; +
+<i>362</i>&nbsp;                    &quot;[]&quot; +
+<i>363</i>&nbsp;                    &quot;[]&quot;));
+<i>364</i>&nbsp;
+<i>365</i>&nbsp;                //---- label2 ----
+<b class="fc"><i>366</i>&nbsp;                label2.setText(&quot;\u72b6\u6001\uff1a&quot;);</b>
+<b class="fc"><i>367</i>&nbsp;                label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD, label2.getFont().getSize() + 8f));</b>
+<b class="fc"><i>368</i>&nbsp;                label2.setForeground(Color.black);</b>
+<b class="fc"><i>369</i>&nbsp;                infoPanel.add(label2, &quot;cell 1 1&quot;);</b>
+<i>370</i>&nbsp;
+<i>371</i>&nbsp;                //---- labelState ----
+<b class="fc"><i>372</i>&nbsp;                labelState.setFont(labelState.getFont().deriveFont(labelState.getFont().getSize() + 6f));</b>
+<b class="fc"><i>373</i>&nbsp;                infoPanel.add(labelState, &quot;cell 4 1&quot;);</b>
+<i>374</i>&nbsp;
+<i>375</i>&nbsp;                //---- label1 ----
+<b class="fc"><i>376</i>&nbsp;                label1.setText(&quot;\u71b5\u503c\uff1a&quot;);</b>
+<b class="fc"><i>377</i>&nbsp;                label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 8f));</b>
+<b class="fc"><i>378</i>&nbsp;                label1.setForeground(Color.black);</b>
+<b class="fc"><i>379</i>&nbsp;                infoPanel.add(label1, &quot;cell 1 5&quot;);</b>
+<i>380</i>&nbsp;
+<i>381</i>&nbsp;                //---- labelEntropy ----
+<b class="fc"><i>382</i>&nbsp;                labelEntropy.setFont(labelEntropy.getFont().deriveFont(labelEntropy.getFont().getSize() + 6f));</b>
+<b class="fc"><i>383</i>&nbsp;                infoPanel.add(labelEntropy, &quot;cell 4 5&quot;);</b>
+<i>384</i>&nbsp;            }
+<b class="fc"><i>385</i>&nbsp;            rightPanel.add(infoPanel, &quot;cell 0 0 2 2&quot;);</b>
+<i>386</i>&nbsp;
+<i>387</i>&nbsp;            //======== opratepanel ========
+<i>388</i>&nbsp;            {
+<b class="fc"><i>389</i>&nbsp;                opratepanel.setPreferredSize(new Dimension(400, 600));</b>
+<b class="fc"><i>390</i>&nbsp;                opratepanel.setFont(opratepanel.getFont().deriveFont(opratepanel.getFont().getSize() + 8f));</b>
+<b class="fc"><i>391</i>&nbsp;                opratepanel.setLayout(new MigLayout(</b>
+<i>392</i>&nbsp;                    &quot;hidemode 3&quot;,
+<i>393</i>&nbsp;                    // columns
+<i>394</i>&nbsp;                    &quot;[fill]&quot; +
+<i>395</i>&nbsp;                    &quot;[fill]&quot; +
+<i>396</i>&nbsp;                    &quot;[fill]&quot; +
+<i>397</i>&nbsp;                    &quot;[fill]&quot; +
+<i>398</i>&nbsp;                    &quot;[fill]&quot; +
+<i>399</i>&nbsp;                    &quot;[fill]&quot; +
+<i>400</i>&nbsp;                    &quot;[fill]&quot; +
+<i>401</i>&nbsp;                    &quot;[fill]&quot; +
+<i>402</i>&nbsp;                    &quot;[fill]&quot; +
+<i>403</i>&nbsp;                    &quot;[fill]&quot; +
+<i>404</i>&nbsp;                    &quot;[fill]&quot; +
+<i>405</i>&nbsp;                    &quot;[fill]&quot; +
+<i>406</i>&nbsp;                    &quot;[fill]&quot; +
+<i>407</i>&nbsp;                    &quot;[fill]&quot; +
+<i>408</i>&nbsp;                    &quot;[fill]&quot;,
+<i>409</i>&nbsp;                    // rows
+<i>410</i>&nbsp;                    &quot;[]&quot; +
+<i>411</i>&nbsp;                    &quot;[]&quot; +
+<i>412</i>&nbsp;                    &quot;[]&quot; +
+<i>413</i>&nbsp;                    &quot;[]&quot; +
+<i>414</i>&nbsp;                    &quot;[]&quot; +
+<i>415</i>&nbsp;                    &quot;[]&quot; +
+<i>416</i>&nbsp;                    &quot;[]&quot; +
+<i>417</i>&nbsp;                    &quot;[]&quot; +
+<i>418</i>&nbsp;                    &quot;[]&quot; +
+<i>419</i>&nbsp;                    &quot;[]&quot; +
+<i>420</i>&nbsp;                    &quot;[]&quot; +
+<i>421</i>&nbsp;                    &quot;[]&quot; +
+<i>422</i>&nbsp;                    &quot;[]&quot; +
+<i>423</i>&nbsp;                    &quot;[]&quot; +
+<i>424</i>&nbsp;                    &quot;[]&quot; +
+<i>425</i>&nbsp;                    &quot;[]&quot; +
+<i>426</i>&nbsp;                    &quot;[]&quot; +
+<i>427</i>&nbsp;                    &quot;[]&quot; +
+<i>428</i>&nbsp;                    &quot;[]&quot; +
+<i>429</i>&nbsp;                    &quot;[]&quot; +
+<i>430</i>&nbsp;                    &quot;[]&quot; +
+<i>431</i>&nbsp;                    &quot;[]&quot;));
+<i>432</i>&nbsp;
+<i>433</i>&nbsp;                //---- label11 ----
+<b class="fc"><i>434</i>&nbsp;                label11.setText(&quot;\u6539\u53d8\u7cfb\u7edf&quot;);</b>
+<b class="fc"><i>435</i>&nbsp;                label11.setFont(label11.getFont().deriveFont(label11.getFont().getSize() + 12f));</b>
+<b class="fc"><i>436</i>&nbsp;                opratepanel.add(label11, &quot;cell 1 1&quot;);</b>
+<b class="fc"><i>437</i>&nbsp;                opratepanel.add(separator2, &quot;cell 1 2 10 1&quot;);</b>
+<i>438</i>&nbsp;
+<i>439</i>&nbsp;                //---- label4 ----
+<b class="fc"><i>440</i>&nbsp;                label4.setText(&quot;\u5220\u9664\u8f68\u9053&quot;);</b>
+<b class="fc"><i>441</i>&nbsp;                opratepanel.add(label4, &quot;cell 1 3&quot;);</b>
+<b class="fc"><i>442</i>&nbsp;                opratepanel.add(comboBoxRemoveTrack, &quot;cell 6 3&quot;);</b>
+<i>443</i>&nbsp;
+<i>444</i>&nbsp;                //---- buttonRemoveTrack ----
+<b class="fc"><i>445</i>&nbsp;                buttonRemoveTrack.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="fc"><i>446</i>&nbsp;                buttonRemoveTrack.setMinimumSize(new Dimension(50, 30));</b>
+<b class="fc"><i>447</i>&nbsp;                buttonRemoveTrack.setPreferredSize(new Dimension(50, 30));</b>
+<b class="fc"><i>448</i>&nbsp;                buttonRemoveTrack.addMouseListener(new MouseAdapter() {</b>
+<i>449</i>&nbsp;                    @Override
+<i>450</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>451</i>&nbsp;                        buttonRemoveTrackMousePressed(e);</b>
+<b class="nc"><i>452</i>&nbsp;                    }</b>
+<i>453</i>&nbsp;                });
+<b class="fc"><i>454</i>&nbsp;                opratepanel.add(buttonRemoveTrack, &quot;cell 9 3&quot;);</b>
+<i>455</i>&nbsp;
+<i>456</i>&nbsp;                //---- label5 ----
+<b class="fc"><i>457</i>&nbsp;                label5.setText(&quot;\u6dfb\u52a0\u8f68\u9053&quot;);</b>
+<b class="fc"><i>458</i>&nbsp;                opratepanel.add(label5, &quot;cell 1 4&quot;);</b>
+<i>459</i>&nbsp;
+<i>460</i>&nbsp;                //---- textFieldAddTrack ----
+<b class="fc"><i>461</i>&nbsp;                textFieldAddTrack.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));</b>
+<b class="fc"><i>462</i>&nbsp;                textFieldAddTrack.setToolTipText(&quot;\u8f68\u9053\u534a\u5f84&quot;);</b>
+<b class="fc"><i>463</i>&nbsp;                opratepanel.add(textFieldAddTrack, &quot;cell 6 4&quot;);</b>
+<i>464</i>&nbsp;
+<i>465</i>&nbsp;                //---- buttonAddTrack ----
+<b class="fc"><i>466</i>&nbsp;                buttonAddTrack.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="fc"><i>467</i>&nbsp;                buttonAddTrack.addMouseListener(new MouseAdapter() {</b>
+<i>468</i>&nbsp;                    @Override
+<i>469</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>470</i>&nbsp;                        buttonAddTrackMousePressed(e);</b>
+<b class="nc"><i>471</i>&nbsp;                    }</b>
+<i>472</i>&nbsp;                });
+<b class="fc"><i>473</i>&nbsp;                opratepanel.add(buttonAddTrack, &quot;cell 9 4&quot;);</b>
+<i>474</i>&nbsp;
+<i>475</i>&nbsp;                //---- label6 ----
+<b class="fc"><i>476</i>&nbsp;                label6.setText(&quot;\u6dfb\u52a0\u7269\u4f53&quot;);</b>
+<b class="fc"><i>477</i>&nbsp;                opratepanel.add(label6, &quot;cell 1 6&quot;);</b>
+<i>478</i>&nbsp;
+<i>479</i>&nbsp;                //---- buttonAddPO ----
+<b class="fc"><i>480</i>&nbsp;                buttonAddPO.setText(&quot;\u8f93\u5165&quot;);</b>
+<b class="fc"><i>481</i>&nbsp;                buttonAddPO.addMouseListener(new MouseAdapter() {</b>
+<i>482</i>&nbsp;                    @Override
+<i>483</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>484</i>&nbsp;                        buttonAddPOMousePressed(e);</b>
+<b class="nc"><i>485</i>&nbsp;                    }</b>
+<i>486</i>&nbsp;                });
+<b class="fc"><i>487</i>&nbsp;                opratepanel.add(buttonAddPO, &quot;cell 9 6&quot;);</b>
+<i>488</i>&nbsp;
+<i>489</i>&nbsp;                //---- label7 ----
+<b class="fc"><i>490</i>&nbsp;                label7.setText(&quot;\u5220\u9664\u7269\u4f53&quot;);</b>
+<b class="fc"><i>491</i>&nbsp;                opratepanel.add(label7, &quot;cell 1 8&quot;);</b>
+<b class="fc"><i>492</i>&nbsp;                opratepanel.add(comboBoxRemovePO, &quot;cell 6 8&quot;);</b>
+<i>493</i>&nbsp;
+<i>494</i>&nbsp;                //---- buttonRemovePO ----
+<b class="fc"><i>495</i>&nbsp;                buttonRemovePO.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="fc"><i>496</i>&nbsp;                buttonRemovePO.addMouseListener(new MouseAdapter() {</b>
+<i>497</i>&nbsp;                    @Override
+<i>498</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>499</i>&nbsp;                        buttonRemovePOMousePressed(e);</b>
+<b class="nc"><i>500</i>&nbsp;                    }</b>
+<i>501</i>&nbsp;                });
+<b class="fc"><i>502</i>&nbsp;                opratepanel.add(buttonRemovePO, &quot;cell 9 8&quot;);</b>
+<i>503</i>&nbsp;
+<i>504</i>&nbsp;                //---- label10 ----
+<b class="fc"><i>505</i>&nbsp;                label10.setText(&quot;\u7279\u6b8a\u529f\u80fd&quot;);</b>
+<b class="fc"><i>506</i>&nbsp;                label10.setFont(label10.getFont().deriveFont(label10.getFont().getSize() + 11f));</b>
+<b class="fc"><i>507</i>&nbsp;                opratepanel.add(label10, &quot;cell 1 14&quot;);</b>
+<b class="fc"><i>508</i>&nbsp;                opratepanel.add(separator1, &quot;cell 1 16 14 1&quot;);</b>
+<i>509</i>&nbsp;
+<i>510</i>&nbsp;                //---- label8 ----
+<b class="fc"><i>511</i>&nbsp;                label8.setText(&quot;\u4ea4\u6362\u8f68\u9053&quot;);</b>
+<b class="fc"><i>512</i>&nbsp;                opratepanel.add(label8, &quot;cell 1 18&quot;);</b>
+<b class="fc"><i>513</i>&nbsp;                opratepanel.add(comboBoxPOTrack1, &quot;cell 4 18&quot;);</b>
+<b class="fc"><i>514</i>&nbsp;                opratepanel.add(comboBoxPOTrack2, &quot;cell 6 18&quot;);</b>
+<i>515</i>&nbsp;
+<i>516</i>&nbsp;                //---- buttonChangePOTrack ----
+<b class="fc"><i>517</i>&nbsp;                buttonChangePOTrack.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="fc"><i>518</i>&nbsp;                buttonChangePOTrack.addMouseListener(new MouseAdapter() {</b>
+<i>519</i>&nbsp;                    @Override
+<i>520</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>521</i>&nbsp;                        buttonChangePOTrackMousePressed(e);</b>
+<b class="nc"><i>522</i>&nbsp;                    }</b>
+<i>523</i>&nbsp;                });
+<b class="fc"><i>524</i>&nbsp;                opratepanel.add(buttonChangePOTrack, &quot;cell 9 18&quot;);</b>
+<i>525</i>&nbsp;
+<i>526</i>&nbsp;                //---- label9 ----
+<b class="fc"><i>527</i>&nbsp;                label9.setText(&quot;\u4ea4\u6362\u7ec4&quot;);</b>
+<b class="fc"><i>528</i>&nbsp;                opratepanel.add(label9, &quot;cell 1 21&quot;);</b>
+<b class="fc"><i>529</i>&nbsp;                opratepanel.add(comboBoxPOGroup1, &quot;cell 4 21&quot;);</b>
+<b class="fc"><i>530</i>&nbsp;                opratepanel.add(comboBoxPOGroup2, &quot;cell 6 21&quot;);</b>
+<i>531</i>&nbsp;
+<i>532</i>&nbsp;                //---- buttonChangePOGroup ----
+<b class="fc"><i>533</i>&nbsp;                buttonChangePOGroup.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="fc"><i>534</i>&nbsp;                buttonChangePOGroup.addMouseListener(new MouseAdapter() {</b>
+<i>535</i>&nbsp;                    @Override
+<i>536</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>537</i>&nbsp;                        buttonChangePOGroupMousePressed(e);</b>
+<b class="nc"><i>538</i>&nbsp;                    }</b>
+<i>539</i>&nbsp;                });
+<b class="fc"><i>540</i>&nbsp;                opratepanel.add(buttonChangePOGroup, &quot;cell 9 21&quot;);</b>
+<i>541</i>&nbsp;            }
+<b class="fc"><i>542</i>&nbsp;            rightPanel.add(opratepanel, &quot;cell 0 2 2 3&quot;);</b>
+<i>543</i>&nbsp;        }
+<b class="fc"><i>544</i>&nbsp;        add(rightPanel, &quot;cell 32 15 1 28&quot;);</b>
+<i>545</i>&nbsp;        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+<b class="fc"><i>546</i>&nbsp;    }</b>
+<i>547</i>&nbsp;
+<i>548</i>&nbsp;    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+<i>549</i>&nbsp;    private JLabel labelTitle;
+<i>550</i>&nbsp;    private JButton buttonLog;
+<i>551</i>&nbsp;    private JLabel labelStrategy;
+<i>552</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxStrategy;
+<i>553</i>&nbsp;    private JLabel labelChangeGroup;
+<i>554</i>&nbsp;    private JComboBox comboBoxGroupSelect;
+<i>555</i>&nbsp;    private JPanel drawPanel;
+<i>556</i>&nbsp;    private JPanel rightPanel;
+<i>557</i>&nbsp;    private JPanel infoPanel;
+<i>558</i>&nbsp;    private JLabel label2;
+<i>559</i>&nbsp;    private JLabel labelState;
+<i>560</i>&nbsp;    private JLabel label1;
+<i>561</i>&nbsp;    private JLabel labelEntropy;
+<i>562</i>&nbsp;    private JPanel opratepanel;
+<i>563</i>&nbsp;    private JLabel label11;
+<i>564</i>&nbsp;    private JSeparator separator2;
+<i>565</i>&nbsp;    private JLabel label4;
+<i>566</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxRemoveTrack;
+<i>567</i>&nbsp;    private JButton buttonRemoveTrack;
+<i>568</i>&nbsp;    private JLabel label5;
+<i>569</i>&nbsp;    private JTextField textFieldAddTrack;
+<i>570</i>&nbsp;    private JButton buttonAddTrack;
+<i>571</i>&nbsp;    private JLabel label6;
+<i>572</i>&nbsp;    private JButton buttonAddPO;
+<i>573</i>&nbsp;    private JLabel label7;
+<i>574</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxRemovePO;
+<i>575</i>&nbsp;    private JButton buttonRemovePO;
+<i>576</i>&nbsp;    private JLabel label10;
+<i>577</i>&nbsp;    private JSeparator separator1;
+<i>578</i>&nbsp;    private JLabel label8;
+<i>579</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxPOTrack1;
+<i>580</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxPOTrack2;
+<i>581</i>&nbsp;    private JButton buttonChangePOTrack;
+<i>582</i>&nbsp;    private JLabel label9;
+<i>583</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxPOGroup1;
+<i>584</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxPOGroup2;
+<i>585</i>&nbsp;    private JButton buttonChangePOGroup;
+<i>586</i>&nbsp;    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<i>587</i>&nbsp;
+<i>588</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

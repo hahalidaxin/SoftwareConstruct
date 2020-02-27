@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LauncherFrame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">APIs.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LauncherFrame (APIs.gui)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LauncherFrame</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.1%
+  </span>
+  <span class="absValue">
+    (55/ 67)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LauncherFrame$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (56/ 70)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Created by JFormDesigner on Thu May 16 20:38:45 CST 2019
+<i>3</i>&nbsp; */
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;package APIs.gui;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import APIs.OrbitLauncher;
+<i>8</i>&nbsp;import net.miginfocom.swing.MigLayout;
+<i>9</i>&nbsp;import otherDirectory.exception.CheckedException;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.swing.*;
+<i>12</i>&nbsp;import java.awt.*;
+<i>13</i>&nbsp;import java.awt.event.ItemEvent;
+<i>14</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>15</i>&nbsp;import java.awt.event.MouseEvent;
+<i>16</i>&nbsp;import java.io.File;
+<i>17</i>&nbsp;import java.util.ArrayList;
+<i>18</i>&nbsp;import java.util.List;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;/**
+<i>21</i>&nbsp; * @author Brainrain
+<i>22</i>&nbsp; */
+<b class="nc"><i>23</i>&nbsp;public class LauncherFrame extends JFrame {</b>
+<b class="fc"><i>24</i>&nbsp;    String filepath = &quot;src/configFile/&quot;;</b>
+<i>25</i>&nbsp;    OrbitLauncher orbitLauncher;
+<b class="fc"><i>26</i>&nbsp;    public LauncherFrame(OrbitLauncher launcher) {</b>
+<b class="fc"><i>27</i>&nbsp;        initComponents();</b>
+<b class="fc"><i>28</i>&nbsp;        orbitLauncher = launcher;</b>
+<b class="fc"><i>29</i>&nbsp;        this.comboBoxSystemSelect.addItem(&quot;TrackGame&quot;);</b>
+<b class="fc"><i>30</i>&nbsp;        this.comboBoxSystemSelect.addItem(&quot;AtomicStructure&quot;);</b>
+<b class="fc"><i>31</i>&nbsp;        this.comboBoxSystemSelect.addItem(&quot;SocialNetworkCircle&quot;);</b>
+<b class="fc"><i>32</i>&nbsp;        this.comboBoxSystemSelect.setSelectedIndex(0);</b>
+<b class="fc"><i>33</i>&nbsp;        refreshAll();</b>
+<b class="fc"><i>34</i>&nbsp;    }</b>
+<i>35</i>&nbsp;    private void refreshAll() {
+<b class="fc"><i>36</i>&nbsp;        this.comboBoxFileSelect.removeAllItems();</b>
+<b class="fc"><i>37</i>&nbsp;        getOrbitFilenames((String)this.comboBoxSystemSelect.getSelectedItem())</b>
+<b class="fc"><i>38</i>&nbsp;                .forEach(this.comboBoxFileSelect::addItem);</b>
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    private List&lt;String&gt; getOrbitFilenames(String orbitName) {
+<b class="fc"><i>42</i>&nbsp;        File file = new File(filepath);</b>
+<b class="fc"><i>43</i>&nbsp;        File[] array = file.listFiles();</b>
+<b class="fc"><i>44</i>&nbsp;        if(array==null) return new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>45</i>&nbsp;        List&lt;String&gt; filenames = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>46</i>&nbsp;        for (int i = 0; i &lt; array.length; i++) {</b>
+<b class="fc"><i>47</i>&nbsp;            if(array[i].isFile() &amp;&amp; array[i].getName().startsWith(orbitName)) {</b>
+<b class="fc"><i>48</i>&nbsp;                filenames.add(array[i].getName());</b>
+<i>49</i>&nbsp;            }
+<i>50</i>&nbsp;        }
+<b class="fc"><i>51</i>&nbsp;        return filenames;</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    private void comboBoxSystemSelectItemStateChanged(ItemEvent e) {
+<i>55</i>&nbsp;//        选择了系统 需要更新需要显示的文件
+<b class="fc"><i>56</i>&nbsp;        switch(e.getStateChange()) {</b>
+<i>57</i>&nbsp;            case ItemEvent.SELECTED:
+<b class="fc"><i>58</i>&nbsp;                refreshAll();</b>
+<b class="fc"><i>59</i>&nbsp;                break;</b>
+<i>60</i>&nbsp;            default:
+<i>61</i>&nbsp;                break;
+<i>62</i>&nbsp;        }
+<b class="fc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    private void buttonStartMousePressed(MouseEvent e) {
+<b class="nc"><i>66</i>&nbsp;        boolean visiblebool = false;</b>
+<i>67</i>&nbsp;        try {
+<b class="nc"><i>68</i>&nbsp;            String orbitFilePath = filepath + (String) this.comboBoxFileSelect.getSelectedItem();</b>
+<b class="nc"><i>69</i>&nbsp;            int orbitType = this.comboBoxSystemSelect.getSelectedIndex();</b>
+<b class="nc"><i>70</i>&nbsp;            orbitLauncher.launchOrbit(orbitType,orbitFilePath);</b>
+<b class="nc"><i>71</i>&nbsp;        } catch(CheckedException exept) {</b>
+<i>72</i>&nbsp;//            此时读入文件发生错误，需要提示用户重新选择输入文件
+<b class="nc"><i>73</i>&nbsp;            visiblebool = true;</b>
+<b class="nc"><i>74</i>&nbsp;            JOptionPane.showMessageDialog(this,</b>
+<b class="nc"><i>75</i>&nbsp;                    String.format(&quot;输入文件发生错误%n错误信息:\t%s%n请重新选择输入文件&quot;,exept));</b>
+<b class="nc"><i>76</i>&nbsp;        }</b>
+<i>77</i>&nbsp;//        此时创建窗口成功，需要关闭当前窗口
+<b class="nc"><i>78</i>&nbsp;        this.setVisible(visiblebool);</b>
+<b class="nc"><i>79</i>&nbsp;    }</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    private void initComponents() {
+<i>82</i>&nbsp;        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+<b class="fc"><i>83</i>&nbsp;        separator1 = new JSeparator();</b>
+<b class="fc"><i>84</i>&nbsp;        label2 = new JLabel();</b>
+<b class="fc"><i>85</i>&nbsp;        comboBoxSystemSelect = new JComboBox();</b>
+<b class="fc"><i>86</i>&nbsp;        label3 = new JLabel();</b>
+<b class="fc"><i>87</i>&nbsp;        comboBoxFileSelect = new JComboBox();</b>
+<b class="fc"><i>88</i>&nbsp;        buttonStart = new JButton();</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        //======== this ========
+<b class="fc"><i>91</i>&nbsp;        setResizable(false);</b>
+<b class="fc"><i>92</i>&nbsp;        setMinimumSize(new Dimension(440, 320));</b>
+<b class="fc"><i>93</i>&nbsp;        setTitle(&quot;SystemLauncher&quot;);</b>
+<b class="fc"><i>94</i>&nbsp;        setFont(new Font(&quot;Dialog&quot;, Font.BOLD, 12));</b>
+<b class="fc"><i>95</i>&nbsp;        Container contentPane = getContentPane();</b>
+<b class="fc"><i>96</i>&nbsp;        contentPane.setLayout(new MigLayout(</b>
+<i>97</i>&nbsp;            &quot;hidemode 3&quot;,
+<i>98</i>&nbsp;            // columns
+<i>99</i>&nbsp;            &quot;[fill]&quot; +
+<i>100</i>&nbsp;            &quot;[fill]&quot; +
+<i>101</i>&nbsp;            &quot;[fill]&quot; +
+<i>102</i>&nbsp;            &quot;[fill]&quot; +
+<i>103</i>&nbsp;            &quot;[fill]&quot; +
+<i>104</i>&nbsp;            &quot;[fill]&quot; +
+<i>105</i>&nbsp;            &quot;[fill]&quot; +
+<i>106</i>&nbsp;            &quot;[fill]&quot; +
+<i>107</i>&nbsp;            &quot;[fill]&quot; +
+<i>108</i>&nbsp;            &quot;[fill]&quot; +
+<i>109</i>&nbsp;            &quot;[fill]&quot; +
+<i>110</i>&nbsp;            &quot;[fill]&quot; +
+<i>111</i>&nbsp;            &quot;[fill]&quot; +
+<i>112</i>&nbsp;            &quot;[fill]&quot; +
+<i>113</i>&nbsp;            &quot;[fill]&quot; +
+<i>114</i>&nbsp;            &quot;[fill]&quot; +
+<i>115</i>&nbsp;            &quot;[fill]&quot; +
+<i>116</i>&nbsp;            &quot;[fill]&quot; +
+<i>117</i>&nbsp;            &quot;[fill]&quot; +
+<i>118</i>&nbsp;            &quot;[fill]&quot; +
+<i>119</i>&nbsp;            &quot;[fill]&quot; +
+<i>120</i>&nbsp;            &quot;[fill]&quot; +
+<i>121</i>&nbsp;            &quot;[fill]&quot; +
+<i>122</i>&nbsp;            &quot;[fill]&quot; +
+<i>123</i>&nbsp;            &quot;[fill]&quot;,
+<i>124</i>&nbsp;            // rows
+<i>125</i>&nbsp;            &quot;[]&quot; +
+<i>126</i>&nbsp;            &quot;[]&quot; +
+<i>127</i>&nbsp;            &quot;[]&quot; +
+<i>128</i>&nbsp;            &quot;[]&quot; +
+<i>129</i>&nbsp;            &quot;[]&quot; +
+<i>130</i>&nbsp;            &quot;[]&quot; +
+<i>131</i>&nbsp;            &quot;[]&quot; +
+<i>132</i>&nbsp;            &quot;[]&quot; +
+<i>133</i>&nbsp;            &quot;[]&quot; +
+<i>134</i>&nbsp;            &quot;[]&quot; +
+<i>135</i>&nbsp;            &quot;[]&quot; +
+<i>136</i>&nbsp;            &quot;[]&quot; +
+<i>137</i>&nbsp;            &quot;[]&quot; +
+<i>138</i>&nbsp;            &quot;[]&quot; +
+<i>139</i>&nbsp;            &quot;[]&quot; +
+<i>140</i>&nbsp;            &quot;[]&quot; +
+<i>141</i>&nbsp;            &quot;[]&quot; +
+<i>142</i>&nbsp;            &quot;[]&quot; +
+<i>143</i>&nbsp;            &quot;[]&quot; +
+<i>144</i>&nbsp;            &quot;[]&quot; +
+<i>145</i>&nbsp;            &quot;[]&quot; +
+<i>146</i>&nbsp;            &quot;[]&quot; +
+<i>147</i>&nbsp;            &quot;[]&quot; +
+<i>148</i>&nbsp;            &quot;[]&quot; +
+<i>149</i>&nbsp;            &quot;[]&quot; +
+<i>150</i>&nbsp;            &quot;[]&quot; +
+<i>151</i>&nbsp;            &quot;[]&quot; +
+<i>152</i>&nbsp;            &quot;[]&quot;));
+<b class="fc"><i>153</i>&nbsp;        contentPane.add(separator1, &quot;cell 1 3&quot;);</b>
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;        //---- label2 ----
+<b class="fc"><i>156</i>&nbsp;        label2.setText(&quot;\u8f68\u9053\u7cfb\u7edf\u9009\u62e9&quot;);</b>
+<b class="fc"><i>157</i>&nbsp;        label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 10f));</b>
+<b class="fc"><i>158</i>&nbsp;        contentPane.add(label2, &quot;cell 2 9&quot;);</b>
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;        //---- comboBoxSystemSelect ----
+<b class="fc"><i>161</i>&nbsp;        comboBoxSystemSelect.addItemListener(e -&gt; comboBoxSystemSelectItemStateChanged(e));</b>
+<b class="fc"><i>162</i>&nbsp;        contentPane.add(comboBoxSystemSelect, &quot;cell 7 9&quot;);</b>
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;        //---- label3 ----
+<b class="fc"><i>165</i>&nbsp;        label3.setText(&quot;\u8f93\u5165\u6587\u4ef6\u9009\u62e9&quot;);</b>
+<b class="fc"><i>166</i>&nbsp;        label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 10f));</b>
+<b class="fc"><i>167</i>&nbsp;        contentPane.add(label3, &quot;cell 2 14&quot;);</b>
+<b class="fc"><i>168</i>&nbsp;        contentPane.add(comboBoxFileSelect, &quot;cell 7 14&quot;);</b>
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;        //---- buttonStart ----
+<b class="fc"><i>171</i>&nbsp;        buttonStart.setText(&quot;\u542f\u52a8\u7cfb\u7edf&quot;);</b>
+<b class="fc"><i>172</i>&nbsp;        buttonStart.setFont(buttonStart.getFont().deriveFont(buttonStart.getFont().getSize() + 8f));</b>
+<b class="fc"><i>173</i>&nbsp;        buttonStart.addMouseListener(new MouseAdapter() {</b>
+<i>174</i>&nbsp;            @Override
+<i>175</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>176</i>&nbsp;                buttonStartMousePressed(e);</b>
+<b class="nc"><i>177</i>&nbsp;            }</b>
+<i>178</i>&nbsp;        });
+<b class="fc"><i>179</i>&nbsp;        contentPane.add(buttonStart, &quot;cell 2 18 2 2&quot;);</b>
+<b class="fc"><i>180</i>&nbsp;        pack();</b>
+<b class="fc"><i>181</i>&nbsp;        setLocationRelativeTo(getOwner());</b>
+<i>182</i>&nbsp;        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+<b class="fc"><i>183</i>&nbsp;    }</b>
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+<i>186</i>&nbsp;    private JSeparator separator1;
+<i>187</i>&nbsp;    private JLabel label2;
+<i>188</i>&nbsp;    private JComboBox comboBoxSystemSelect;
+<i>189</i>&nbsp;    private JLabel label3;
+<i>190</i>&nbsp;    private JComboBox comboBoxFileSelect;
+<i>191</i>&nbsp;    private JButton buttonStart;
+<i>192</i>&nbsp;    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<i>193</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

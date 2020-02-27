@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Relation</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">otherDirectory</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Relation (otherDirectory)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Relation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (18/ 19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package otherDirectory;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import applications.SocialNetworkCircle.CentralUser;
+<i>4</i>&nbsp;import applications.SocialNetworkCircle.Friend;
+<i>5</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Immutable Object
+<i>9</i>&nbsp; *  两个物体之间的关系
+<i>10</i>&nbsp; *  单向边，但是有节点顺序
+<i>11</i>&nbsp; *  相等判断使用值相等
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class Relation&lt;L,E&gt; {
+<i>14</i>&nbsp;//    AF(*) = 一条以obju开始到objv结束权值为weight的有向边
+<i>15</i>&nbsp;//    RI ： obju!=null &amp;&amp; objv!=null
+<i>16</i>&nbsp;//    Rep Explosure : 在getter中暴露了obju和objv但是LE类型都是Immutable的类型 所以安全
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    L obju;
+<i>19</i>&nbsp;    E objv;
+<i>20</i>&nbsp;    double weight;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public static Relation&lt;Friend,Friend&gt; getFriendsTie(Friend obju, Friend objv, double weight) {
+<b class="fc"><i>23</i>&nbsp;        return new Relation&lt;&gt;(obju,objv,weight);</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public static Relation&lt;CentralUser,Friend&gt; getCentralUserTie(CentralUser obju, Friend objv, double weight) {
+<b class="fc"><i>27</i>&nbsp;        return new Relation&lt;&gt;(obju,objv,weight);</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<b class="fc"><i>30</i>&nbsp;    public Relation(L obju, E objv,double weight) {</b>
+<b class="fc"><i>31</i>&nbsp;        this.obju = obju;</b>
+<b class="fc"><i>32</i>&nbsp;        this.objv = objv;</b>
+<b class="fc"><i>33</i>&nbsp;        this.weight = weight;</b>
+<b class="fc"><i>34</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;    private void checkRep() {
+<b class="fc"><i>37</i>&nbsp;        UncheckedException.assertTrue(obju!=null &amp;&amp; objv!=null ,</b>
+<i>38</i>&nbsp;                &quot;不满足uv不空的条件&quot;);
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public L getObju() {
+<b class="fc"><i>42</i>&nbsp;        return obju;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public E getObjv() {
+<b class="fc"><i>46</i>&nbsp;        return objv;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public double getWeight() {
+<b class="fc"><i>50</i>&nbsp;        return weight;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public boolean equals(Object obj) {
+<b class="fc"><i>55</i>&nbsp;        if(obj==null) return false;</b>
+<b class="fc"><i>56</i>&nbsp;        if(obj instanceof Relation) {</b>
+<b class="fc"><i>57</i>&nbsp;            Relation&lt;L, E&gt; that = (Relation&lt;L, E&gt;) obj;</b>
+<b class="fc"><i>58</i>&nbsp;            return this.obju.equals(that.obju) &amp;&amp; this.objv.equals(that.objv) &amp;&amp; this.weight == that.weight;</b>
+<i>59</i>&nbsp;        } else {
+<b class="nc"><i>60</i>&nbsp;            return false;</b>
+<i>61</i>&nbsp;        }
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Override
+<i>65</i>&nbsp;    public int hashCode() {
+<b class="fc"><i>66</i>&nbsp;        return this.obju.hashCode()*31*31+this.objv.hashCode()*31+(int)this.weight;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

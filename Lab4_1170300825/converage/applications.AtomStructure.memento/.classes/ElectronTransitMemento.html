@@ -1,0 +1,119 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ElectronTransitMemento</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.AtomStructure.memento</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ElectronTransitMemento (applications.AtomStructure.memento)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ElectronTransitMemento</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.AtomStructure.memento;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import applications.AtomStructure.Electron;
+<i>4</i>&nbsp;import track.Track;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * Memento - ±¸ÍüÂ¼
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class ElectronTransitMemento {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    Electron electron;
+<i>12</i>&nbsp;    Track fromTrack,toTrack;
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;    public ElectronTransitMemento(Electron electron,Track fromTrack,Track toTrack) {</b>
+<b class="fc"><i>15</i>&nbsp;        this.electron = electron;</b>
+<b class="fc"><i>16</i>&nbsp;        this.fromTrack = fromTrack;</b>
+<b class="fc"><i>17</i>&nbsp;        this.toTrack = toTrack;</b>
+<b class="fc"><i>18</i>&nbsp;    }</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public Electron getElectron() {
+<b class="fc"><i>21</i>&nbsp;        return electron;</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public Track getFromTrack() {
+<b class="fc"><i>25</i>&nbsp;        return fromTrack;</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public Track getToTrack() {
+<b class="fc"><i>29</i>&nbsp;        return toTrack;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override
+<i>33</i>&nbsp;    public String toString() {
+<b class="fc"><i>34</i>&nbsp;        return String.format(&quot;Transit e from %.2f to %.2f&quot;,fromTrack.getRadius(),toTrack.getRadius());</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

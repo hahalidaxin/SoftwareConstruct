@@ -1,0 +1,154 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ConcreteCircularOrbitBuilder</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">circularOrbit</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ConcreteCircularOrbitBuilder (circularOrbit)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConcreteCircularOrbitBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package circularOrbit;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import otherDirectory.Relation;
+<i>4</i>&nbsp;import track.Track;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.ArrayList;
+<i>7</i>&nbsp;import java.util.HashMap;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;import java.util.Map;
+<i>10</i>&nbsp;
+<b class="fc"><i>11</i>&nbsp;public abstract class ConcreteCircularOrbitBuilder&lt;L,E&gt; {</b>
+<i>12</i>&nbsp;    protected ConcreteCircularOrbit&lt;L,E&gt; concreteCircularOrbit;
+<i>13</i>&nbsp;    protected String sysName;
+<i>14</i>&nbsp;    protected L centralUser;
+<b class="fc"><i>15</i>&nbsp;    protected List&lt;Track&gt; tracks = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>16</i>&nbsp;    protected Map&lt;Track,List&lt;E&gt;&gt; physicalObjMap = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>17</i>&nbsp;    protected List&lt;Relation&lt;L, E&gt;&gt; relOfCentralObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>18</i>&nbsp;    protected Map&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; relfOf2TraObjs = new HashMap&lt;&gt;();</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public abstract ConcreteCircularOrbit&lt;L,E&gt; getConcreteCircularOrbit();
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * 创建对象
+<i>24</i>&nbsp;     */
+<i>25</i>&nbsp;    public void createConcreteCircularOrbit(String sysName) {
+<b class="fc"><i>26</i>&nbsp;        this.sysName = sysName;</b>
+<b class="fc"><i>27</i>&nbsp;    };</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * 构造步骤：设置轨道系统中的轨道
+<i>32</i>&nbsp;     * @param trackList 需要添加的所有轨道
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public void buildTracks(List&lt;Track&gt; trackList) {
+<i>35</i>&nbsp;//        for(Track track:tracks){
+<i>36</i>&nbsp;//            concreteCircularOrbit.addTrack(track);
+<i>37</i>&nbsp;//        }
+<b class="fc"><i>38</i>&nbsp;        this.tracks = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>39</i>&nbsp;        trackList.forEach(x-&gt;this.tracks.add(x));</b>
+<b class="fc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * 构造步骤：向轨道系统中添加中心物体和轨道物体
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public void buildObjects(L centralObjects, Map&lt;Track,List&lt;E&gt;&gt; physicalObjMap) {
+<i>46</i>&nbsp;//        concreteCircularOrbit.addCentralObject(centralObjects);
+<i>47</i>&nbsp;//        for(Map.Entry&lt;Track, List&lt;E&gt;&gt; entry:physicalObjMap.entrySet()) {
+<i>48</i>&nbsp;//            for(E po:entry.getValue()) {
+<i>49</i>&nbsp;//                concreteCircularOrbit.addPhysicalObj2Track(po, entry.getKey());
+<i>50</i>&nbsp;//            }
+<i>51</i>&nbsp;//        }
+<b class="fc"><i>52</i>&nbsp;        this.centralUser = centralObjects;</b>
+<b class="fc"><i>53</i>&nbsp;        this.physicalObjMap = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>54</i>&nbsp;        for(Map.Entry&lt;Track,List&lt;E&gt;&gt; entry:physicalObjMap.entrySet()) {</b>
+<b class="fc"><i>55</i>&nbsp;            Track tk = entry.getKey();</b>
+<b class="fc"><i>56</i>&nbsp;            this.physicalObjMap.put(tk,new ArrayList&lt;&gt;());</b>
+<b class="fc"><i>57</i>&nbsp;            entry.getValue().forEach(x-&gt;this.physicalObjMap.get(tk).add(x));</b>
+<b class="fc"><i>58</i>&nbsp;        }</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public void buildRelation(List&lt;Relation&lt;L, E&gt;&gt; relOfCentralObjs, Map&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; friendMap){
+<i>62</i>&nbsp;//        空实现
+<b class="fc"><i>63</i>&nbsp;        this.relOfCentralObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>64</i>&nbsp;        relOfCentralObjs.forEach(x-&gt;this.relOfCentralObjs.add(x));</b>
+<b class="fc"><i>65</i>&nbsp;        this.relfOf2TraObjs = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>66</i>&nbsp;        friendMap.forEach((x,y)-&gt;{</b>
+<b class="fc"><i>67</i>&nbsp;            this.relfOf2TraObjs.put(x,new ArrayList&lt;&gt;());</b>
+<b class="fc"><i>68</i>&nbsp;            y.forEach(rel-&gt;this.relfOf2TraObjs.get(x).add(rel));</b>
+<b class="fc"><i>69</i>&nbsp;        });</b>
+<b class="fc"><i>70</i>&nbsp;    }</b>
+<i>71</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

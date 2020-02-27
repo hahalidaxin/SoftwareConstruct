@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Difference</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">otherDirectory</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Difference (otherDirectory)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Difference</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/ 28)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Difference$TrackDifference</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/ 26)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (54/ 54)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package otherDirectory;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import physicalObject.PhysicalObject;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.HashSet;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;import java.util.Set;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class Difference&lt;E extends PhysicalObject&gt; {
+<i>11</i>&nbsp;//    AF(*) = 有trackNumDiff个轨道比较结果的轨道差异对象Difference
+<i>12</i>&nbsp;
+<b class="fc"><i>13</i>&nbsp;    int trackIndex = 0;</b>
+<i>14</i>&nbsp;    private int trackNumDiff;
+<b class="fc"><i>15</i>&nbsp;    private List&lt;TrackDifference&gt; trackDiffList = new ArrayList&lt;&gt;();</b>
+<i>16</i>&nbsp;
+<b class="fc"><i>17</i>&nbsp;    public Difference(int trackNumDiff) {</b>
+<b class="fc"><i>18</i>&nbsp;        this.trackNumDiff = trackNumDiff;</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * 向系统轨道差异对象中添加两条对应比较的轨道
+<i>23</i>&nbsp;     * @param list1 轨道1上的所有物体
+<i>24</i>&nbsp;     * @param list2 轨道2上的所有物体
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    public void addTrackSet(List&lt;E&gt; list1, List&lt;E&gt; list2) {
+<b class="fc"><i>27</i>&nbsp;        List&lt;E&gt; OriOrbit1Objs = new ArrayList&lt;&gt;(list1);</b>
+<b class="fc"><i>28</i>&nbsp;        List&lt;E&gt; OriOrbit2Objs = new ArrayList&lt;&gt;(list2);</b>
+<b class="fc"><i>29</i>&nbsp;        trackIndex++;</b>
+<b class="fc"><i>30</i>&nbsp;        int NumDiff = OriOrbit1Objs.size()-OriOrbit2Objs.size();</b>
+<b class="fc"><i>31</i>&nbsp;        Set&lt;E&gt; deleteObjs = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>32</i>&nbsp;        for(E po1:OriOrbit1Objs) {</b>
+<b class="fc"><i>33</i>&nbsp;            for(E po2:OriOrbit2Objs) {</b>
+<b class="fc"><i>34</i>&nbsp;                if(po1.equalsObject(po2)) {</b>
+<b class="fc"><i>35</i>&nbsp;                    deleteObjs.add(po2);</b>
+<i>36</i>&nbsp;                }
+<b class="fc"><i>37</i>&nbsp;            }</b>
+<b class="fc"><i>38</i>&nbsp;        }</b>
+<b class="fc"><i>39</i>&nbsp;        for(E po:deleteObjs) {</b>
+<b class="fc"><i>40</i>&nbsp;            OriOrbit1Objs.removeIf((x)-&gt;x.equalsObject(po));</b>
+<b class="fc"><i>41</i>&nbsp;            OriOrbit2Objs.removeIf((x)-&gt;x.equalsObject(po));</b>
+<b class="fc"><i>42</i>&nbsp;        }</b>
+<i>43</i>&nbsp;
+<b class="fc"><i>44</i>&nbsp;        trackDiffList.add(new TrackDifference(trackIndex,NumDiff,</b>
+<i>45</i>&nbsp;                new HashSet&lt;&gt;(OriOrbit1Objs),new HashSet&lt;&gt;(OriOrbit2Objs)));
+<i>46</i>&nbsp;
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Override
+<i>50</i>&nbsp;    public String toString() {
+<b class="fc"><i>51</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>52</i>&nbsp;        sb.append(String.format(&quot;轨道数差异：%d%n&quot;,trackNumDiff));</b>
+<b class="fc"><i>53</i>&nbsp;        for(TrackDifference trackdiff:trackDiffList) {</b>
+<b class="fc"><i>54</i>&nbsp;            sb.append(trackdiff.toString()+&quot;\n&quot;);</b>
+<b class="fc"><i>55</i>&nbsp;        }</b>
+<b class="fc"><i>56</i>&nbsp;        return sb.toString();</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    private class TrackDifference {
+<i>60</i>&nbsp;//       AF(*) = 数目差异为objNumDiff 互异轨道物体集合分别为orbit1Objs和orbit2Objs的单条轨道差异对象
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;        int index;
+<i>63</i>&nbsp;        int objNumDiff;
+<i>64</i>&nbsp;        Set&lt;E&gt; orbit1Objs,orbit2Objs;
+<i>65</i>&nbsp;
+<b class="fc"><i>66</i>&nbsp;        public TrackDifference(int index,int objNumDiff,Set&lt;E&gt; orbit1Objs,Set&lt;E&gt; orbit2Objs) {</b>
+<b class="fc"><i>67</i>&nbsp;            this.index = index;</b>
+<b class="fc"><i>68</i>&nbsp;            this.objNumDiff = objNumDiff;</b>
+<b class="fc"><i>69</i>&nbsp;            this.orbit1Objs = orbit1Objs;</b>
+<b class="fc"><i>70</i>&nbsp;            this.orbit2Objs = orbit2Objs;</b>
+<b class="fc"><i>71</i>&nbsp;        }</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;        /**
+<i>74</i>&nbsp;         * 获取一个轨道互异物体集合转化后的字符串
+<i>75</i>&nbsp;         * @param orbitObjs 一个轨道上的互异轨道物体集合
+<i>76</i>&nbsp;         * @return 返回转化后的字符串，如果集合数目为0则返回 空 如果数目只有一个则不加结合符号，
+<i>77</i>&nbsp;         * 如果数目&gt;=1则添加集合符号
+<i>78</i>&nbsp;         */
+<i>79</i>&nbsp;        private String getObjectString(Set&lt;E&gt; orbitObjs) {
+<b class="fc"><i>80</i>&nbsp;            StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>81</i>&nbsp;            if(orbitObjs.size()==0) sb.append(&quot;无&quot;);</b>
+<b class="fc"><i>82</i>&nbsp;            else if(orbitObjs.size()==1) {</b>
+<b class="fc"><i>83</i>&nbsp;                for(E po:orbitObjs) {</b>
+<b class="fc"><i>84</i>&nbsp;                    sb.append(po.toString());</b>
+<b class="fc"><i>85</i>&nbsp;                }</b>
+<i>86</i>&nbsp;            } else {
+<b class="fc"><i>87</i>&nbsp;                sb.append(&quot;{&quot;);</b>
+<b class="fc"><i>88</i>&nbsp;                boolean flag = false;</b>
+<b class="fc"><i>89</i>&nbsp;                for(E po:orbitObjs) {</b>
+<b class="fc"><i>90</i>&nbsp;                    if(!flag) {</b>
+<b class="fc"><i>91</i>&nbsp;                        flag = true;</b>
+<b class="fc"><i>92</i>&nbsp;                        sb.append(po.toString());</b>
+<i>93</i>&nbsp;                    } else {
+<b class="fc"><i>94</i>&nbsp;                        sb.append(&quot;,&quot;+po.toString());</b>
+<i>95</i>&nbsp;                    }
+<b class="fc"><i>96</i>&nbsp;                }</b>
+<b class="fc"><i>97</i>&nbsp;                sb.append(&quot;}&quot;);</b>
+<i>98</i>&nbsp;            }
+<b class="fc"><i>99</i>&nbsp;            return sb.toString();</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;        /**
+<i>103</i>&nbsp;         * 获取单条轨道的比较结果
+<i>104</i>&nbsp;         * @return 单条轨道比较结果 如果两个互异轨道物体都返回无 这说明两者并不存在物体差异，
+<i>105</i>&nbsp;         * 否则数目对应的互异轨道物体集合字符串
+<i>106</i>&nbsp;         */
+<i>107</i>&nbsp;        @Override
+<i>108</i>&nbsp;        public String toString() {
+<b class="fc"><i>109</i>&nbsp;            String tmp = getObjectString(orbit1Objs)+&quot;-&quot;+getObjectString(orbit2Objs);</b>
+<b class="fc"><i>110</i>&nbsp;            if(tmp.equals(&quot;无-无&quot;))</b>
+<b class="fc"><i>111</i>&nbsp;                return String.format(&quot;轨道%d的物体数量差异：%d ；&quot;,index,objNumDiff);</b>
+<i>112</i>&nbsp;            else
+<b class="fc"><i>113</i>&nbsp;                return String.format(&quot;轨道%d的物体数量差异：%d ；  物体差异：%s&quot;,index,objNumDiff,tmp);</b>
+<i>114</i>&nbsp;        }
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

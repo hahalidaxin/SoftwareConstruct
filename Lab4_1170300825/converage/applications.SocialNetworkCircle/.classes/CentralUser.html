@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CentralUser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.SocialNetworkCircle</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CentralUser (applications.SocialNetworkCircle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CentralUser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.SocialNetworkCircle;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import centralObject.CentralObject;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class CentralUser extends CentralObject {
+<i>6</i>&nbsp;    private String gender;
+<i>7</i>&nbsp;    private int age;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    public static CentralUser getInstance(String obName,String gender,int age) {
+<b class="fc"><i>11</i>&nbsp;        return new CentralUser(obName,gender,age);</b>
+<i>12</i>&nbsp;    }
+<i>13</i>&nbsp;    public static CentralUser getInstance(String obName) {
+<b class="fc"><i>14</i>&nbsp;        return new CentralUser(obName);</b>
+<i>15</i>&nbsp;    }
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public CentralUser(String obName) {
+<b class="fc"><i>18</i>&nbsp;        super(obName);</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    public CentralUser(String obName,String gender,int age) {
+<b class="fc"><i>22</i>&nbsp;        super(obName);</b>
+<b class="fc"><i>23</i>&nbsp;        this.gender = gender;</b>
+<b class="fc"><i>24</i>&nbsp;        this.age = age;</b>
+<b class="fc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @Override
+<i>28</i>&nbsp;    public boolean equals(Object obj) {
+<b class="fc"><i>29</i>&nbsp;        if(obj instanceof CentralUser) {</b>
+<b class="fc"><i>30</i>&nbsp;            CentralUser that = (CentralUser) obj;</b>
+<b class="fc"><i>31</i>&nbsp;            return super.equals(obj) &amp;&amp; gender.equals(that.gender) &amp;&amp; age==that.age;</b>
+<i>32</i>&nbsp;        } else {
+<b class="nc"><i>33</i>&nbsp;            return false;</b>
+<i>34</i>&nbsp;        }
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Override
+<i>38</i>&nbsp;    public int hashCode() {
+<b class="fc"><i>39</i>&nbsp;        return super.hashCode()*31*31+gender.hashCode()*31+age;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

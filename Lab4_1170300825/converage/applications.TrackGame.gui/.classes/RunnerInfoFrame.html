@@ -1,0 +1,355 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RunnerInfoFrame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.TrackGame.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RunnerInfoFrame (applications.TrackGame.gui)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RunnerInfoFrame</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 106)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RunnerInfoFrame$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 109)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Created by JFormDesigner on Sun Apr 21 16:35:47 CST 2019
+<i>3</i>&nbsp; */
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;package applications.TrackGame.gui;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import applications.TrackGame.Runner;
+<i>8</i>&nbsp;import applications.TrackGame.TrackGame;
+<i>9</i>&nbsp;import net.miginfocom.swing.MigLayout;
+<i>10</i>&nbsp;import org.apache.log4j.Logger;
+<i>11</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import javax.swing.*;
+<i>14</i>&nbsp;import java.awt.*;
+<i>15</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>16</i>&nbsp;import java.awt.event.MouseEvent;
+<i>17</i>&nbsp;import java.util.List;
+<i>18</i>&nbsp;import java.util.regex.Matcher;
+<i>19</i>&nbsp;import java.util.regex.Pattern;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;/**
+<i>22</i>&nbsp; * @author Brainrain
+<i>23</i>&nbsp; */
+<b class="nc"><i>24</i>&nbsp;public class RunnerInfoFrame extends JFrame {</b>
+<b class="nc"><i>25</i>&nbsp;    private static Logger logger = Logger.getLogger(Runner.class.getName());</b>
+<i>26</i>&nbsp;    TrackGame trackGame;
+<b class="nc"><i>27</i>&nbsp;    public RunnerInfoFrame(TrackGame trackGame, List&lt;String&gt; trackList) {</b>
+<b class="nc"><i>28</i>&nbsp;        this.trackGame = trackGame;</b>
+<b class="nc"><i>29</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>30</i>&nbsp;        this.comboBoxTrackList.removeAllItems();</b>
+<b class="nc"><i>31</i>&nbsp;        for(String str:trackList) {</b>
+<b class="nc"><i>32</i>&nbsp;            this.comboBoxTrackList.addItem(str);</b>
+<b class="nc"><i>33</i>&nbsp;        }</b>
+<b class="nc"><i>34</i>&nbsp;    }</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    private boolean testMatch(String line,String regex) {
+<b class="nc"><i>37</i>&nbsp;        Matcher matcher = Pattern.compile(regex).matcher(line);</b>
+<b class="nc"><i>38</i>&nbsp;        if(matcher.find()) {</b>
+<b class="nc"><i>39</i>&nbsp;            if(matcher.group(1).equals(line)) {</b>
+<b class="nc"><i>40</i>&nbsp;                return true;</b>
+<i>41</i>&nbsp;            } else {
+<b class="nc"><i>42</i>&nbsp;                return false;</b>
+<i>43</i>&nbsp;            }
+<i>44</i>&nbsp;        } else {
+<b class="nc"><i>45</i>&nbsp;            return false;</b>
+<i>46</i>&nbsp;        }
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;    private void buttonSummitMousePressed(MouseEvent e) {
+<i>49</i>&nbsp;        try {
+<b class="nc"><i>50</i>&nbsp;            if(!testMatch(textFieldName.getText(),&quot;([a-zA-Z]+)&quot;)) {</b>
+<b class="nc"><i>51</i>&nbsp;                UncheckedException.assertTrue(false,&quot;运动员名称不符合要求&quot;);</b>
+<i>52</i>&nbsp;            }
+<b class="nc"><i>53</i>&nbsp;            String obName = this.textFieldName.getText();</b>
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;            if(!testMatch(textFieldID.getText(),&quot;(\\d+)&quot;)) {</b>
+<b class="nc"><i>56</i>&nbsp;                UncheckedException.assertTrue(false,&quot;运动员ID不符合要求&quot;);</b>
+<i>57</i>&nbsp;            }
+<b class="nc"><i>58</i>&nbsp;            int id = Integer.parseInt(this.textFieldID.getText());</b>
+<i>59</i>&nbsp;
+<b class="nc"><i>60</i>&nbsp;            if(!testMatch(textFieldNation.getText(),&quot;([A-Z]{3})&quot;)) {</b>
+<b class="nc"><i>61</i>&nbsp;                UncheckedException.assertTrue(false,&quot;运动员国家不符合要求&quot;);</b>
+<i>62</i>&nbsp;            }
+<b class="nc"><i>63</i>&nbsp;            String nation = this.textFieldNation.getText();</b>
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;            if(!testMatch(textFieldAge.getText(),&quot;(\\d+)&quot;)) {</b>
+<b class="nc"><i>66</i>&nbsp;                UncheckedException.assertTrue(false,&quot;运动员年龄不符合要求&quot;);</b>
+<i>67</i>&nbsp;            }
+<b class="nc"><i>68</i>&nbsp;            int age = Integer.parseInt(this.textFieldAge.getText());</b>
+<i>69</i>&nbsp;
+<b class="nc"><i>70</i>&nbsp;            if(!testMatch(textField5BestScore.getText(),&quot;(\\d{1,2}\\.\\d{2})&quot;)) {</b>
+<b class="nc"><i>71</i>&nbsp;                UncheckedException.assertTrue(false,&quot;运动员最佳成绩不符合要求&quot;);</b>
+<i>72</i>&nbsp;            }
+<b class="nc"><i>73</i>&nbsp;            double bestScore = Double.parseDouble(this.textField5BestScore.getText());</b>
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;            Runner runner = Runner.getInstance(obName, id, age, bestScore, nation);</b>
+<b class="nc"><i>76</i>&nbsp;            double trackRadius = Double.parseDouble((String) this.comboBoxTrackList.getSelectedItem());</b>
+<b class="nc"><i>77</i>&nbsp;            trackGame.addPhysicalObject(runner, trackRadius);</b>
+<b class="nc"><i>78</i>&nbsp;            this.setVisible(false);</b>
+<b class="nc"><i>79</i>&nbsp;        } catch(UncheckedException except) {</b>
+<b class="nc"><i>80</i>&nbsp;            logger.error(except);</b>
+<b class="nc"><i>81</i>&nbsp;            JOptionPane.showMessageDialog(this,except);</b>
+<b class="nc"><i>82</i>&nbsp;            trackGame.reLoadAll();</b>
+<i>83</i>&nbsp;//            UncheckedException.assertTrue(false,&quot;运动员信息输入不符合规范&quot;);
+<b class="nc"><i>84</i>&nbsp;        }</b>
+<b class="nc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    private void initComponents() {
+<i>88</i>&nbsp;        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+<b class="nc"><i>89</i>&nbsp;        label1 = new JLabel();</b>
+<b class="nc"><i>90</i>&nbsp;        separator1 = new JSeparator();</b>
+<b class="nc"><i>91</i>&nbsp;        infopanel = new JPanel();</b>
+<b class="nc"><i>92</i>&nbsp;        label2 = new JLabel();</b>
+<b class="nc"><i>93</i>&nbsp;        textFieldName = new JTextField();</b>
+<b class="nc"><i>94</i>&nbsp;        label4 = new JLabel();</b>
+<b class="nc"><i>95</i>&nbsp;        textFieldID = new JTextField();</b>
+<b class="nc"><i>96</i>&nbsp;        label5 = new JLabel();</b>
+<b class="nc"><i>97</i>&nbsp;        textFieldNation = new JTextField();</b>
+<b class="nc"><i>98</i>&nbsp;        label6 = new JLabel();</b>
+<b class="nc"><i>99</i>&nbsp;        textFieldAge = new JTextField();</b>
+<b class="nc"><i>100</i>&nbsp;        label7 = new JLabel();</b>
+<b class="nc"><i>101</i>&nbsp;        textField5BestScore = new JTextField();</b>
+<b class="nc"><i>102</i>&nbsp;        label8 = new JLabel();</b>
+<b class="nc"><i>103</i>&nbsp;        comboBoxTrackList = new JComboBox&lt;&gt;();</b>
+<b class="nc"><i>104</i>&nbsp;        buttonSummit = new JButton();</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;        //======== this ========
+<b class="nc"><i>107</i>&nbsp;        Container contentPane = getContentPane();</b>
+<b class="nc"><i>108</i>&nbsp;        contentPane.setLayout(new MigLayout(</b>
+<i>109</i>&nbsp;            &quot;hidemode 3&quot;,
+<i>110</i>&nbsp;            // columns
+<i>111</i>&nbsp;            &quot;[fill]&quot; +
+<i>112</i>&nbsp;            &quot;[fill]&quot; +
+<i>113</i>&nbsp;            &quot;[fill]&quot; +
+<i>114</i>&nbsp;            &quot;[fill]&quot; +
+<i>115</i>&nbsp;            &quot;[fill]&quot; +
+<i>116</i>&nbsp;            &quot;[fill]&quot; +
+<i>117</i>&nbsp;            &quot;[fill]&quot; +
+<i>118</i>&nbsp;            &quot;[fill]&quot; +
+<i>119</i>&nbsp;            &quot;[fill]&quot; +
+<i>120</i>&nbsp;            &quot;[fill]&quot;,
+<i>121</i>&nbsp;            // rows
+<i>122</i>&nbsp;            &quot;[]&quot; +
+<i>123</i>&nbsp;            &quot;[]&quot; +
+<i>124</i>&nbsp;            &quot;[]&quot; +
+<i>125</i>&nbsp;            &quot;[]&quot; +
+<i>126</i>&nbsp;            &quot;[]&quot; +
+<i>127</i>&nbsp;            &quot;[]&quot; +
+<i>128</i>&nbsp;            &quot;[]&quot;));
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;        //---- label1 ----
+<b class="nc"><i>131</i>&nbsp;        label1.setText(&quot;\u8be6\u7ec6\u4fe1\u606f&quot;);</b>
+<b class="nc"><i>132</i>&nbsp;        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 12f));</b>
+<b class="nc"><i>133</i>&nbsp;        contentPane.add(label1, &quot;cell 4 0&quot;);</b>
+<b class="nc"><i>134</i>&nbsp;        contentPane.add(separator1, &quot;cell 5 1&quot;);</b>
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;        //======== infopanel ========
+<i>137</i>&nbsp;        {
+<b class="nc"><i>138</i>&nbsp;            infopanel.setPreferredSize(new Dimension(520, 401));</b>
+<b class="nc"><i>139</i>&nbsp;            infopanel.setBackground(Color.white);</b>
+<b class="nc"><i>140</i>&nbsp;            infopanel.setLayout(new MigLayout(</b>
+<i>141</i>&nbsp;                &quot;hidemode 3&quot;,
+<i>142</i>&nbsp;                // columns
+<i>143</i>&nbsp;                &quot;[fill]&quot; +
+<i>144</i>&nbsp;                &quot;[fill]&quot; +
+<i>145</i>&nbsp;                &quot;[fill]&quot; +
+<i>146</i>&nbsp;                &quot;[fill]&quot; +
+<i>147</i>&nbsp;                &quot;[fill]&quot; +
+<i>148</i>&nbsp;                &quot;[fill]&quot; +
+<i>149</i>&nbsp;                &quot;[fill]&quot; +
+<i>150</i>&nbsp;                &quot;[fill]&quot; +
+<i>151</i>&nbsp;                &quot;[fill]&quot;,
+<i>152</i>&nbsp;                // rows
+<i>153</i>&nbsp;                &quot;[]&quot; +
+<i>154</i>&nbsp;                &quot;[]&quot; +
+<i>155</i>&nbsp;                &quot;[]&quot; +
+<i>156</i>&nbsp;                &quot;[]&quot; +
+<i>157</i>&nbsp;                &quot;[]&quot; +
+<i>158</i>&nbsp;                &quot;[]&quot; +
+<i>159</i>&nbsp;                &quot;[]&quot; +
+<i>160</i>&nbsp;                &quot;[]&quot; +
+<i>161</i>&nbsp;                &quot;[]&quot; +
+<i>162</i>&nbsp;                &quot;[]&quot; +
+<i>163</i>&nbsp;                &quot;[]&quot;));
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;            //---- label2 ----
+<b class="nc"><i>166</i>&nbsp;            label2.setText(&quot;\u540d\u79f0\uff1a&quot;);</b>
+<b class="nc"><i>167</i>&nbsp;            label2.setForeground(Color.black);</b>
+<b class="nc"><i>168</i>&nbsp;            label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 6f));</b>
+<b class="nc"><i>169</i>&nbsp;            infopanel.add(label2, &quot;cell 1 1&quot;);</b>
+<i>170</i>&nbsp;
+<i>171</i>&nbsp;            //---- textFieldName ----
+<b class="nc"><i>172</i>&nbsp;            textFieldName.setBackground(Color.white);</b>
+<b class="nc"><i>173</i>&nbsp;            textFieldName.setMinimumSize(new Dimension(100, 27));</b>
+<b class="nc"><i>174</i>&nbsp;            infopanel.add(textFieldName, &quot;cell 8 1&quot;);</b>
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;            //---- label4 ----
+<b class="nc"><i>177</i>&nbsp;            label4.setText(&quot;ID\uff1a&quot;);</b>
+<b class="nc"><i>178</i>&nbsp;            label4.setForeground(Color.black);</b>
+<b class="nc"><i>179</i>&nbsp;            label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 6f));</b>
+<b class="nc"><i>180</i>&nbsp;            infopanel.add(label4, &quot;cell 1 2&quot;);</b>
+<b class="nc"><i>181</i>&nbsp;            infopanel.add(textFieldID, &quot;cell 8 2&quot;);</b>
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;            //---- label5 ----
+<b class="nc"><i>184</i>&nbsp;            label5.setText(&quot;\u56fd\u5bb6\uff1a&quot;);</b>
+<b class="nc"><i>185</i>&nbsp;            label5.setForeground(Color.black);</b>
+<b class="nc"><i>186</i>&nbsp;            label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 6f));</b>
+<b class="nc"><i>187</i>&nbsp;            infopanel.add(label5, &quot;cell 1 3&quot;);</b>
+<b class="nc"><i>188</i>&nbsp;            infopanel.add(textFieldNation, &quot;cell 8 3&quot;);</b>
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;            //---- label6 ----
+<b class="nc"><i>191</i>&nbsp;            label6.setText(&quot;\u5e74\u9f84\uff1a&quot;);</b>
+<b class="nc"><i>192</i>&nbsp;            label6.setForeground(Color.black);</b>
+<b class="nc"><i>193</i>&nbsp;            label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 6f));</b>
+<b class="nc"><i>194</i>&nbsp;            infopanel.add(label6, &quot;cell 1 4&quot;);</b>
+<b class="nc"><i>195</i>&nbsp;            infopanel.add(textFieldAge, &quot;cell 8 4&quot;);</b>
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;            //---- label7 ----
+<b class="nc"><i>198</i>&nbsp;            label7.setText(&quot;\u6700\u597d\u6210\u7ee9\uff1a&quot;);</b>
+<b class="nc"><i>199</i>&nbsp;            label7.setForeground(Color.black);</b>
+<b class="nc"><i>200</i>&nbsp;            label7.setFont(label7.getFont().deriveFont(label7.getFont().getSize() + 6f));</b>
+<b class="nc"><i>201</i>&nbsp;            infopanel.add(label7, &quot;cell 1 5&quot;);</b>
+<b class="nc"><i>202</i>&nbsp;            infopanel.add(textField5BestScore, &quot;cell 8 5&quot;);</b>
+<i>203</i>&nbsp;        }
+<b class="nc"><i>204</i>&nbsp;        contentPane.add(infopanel, &quot;cell 4 2&quot;);</b>
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;        //---- label8 ----
+<b class="nc"><i>207</i>&nbsp;        label8.setText(&quot;\u6dfb\u52a0\u5230\uff1a&quot;);</b>
+<b class="nc"><i>208</i>&nbsp;        label8.setForeground(Color.black);</b>
+<b class="nc"><i>209</i>&nbsp;        label8.setFont(label8.getFont().deriveFont(label8.getFont().getSize() + 6f));</b>
+<b class="nc"><i>210</i>&nbsp;        contentPane.add(label8, &quot;cell 4 3&quot;);</b>
+<b class="nc"><i>211</i>&nbsp;        contentPane.add(comboBoxTrackList, &quot;cell 4 3&quot;);</b>
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;        //---- buttonSummit ----
+<b class="nc"><i>214</i>&nbsp;        buttonSummit.setText(&quot;\u63d0\u4ea4&quot;);</b>
+<b class="nc"><i>215</i>&nbsp;        buttonSummit.setPreferredSize(new Dimension(150, 50));</b>
+<b class="nc"><i>216</i>&nbsp;        buttonSummit.addMouseListener(new MouseAdapter() {</b>
+<i>217</i>&nbsp;            @Override
+<i>218</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>219</i>&nbsp;                buttonSummitMousePressed(e);</b>
+<b class="nc"><i>220</i>&nbsp;            }</b>
+<i>221</i>&nbsp;        });
+<b class="nc"><i>222</i>&nbsp;        contentPane.add(buttonSummit, &quot;cell 2 6 5 1&quot;);</b>
+<b class="nc"><i>223</i>&nbsp;        pack();</b>
+<b class="nc"><i>224</i>&nbsp;        setLocationRelativeTo(getOwner());</b>
+<i>225</i>&nbsp;        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+<b class="nc"><i>226</i>&nbsp;    }</b>
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+<i>229</i>&nbsp;    private JLabel label1;
+<i>230</i>&nbsp;    private JSeparator separator1;
+<i>231</i>&nbsp;    private JPanel infopanel;
+<i>232</i>&nbsp;    private JLabel label2;
+<i>233</i>&nbsp;    private JTextField textFieldName;
+<i>234</i>&nbsp;    private JLabel label4;
+<i>235</i>&nbsp;    private JTextField textFieldID;
+<i>236</i>&nbsp;    private JLabel label5;
+<i>237</i>&nbsp;    private JTextField textFieldNation;
+<i>238</i>&nbsp;    private JLabel label6;
+<i>239</i>&nbsp;    private JTextField textFieldAge;
+<i>240</i>&nbsp;    private JLabel label7;
+<i>241</i>&nbsp;    private JTextField textField5BestScore;
+<i>242</i>&nbsp;    private JLabel label8;
+<i>243</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxTrackList;
+<i>244</i>&nbsp;    private JButton buttonSummit;
+<i>245</i>&nbsp;    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<i>246</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

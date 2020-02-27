@@ -1,0 +1,606 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ConcreteCircularOrbit</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">circularOrbit</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ConcreteCircularOrbit (circularOrbit)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConcreteCircularOrbit</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (26/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.1%
+  </span>
+  <span class="absValue">
+    (206/ 254)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConcreteCircularOrbit$MyIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/ 15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (30/ 32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.2%
+  </span>
+  <span class="absValue">
+    (221/ 269)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package circularOrbit;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.apache.log4j.Logger;
+<i>4</i>&nbsp;import otherDirectory.Difference;
+<i>5</i>&nbsp;import otherDirectory.Relation;
+<i>6</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>7</i>&nbsp;import track.Track;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import javax.swing.*;
+<i>10</i>&nbsp;import java.util.*;
+<i>11</i>&nbsp;import java.util.concurrent.LinkedBlockingQueue;
+<i>12</i>&nbsp;import java.util.stream.Collectors;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public class  ConcreteCircularOrbit&lt;L,E&gt; implements  CircularOrbit&lt;L,E&gt; ,Iterable&lt;E&gt; {
+<i>15</i>&nbsp;//    AF(*) = 以centralObject为中心点物体的轨道系统，
+<i>16</i>&nbsp;//    轨道系统中所有轨道为physicalObjectMap.keySet()，轨道上物体映射为physiclObjectMap，
+<i>17</i>&nbsp;//    中心物体与第一层轨道物体的关系为relOfCobj2TraObj，轨道物体之间的关系为relOf2TraObjs。
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;//    RI：relOfxxx中的轨道物体必须已经在physicalObjectMap中出现
+<i>20</i>&nbsp;//      ，relOfCobj2TracObj中的所有物体都必须处于第一层轨道上
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;//    Rep Explosure： getTrackPo 返回Track 是Immutable类型
+<i>23</i>&nbsp;//                    getPhsycialObjList 使用Collections.unmodifiableList进行防御式保护
+<i>24</i>&nbsp;//                     对于域修改轨道系统有关系的函数，其输入参数都为Immutable的类型
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;    private static Logger logger = Logger.getLogger(ConcreteCircularOrbit.class.getName());</b>
+<i>28</i>&nbsp;    protected L centralObject;
+<b class="fc"><i>29</i>&nbsp;    protected Map&lt;Track,List&lt;E&gt;&gt; physicalObjectMap = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>30</i>&nbsp;    protected List&lt;Relation&lt;L,E&gt;&gt; relOfCobj2TraObj = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>31</i>&nbsp;    protected Map&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; relOf2TraObjs = new HashMap&lt;&gt;();</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;//    提供构造方法
+<i>35</i>&nbsp;//    空的构造方法
+<b class="fc"><i>36</i>&nbsp;    public ConcreteCircularOrbit() {</b>
+<i>37</i>&nbsp;
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;//    不能通过修改操作来构造系统 否则无法正常进行checkRep检查不变性
+<i>40</i>&nbsp;    public ConcreteCircularOrbit(L co,Map&lt;Track,List&lt;E&gt;&gt; pm,
+<b class="fc"><i>41</i>&nbsp;                                  List&lt;Relation&lt;L,E&gt;&gt; rel1,Map&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; rel2) {</b>
+<b class="fc"><i>42</i>&nbsp;        this.centralObject = co;</b>
+<b class="fc"><i>43</i>&nbsp;        this.physicalObjectMap = pm;</b>
+<b class="fc"><i>44</i>&nbsp;        this.relOfCobj2TraObj = rel1;</b>
+<b class="fc"><i>45</i>&nbsp;        this.relOf2TraObjs = rel2;</b>
+<b class="fc"><i>46</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;//    维护循环不变性
+<i>50</i>&nbsp;    protected void checkRep() {
+<b class="fc"><i>51</i>&nbsp;        if(relOf2TraObjs==null) return;</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;        try {
+<b class="fc"><i>54</i>&nbsp;            Set&lt;E&gt; poSet = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>55</i>&nbsp;            Iterator&lt;E&gt; ite = this.iterator();</b>
+<b class="fc"><i>56</i>&nbsp;            while (ite.hasNext()) {</b>
+<b class="fc"><i>57</i>&nbsp;                poSet.add(ite.next());</b>
+<i>58</i>&nbsp;            }
+<i>59</i>&nbsp;
+<b class="fc"><i>60</i>&nbsp;            for (Map.Entry&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; entry: relOf2TraObjs.entrySet()) {</b>
+<i>61</i>&nbsp;//                E po = entry.getKey();
+<b class="fc"><i>62</i>&nbsp;                for (Relation&lt;E, E&gt; rel : entry.getValue()) {</b>
+<b class="fc"><i>63</i>&nbsp;                    UncheckedException.assertTrue(poSet.contains(rel.getObjv()) &amp;&amp; poSet.contains(rel.getObju()),</b>
+<i>64</i>&nbsp;                            &quot;relOf2TraObjs不满足循环不变性&quot;);
+<b class="fc"><i>65</i>&nbsp;                }</b>
+<b class="fc"><i>66</i>&nbsp;            }</b>
+<i>67</i>&nbsp;//            List&lt;Track&gt; sortedTracks = getSortedTrack();
+<i>68</i>&nbsp;//            Set&lt;E&gt; firstTrackObjSet = new HashSet&lt;&gt;(physicalObjectMap.get(sortedTracks.get(0)));
+<i>69</i>&nbsp;//            for (Relation&lt;L, E&gt; rel : relOfCobj2TraObj) {
+<i>70</i>&nbsp;//                UncheckedException.assertTrue(rel.getObju() == centralObject, &quot;relOfCobj2TraObj relation.u不满足循环不变性&quot;);
+<i>71</i>&nbsp;//                UncheckedException.assertTrue(firstTrackObjSet.contains(rel.getObjv()), &quot;relOfCobj2TraObj relation.u不满足循环不变性&quot;);
+<i>72</i>&nbsp;//            }
+<b class="nc"><i>73</i>&nbsp;        } catch (UncheckedException e) {</b>
+<b class="nc"><i>74</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>75</i>&nbsp;            throw e;</b>
+<b class="fc"><i>76</i>&nbsp;        }</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public boolean addTrack(Track newTrack) {
+<i>81</i>&nbsp;        try {
+<b class="fc"><i>82</i>&nbsp;            UncheckedException.assertTrue(newTrack!=null,&quot;不满足newTrack不为空的条件&quot;);</b>
+<b class="nc"><i>83</i>&nbsp;        }catch(UncheckedException e) {</b>
+<b class="nc"><i>84</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>85</i>&nbsp;            throw e;</b>
+<b class="fc"><i>86</i>&nbsp;        }</b>
+<i>87</i>&nbsp;
+<b class="fc"><i>88</i>&nbsp;        logger.info(String.format(&quot;添加一条半径为%f的圆形轨道&quot;,newTrack.getRadius()));</b>
+<b class="fc"><i>89</i>&nbsp;        if(physicalObjectMap.containsKey(newTrack)) {</b>
+<b class="fc"><i>90</i>&nbsp;            return false;</b>
+<i>91</i>&nbsp;        }
+<b class="fc"><i>92</i>&nbsp;        physicalObjectMap.put(newTrack,new ArrayList&lt;&gt;());</b>
+<b class="fc"><i>93</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>94</i>&nbsp;        return true;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public boolean removeTrack(Track  rmTrack) {
+<i>99</i>&nbsp;        try {
+<b class="fc"><i>100</i>&nbsp;            UncheckedException.assertTrue(physicalObjectMap.containsKey(rmTrack),&quot;不满足rmTrack存在轨道系统的要求&quot;);</b>
+<b class="fc"><i>101</i>&nbsp;        }catch(UncheckedException e) {</b>
+<b class="fc"><i>102</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>103</i>&nbsp;            throw e;</b>
+<b class="fc"><i>104</i>&nbsp;        }</b>
+<b class="fc"><i>105</i>&nbsp;        logger.info(String.format(&quot;删除一条半径为%f的圆形轨道&quot;,rmTrack.getRadius()));</b>
+<i>106</i>&nbsp;//        删除轨道上的所有物体
+<b class="fc"><i>107</i>&nbsp;        List&lt;E&gt; poList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>108</i>&nbsp;        for(E po:physicalObjectMap.get(rmTrack)) {</b>
+<b class="fc"><i>109</i>&nbsp;            poList.add(po);</b>
+<b class="fc"><i>110</i>&nbsp;        }</b>
+<b class="fc"><i>111</i>&nbsp;        for(E po:poList) {</b>
+<b class="fc"><i>112</i>&nbsp;            removePhysicalObject(po);</b>
+<b class="fc"><i>113</i>&nbsp;        }</b>
+<i>114</i>&nbsp;
+<b class="fc"><i>115</i>&nbsp;        if(!physicalObjectMap.containsKey(rmTrack)) {</b>
+<b class="nc"><i>116</i>&nbsp;            return false;</b>
+<i>117</i>&nbsp;        }
+<b class="fc"><i>118</i>&nbsp;        physicalObjectMap.remove(rmTrack);</b>
+<b class="fc"><i>119</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>120</i>&nbsp;        return true;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @Override
+<i>124</i>&nbsp;    public void addCentralObject(L co) {
+<b class="nc"><i>125</i>&nbsp;        this.centralObject = co;</b>
+<b class="nc"><i>126</i>&nbsp;        logger.info(&quot;添加中心物体&quot;);</b>
+<b class="nc"><i>127</i>&nbsp;    }</b>
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    @Override
+<i>130</i>&nbsp;    public boolean addPhysicalObj2Track(E po, Track tk) {
+<i>131</i>&nbsp;        try {
+<b class="fc"><i>132</i>&nbsp;            UncheckedException.assertTrue(physicalObjectMap.containsKey(tk), &quot;轨道系统中不包含目标轨道&quot;);</b>
+<b class="fc"><i>133</i>&nbsp;        } catch (UncheckedException e) {</b>
+<b class="fc"><i>134</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>135</i>&nbsp;            throw e;</b>
+<b class="fc"><i>136</i>&nbsp;        }</b>
+<b class="fc"><i>137</i>&nbsp;        logger.info(String.format(&quot;将物体%s添加到%f轨道&quot;,po,tk.getRadius()));</b>
+<i>138</i>&nbsp;
+<b class="fc"><i>139</i>&nbsp;        physicalObjectMap.keySet().stream()</b>
+<b class="fc"><i>140</i>&nbsp;                .filter((x)-&gt;physicalObjectMap.get(x).contains(po))</b>
+<b class="fc"><i>141</i>&nbsp;                .forEach((x)-&gt;{</b>
+<b class="fc"><i>142</i>&nbsp;                    UncheckedException.assertTrue(x==tk,&quot;其他轨道已经包含该物体&quot;);</b>
+<b class="fc"><i>143</i>&nbsp;                });</b>
+<b class="fc"><i>144</i>&nbsp;        if(physicalObjectMap.get(tk).contains(po)) return false;</b>
+<b class="fc"><i>145</i>&nbsp;        physicalObjectMap.get(tk).add(po);</b>
+<i>146</i>&nbsp;
+<b class="fc"><i>147</i>&nbsp;        if(!relOf2TraObjs.containsKey(po)) {</b>
+<b class="fc"><i>148</i>&nbsp;            relOf2TraObjs.put(po,new ArrayList&lt;&gt;());</b>
+<i>149</i>&nbsp;        }
+<b class="fc"><i>150</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>151</i>&nbsp;        return true;</b>
+<i>152</i>&nbsp;    }
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    @Override
+<i>155</i>&nbsp;    public void removePhysicalObject(E oldObj) {
+<b class="fc"><i>156</i>&nbsp;        boolean rmFlag = false;</b>
+<b class="fc"><i>157</i>&nbsp;        for(Map.Entry&lt;Track,List&lt;E&gt;&gt; entry:physicalObjectMap.entrySet()) {</b>
+<b class="fc"><i>158</i>&nbsp;            if(entry.getValue().contains(oldObj)) {</b>
+<b class="fc"><i>159</i>&nbsp;                entry.getValue().remove(oldObj);</b>
+<b class="fc"><i>160</i>&nbsp;                rmFlag = true;</b>
+<b class="fc"><i>161</i>&nbsp;                break;</b>
+<i>162</i>&nbsp;            }
+<b class="fc"><i>163</i>&nbsp;        }</b>
+<i>164</i>&nbsp;        try {
+<b class="fc"><i>165</i>&nbsp;            UncheckedException.assertTrue(rmFlag, &quot;轨道系统不包含进行 remove 的对象oldObject&quot;);</b>
+<b class="nc"><i>166</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>167</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>168</i>&nbsp;            throw e;</b>
+<b class="fc"><i>169</i>&nbsp;        }</b>
+<b class="fc"><i>170</i>&nbsp;        logger.info(String.format(&quot;删除轨道物体%s&quot;,oldObj));</b>
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;//        在关系表中删除该节点
+<b class="fc"><i>173</i>&nbsp;        relOfCobj2TraObj.removeIf((x)-&gt;(x.getObju()==oldObj||x.getObjv()==oldObj));</b>
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;
+<b class="fc"><i>176</i>&nbsp;        if(relOf2TraObjs.containsKey(oldObj)) {</b>
+<b class="fc"><i>177</i>&nbsp;            relOf2TraObjs.remove(oldObj);</b>
+<i>178</i>&nbsp;        }
+<b class="fc"><i>179</i>&nbsp;        for(Map.Entry&lt;E,List&lt;Relation&lt;E,E&gt;&gt;&gt; entry:relOf2TraObjs.entrySet()) {</b>
+<b class="fc"><i>180</i>&nbsp;            entry.getValue().removeIf((x)-&gt;(x.getObjv()==oldObj||x.getObju()==oldObj));</b>
+<b class="fc"><i>181</i>&nbsp;        }</b>
+<b class="fc"><i>182</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>183</i>&nbsp;    }</b>
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    @Override
+<i>186</i>&nbsp;    public boolean addRelationOfCentralObj2TrackObj(L co, E po,double weight) {
+<i>187</i>&nbsp;        try {
+<b class="fc"><i>188</i>&nbsp;            UncheckedException.assertTrue(co == centralObject, &quot;不满足co限制&quot;);</b>
+<b class="fc"><i>189</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po) != null &amp;&amp; po != null,</b>
+<i>190</i>&nbsp;                    &quot;不满足po限制&quot;);
+<b class="nc"><i>191</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>192</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>193</i>&nbsp;            throw e;</b>
+<b class="fc"><i>194</i>&nbsp;        }</b>
+<b class="fc"><i>195</i>&nbsp;        logger.info(String.format(&quot;添加一条中心物体到轨道物体%s的权重为%f的关系&quot;,po,weight));</b>
+<b class="fc"><i>196</i>&nbsp;        boolean ans = relOfCobj2TraObj.add(new Relation&lt;&gt;(co,po,weight));</b>
+<b class="fc"><i>197</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>198</i>&nbsp;        return ans;</b>
+<i>199</i>&nbsp;    }
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;    /**
+<i>202</i>&nbsp;     * 删除中心物体到轨道物体之间的关系，具体限制与添加spec相同
+<i>203</i>&nbsp;     * @param co 轨道物体
+<i>204</i>&nbsp;     * @param po 中心物体
+<i>205</i>&nbsp;     * @return 删除结果
+<i>206</i>&nbsp;     * 如果不包含这条关系则返回false
+<i>207</i>&nbsp;     * 成功删除关系则返回true
+<i>208</i>&nbsp;     */
+<i>209</i>&nbsp;    public boolean removeRelationOfCentralObjs2TraObj(L co, E po) {
+<i>210</i>&nbsp;        try {
+<b class="fc"><i>211</i>&nbsp;            UncheckedException.assertTrue(co == centralObject, &quot;不满足co限制&quot;);</b>
+<b class="fc"><i>212</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po) != null &amp;&amp; po != null,</b>
+<i>213</i>&nbsp;                    &quot;不满足po限制&quot;);
+<b class="nc"><i>214</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>215</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>216</i>&nbsp;            throw e;</b>
+<b class="fc"><i>217</i>&nbsp;        }</b>
+<b class="fc"><i>218</i>&nbsp;        logger.info(String.format(&quot;删除一条中心物体到轨道物体%s的关系&quot;,po));</b>
+<b class="fc"><i>219</i>&nbsp;        boolean ans = relOfCobj2TraObj.removeIf(rel-&gt;rel.getObjv().equals(po));</b>
+<b class="fc"><i>220</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>221</i>&nbsp;        return ans;</b>
+<i>222</i>&nbsp;    }
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    @Override
+<i>225</i>&nbsp;    public boolean addRelationOf2TrackObs(E po1, E po2,double weight) {
+<i>226</i>&nbsp;        try {
+<b class="fc"><i>227</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po1) != null, &quot;po1不存在轨道系统&quot;);</b>
+<b class="fc"><i>228</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po2) != null, &quot;po2不存在轨道系统&quot;);</b>
+<b class="nc"><i>229</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>230</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>231</i>&nbsp;            throw e;</b>
+<b class="fc"><i>232</i>&nbsp;        }</b>
+<i>233</i>&nbsp;
+<b class="fc"><i>234</i>&nbsp;        logger.info(String.format(&quot;添加一条轨道物体%s到%s的关系&quot;,po1,po2));</b>
+<b class="fc"><i>235</i>&nbsp;        if(!relOf2TraObjs.containsKey(po1)) {</b>
+<b class="nc"><i>236</i>&nbsp;            relOf2TraObjs.put(po1,new ArrayList&lt;&gt;());</b>
+<i>237</i>&nbsp;        }
+<i>238</i>&nbsp;
+<b class="fc"><i>239</i>&nbsp;        if(relOf2TraObjs.get(po1).contains(new Relation&lt;&gt;(po1,po2,weight))) {</b>
+<b class="nc"><i>240</i>&nbsp;            return false;</b>
+<i>241</i>&nbsp;        }
+<i>242</i>&nbsp;
+<b class="fc"><i>243</i>&nbsp;        relOf2TraObjs.get(po1).add(new Relation&lt;&gt;(po1,po2,weight));</b>
+<b class="fc"><i>244</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>245</i>&nbsp;        return true;</b>
+<i>246</i>&nbsp;    }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;    /**
+<i>249</i>&nbsp;     * 删除一条有向边
+<i>250</i>&nbsp;     * @param po1 物体1 ，要求必须存在于轨道系统中
+<i>251</i>&nbsp;     * @param po2 物体2 ，要求必须存在于轨道系统中
+<i>252</i>&nbsp;     *            ，po1-&gt;po2这条边的关系必须存在于轨道系统中
+<i>253</i>&nbsp;     * @return 删除结果
+<i>254</i>&nbsp;     */
+<i>255</i>&nbsp;    public boolean removeRelationOf2TrackObs(E po1,E po2) {
+<i>256</i>&nbsp;        try {
+<b class="fc"><i>257</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po1) != null, &quot;po1不存在轨道系统&quot;);</b>
+<b class="fc"><i>258</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(po2) != null, &quot;po2不存在轨道系统&quot;);</b>
+<b class="fc"><i>259</i>&nbsp;            UncheckedException.assertTrue(relOf2TraObjs.get(po1).stream()</b>
+<b class="fc"><i>260</i>&nbsp;                    .map(x -&gt; x.getObjv()).collect(Collectors.toList())</b>
+<b class="fc"><i>261</i>&nbsp;                    .contains(po2), &quot;两者之间不存在关系&quot;);</b>
+<b class="nc"><i>262</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>263</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>264</i>&nbsp;            throw e;</b>
+<b class="fc"><i>265</i>&nbsp;        }</b>
+<b class="fc"><i>266</i>&nbsp;        logger.info(String.format(&quot;删除一条轨道物体%s到%s的关系&quot;,po1,po2));</b>
+<b class="fc"><i>267</i>&nbsp;        boolean ans = relOf2TraObjs.get(po1).removeIf(rel-&gt;rel.getObjv().equals(po2));</b>
+<b class="fc"><i>268</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>269</i>&nbsp;        return ans;</b>
+<i>270</i>&nbsp;    }
+<i>271</i>&nbsp;
+<i>272</i>&nbsp;    @Override
+<i>273</i>&nbsp;    public void transit(E oldObj,E newObj,Track t) {
+<i>274</i>&nbsp;        try {
+<b class="fc"><i>275</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(oldObj) != null, &quot;oldObj不存在&quot;);</b>
+<b class="fc"><i>276</i>&nbsp;            UncheckedException.assertTrue(getTrackForPO(newObj) != null, &quot;oldObj不存在&quot;);</b>
+<b class="fc"><i>277</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="fc"><i>278</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>279</i>&nbsp;            throw e;</b>
+<b class="fc"><i>280</i>&nbsp;        }</b>
+<b class="fc"><i>281</i>&nbsp;        logger.info(String.format(&quot;将%s迁移到新的轨道%f&quot;,oldObj,t.getRadius()));</b>
+<b class="fc"><i>282</i>&nbsp;        removePhysicalObject(oldObj);</b>
+<b class="fc"><i>283</i>&nbsp;        addPhysicalObj2Track(newObj,t);</b>
+<b class="fc"><i>284</i>&nbsp;        checkRep();</b>
+<b class="fc"><i>285</i>&nbsp;    }</b>
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;    @Override
+<i>288</i>&nbsp;    public double getObjectDistributionEntropy() {
+<b class="fc"><i>289</i>&nbsp;        double totalObjs = physicalObjectMap.values().stream()</b>
+<b class="fc"><i>290</i>&nbsp;                .mapToDouble(List::size).sum();</b>
+<i>291</i>&nbsp;
+<b class="fc"><i>292</i>&nbsp;        double ans = physicalObjectMap.values().stream()</b>
+<b class="fc"><i>293</i>&nbsp;                .mapToDouble(List::size)</b>
+<b class="fc"><i>294</i>&nbsp;                .reduce(0.0,(acc,item)-&gt;{</b>
+<b class="fc"><i>295</i>&nbsp;                    double p = item/totalObjs;</b>
+<b class="fc"><i>296</i>&nbsp;                    if(item&gt;0) acc-=p * Math.log(p)/Math.log(2.0);</b>
+<b class="fc"><i>297</i>&nbsp;                    return acc;</b>
+<i>298</i>&nbsp;                });
+<b class="fc"><i>299</i>&nbsp;        logger.info(String.format(&quot;获取轨道系统的熵值为%f&quot;,ans));</b>
+<b class="fc"><i>300</i>&nbsp;        return ans;</b>
+<i>301</i>&nbsp;    }
+<i>302</i>&nbsp;
+<i>303</i>&nbsp;    protected Map&lt;E,Integer&gt; getSingleSourceDistances(List&lt;E&gt; sources) {
+<i>304</i>&nbsp;        try {
+<b class="fc"><i>305</i>&nbsp;            sources.stream().forEach(x -&gt; UncheckedException.assertTrue(relOf2TraObjs.containsKey(x), &quot;source&quot; + x.toString() + &quot;不存在&quot;));</b>
+<b class="nc"><i>306</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>307</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>308</i>&nbsp;            throw e;</b>
+<b class="fc"><i>309</i>&nbsp;        }</b>
+<i>310</i>&nbsp;
+<b class="fc"><i>311</i>&nbsp;        Queue&lt;E&gt; queue = new LinkedBlockingQueue&lt;&gt;();</b>
+<b class="fc"><i>312</i>&nbsp;        Map&lt;E, Integer&gt; distantMap = new HashMap&lt;&gt;();</b>
+<i>313</i>&nbsp;
+<b class="fc"><i>314</i>&nbsp;        for(E source:sources) {</b>
+<b class="fc"><i>315</i>&nbsp;            if(!queue.offer(source)) {</b>
+<b class="nc"><i>316</i>&nbsp;                UncheckedException.assertTrue(false,&quot;queue.offer失败&quot;);</b>
+<i>317</i>&nbsp;            }
+<b class="fc"><i>318</i>&nbsp;            distantMap.put(source, 1);</b>
+<b class="fc"><i>319</i>&nbsp;        }</b>
+<b class="fc"><i>320</i>&nbsp;        while(!queue.isEmpty()) {</b>
+<b class="fc"><i>321</i>&nbsp;            E topPerson = queue.poll();</b>
+<b class="fc"><i>322</i>&nbsp;            int nowDis=distantMap.get(topPerson);</b>
+<b class="fc"><i>323</i>&nbsp;            List&lt;E&gt; neighborList = relOf2TraObjs.getOrDefault(topPerson,new ArrayList&lt;&gt;())</b>
+<b class="fc"><i>324</i>&nbsp;                    .stream()</b>
+<b class="fc"><i>325</i>&nbsp;                    .map(Relation::getObjv).collect(Collectors.toList());</b>
+<b class="fc"><i>326</i>&nbsp;            for(E ps:neighborList) if(!distantMap.containsKey(ps)){</b>
+<b class="fc"><i>327</i>&nbsp;                distantMap.put(ps,nowDis+1);</b>
+<b class="fc"><i>328</i>&nbsp;                if(!queue.offer(ps)) {</b>
+<b class="nc"><i>329</i>&nbsp;                    UncheckedException.assertTrue(false,&quot;queue.offer失败&quot;);</b>
+<i>330</i>&nbsp;                }
+<i>331</i>&nbsp;            }
+<b class="fc"><i>332</i>&nbsp;        }</b>
+<b class="fc"><i>333</i>&nbsp;        return distantMap;</b>
+<i>334</i>&nbsp;    }
+<i>335</i>&nbsp;
+<i>336</i>&nbsp;    @Override
+<i>337</i>&nbsp;    public int getLogicalDistance(E e1, E e2) {
+<i>338</i>&nbsp;        try {
+<b class="fc"><i>339</i>&nbsp;            UncheckedException.assertTrue(e1 != null &amp;&amp; e2 != null, &quot;不满足e1e2不为空的条件&quot;);</b>
+<i>340</i>&nbsp;
+<b class="fc"><i>341</i>&nbsp;            Map&lt;E, Integer&gt; distanceMap = getSingleSourceDistances(Arrays.asList(e1));</b>
+<b class="fc"><i>342</i>&nbsp;            int ans = distanceMap.getOrDefault(e2, Integer.MAX_VALUE);</b>
+<b class="fc"><i>343</i>&nbsp;            UncheckedException.assertTrue(ans &gt;= 0, &quot;不满足LogicalDistance&gt;=0的后置条件&quot;);</b>
+<b class="fc"><i>344</i>&nbsp;            logger.info(String.format(&quot;获取从轨道物体%s到%s的逻辑距离为%d&quot;,e1,e2,ans));</b>
+<b class="fc"><i>345</i>&nbsp;            return ans;</b>
+<b class="nc"><i>346</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>347</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>348</i>&nbsp;            throw e;</b>
+<i>349</i>&nbsp;        }
+<i>350</i>&nbsp;    }
+<i>351</i>&nbsp;
+<i>352</i>&nbsp;    @Override
+<i>353</i>&nbsp;    public List&lt;Track&gt; getSortedTrack() {
+<b class="fc"><i>354</i>&nbsp;        return physicalObjectMap.keySet().stream()</b>
+<b class="fc"><i>355</i>&nbsp;                .sorted()</b>
+<b class="fc"><i>356</i>&nbsp;                .collect(Collectors.toList());</b>
+<i>357</i>&nbsp;    }
+<i>358</i>&nbsp;
+<i>359</i>&nbsp;    @Override
+<i>360</i>&nbsp;    public List&lt;E&gt; getPhysicalObjectsOnTrack(Track tk) {
+<b class="fc"><i>361</i>&nbsp;        if(!physicalObjectMap.containsKey(tk)) {</b>
+<b class="fc"><i>362</i>&nbsp;            return new ArrayList&lt;&gt;();</b>
+<i>363</i>&nbsp;        }
+<b class="fc"><i>364</i>&nbsp;        return Collections.unmodifiableList(physicalObjectMap.get(tk));</b>
+<i>365</i>&nbsp;    }
+<i>366</i>&nbsp;
+<i>367</i>&nbsp;    @Override
+<i>368</i>&nbsp;    public Difference getDifference(CircularOrbit&lt;L, E&gt; that) {
+<i>369</i>&nbsp;        try {
+<b class="fc"><i>370</i>&nbsp;            UncheckedException.assertTrue(that != null, &quot;不满足that不为空的条件&quot;);</b>
+<b class="nc"><i>371</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>372</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>373</i>&nbsp;            throw e;</b>
+<b class="fc"><i>374</i>&nbsp;        }</b>
+<b class="fc"><i>375</i>&nbsp;        logger.info(&quot;获取两个轨道系统的差异&quot;);</b>
+<b class="fc"><i>376</i>&nbsp;        List&lt;Track&gt; thisSortedTracks = this.getSortedTrack();</b>
+<b class="fc"><i>377</i>&nbsp;        List&lt;Track&gt; thatSortedTracks = that.getSortedTrack();</b>
+<b class="fc"><i>378</i>&nbsp;        Difference diff = new Difference(thisSortedTracks.size() - thatSortedTracks.size());</b>
+<i>379</i>&nbsp;
+<b class="fc"><i>380</i>&nbsp;        if(thisSortedTracks.size()&lt;thatSortedTracks.size()) {</b>
+<b class="fc"><i>381</i>&nbsp;            for(int i=0;i&lt;thatSortedTracks.size()-thisSortedTracks.size();i++) {</b>
+<b class="fc"><i>382</i>&nbsp;                thisSortedTracks.add(null);</b>
+<i>383</i>&nbsp;            }
+<i>384</i>&nbsp;        }
+<i>385</i>&nbsp;
+<b class="fc"><i>386</i>&nbsp;        if(thatSortedTracks.size()&lt;thisSortedTracks.size()) {</b>
+<b class="nc"><i>387</i>&nbsp;            for(int i=0;i&lt;thatSortedTracks.size()-thisSortedTracks.size();i++) {</b>
+<b class="nc"><i>388</i>&nbsp;                thatSortedTracks.add(null);</b>
+<i>389</i>&nbsp;            }
+<i>390</i>&nbsp;        }
+<i>391</i>&nbsp;
+<b class="fc"><i>392</i>&nbsp;        for(int i=0;i&lt;thisSortedTracks.size();i++) {</b>
+<b class="fc"><i>393</i>&nbsp;            Track thisTrack = thisSortedTracks.get(i);</b>
+<b class="fc"><i>394</i>&nbsp;            Track thatTrack = thatSortedTracks.get(i);</b>
+<b class="fc"><i>395</i>&nbsp;            diff.addTrackSet(this.getPhysicalObjectsOnTrack(thisTrack),</b>
+<b class="fc"><i>396</i>&nbsp;                    that.getPhysicalObjectsOnTrack(thatTrack));</b>
+<i>397</i>&nbsp;        }
+<i>398</i>&nbsp;
+<b class="fc"><i>399</i>&nbsp;        return diff;</b>
+<i>400</i>&nbsp;    }
+<i>401</i>&nbsp;
+<i>402</i>&nbsp;    /**
+<i>403</i>&nbsp;     * 返回当前轨道系统中po所在的轨道Track
+<i>404</i>&nbsp;     * @param po 查询轨道物体，要求不为空
+<i>405</i>&nbsp;     * @return po所在的轨道，如果不在该轨道系统中则返回null
+<i>406</i>&nbsp;     */
+<i>407</i>&nbsp;    public Track getTrackForPO(E po) {
+<i>408</i>&nbsp;        try {
+<b class="fc"><i>409</i>&nbsp;            UncheckedException.assertTrue(po != null, &quot;不满足po不为空的要求&quot;);</b>
+<b class="nc"><i>410</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="nc"><i>411</i>&nbsp;            logger.error(e);</b>
+<b class="nc"><i>412</i>&nbsp;            throw e;</b>
+<b class="fc"><i>413</i>&nbsp;        }</b>
+<b class="fc"><i>414</i>&nbsp;        boolean ans = false;</b>
+<b class="fc"><i>415</i>&nbsp;        for(Map.Entry&lt;Track,List&lt;E&gt;&gt; entry:physicalObjectMap.entrySet()) {</b>
+<b class="fc"><i>416</i>&nbsp;            if(entry.getValue().contains(po)) {</b>
+<b class="fc"><i>417</i>&nbsp;                return entry.getKey();</b>
+<i>418</i>&nbsp;            }
+<b class="fc"><i>419</i>&nbsp;        }</b>
+<b class="fc"><i>420</i>&nbsp;        return null;</b>
+<i>421</i>&nbsp;    }
+<i>422</i>&nbsp;
+<i>423</i>&nbsp;
+<i>424</i>&nbsp;    @Override
+<i>425</i>&nbsp;    public boolean checkOribitAvailable() {
+<i>426</i>&nbsp;
+<b class="nc"><i>427</i>&nbsp;        return true;</b>
+<i>428</i>&nbsp;    }
+<i>429</i>&nbsp;
+<i>430</i>&nbsp;    @Override
+<i>431</i>&nbsp;    public List&lt;String&gt; getTrackRadiusList() {
+<b class="fc"><i>432</i>&nbsp;        return physicalObjectMap.keySet().stream()</b>
+<b class="fc"><i>433</i>&nbsp;                .map(x-&gt;Double.toString(x.getRadius()))</b>
+<b class="fc"><i>434</i>&nbsp;                .sorted().collect(Collectors.toList());</b>
+<i>435</i>&nbsp;    }
+<i>436</i>&nbsp;
+<i>437</i>&nbsp;    /**
+<i>438</i>&nbsp;     * 迭代器实现
+<i>439</i>&nbsp;     */
+<i>440</i>&nbsp;
+<i>441</i>&nbsp;    @Override
+<i>442</i>&nbsp;    public  Iterator&lt;E&gt; iterator() {
+<b class="fc"><i>443</i>&nbsp;        return new MyIterator(physicalObjectMap);</b>
+<i>444</i>&nbsp;    }
+<i>445</i>&nbsp;
+<i>446</i>&nbsp;    private class MyIterator&lt;E extends Comparable&gt; implements Iterator&lt;E&gt; {
+<i>447</i>&nbsp;        private List&lt;E&gt; physicalList;
+<i>448</i>&nbsp;        private int ite;
+<i>449</i>&nbsp;        private int size;
+<i>450</i>&nbsp;
+<b class="fc"><i>451</i>&nbsp;        public MyIterator(Map&lt;Track,List&lt;E&gt;&gt; physicalMap) {</b>
+<b class="fc"><i>452</i>&nbsp;            ite = 0;</b>
+<b class="fc"><i>453</i>&nbsp;            size = physicalMap.values().stream()</b>
+<b class="fc"><i>454</i>&nbsp;                    .mapToInt(List::size).sum();</b>
+<b class="fc"><i>455</i>&nbsp;            physicalList = physicalMap.keySet().stream()</b>
+<b class="fc"><i>456</i>&nbsp;                    .sorted()</b>
+<b class="fc"><i>457</i>&nbsp;                    .map(physicalMap::get)</b>
+<b class="fc"><i>458</i>&nbsp;                    .reduce(new ArrayList&lt;&gt;(),(acc,item)-&gt;{</b>
+<b class="fc"><i>459</i>&nbsp;                        Collections.sort(item);</b>
+<b class="fc"><i>460</i>&nbsp;                        acc.addAll(item);</b>
+<b class="fc"><i>461</i>&nbsp;                        return acc;</b>
+<i>462</i>&nbsp;                    });
+<b class="fc"><i>463</i>&nbsp;        }</b>
+<i>464</i>&nbsp;
+<i>465</i>&nbsp;        @Override
+<i>466</i>&nbsp;        public boolean hasNext() {
+<b class="fc"><i>467</i>&nbsp;            return ite&lt;size;</b>
+<i>468</i>&nbsp;        }
+<i>469</i>&nbsp;
+<i>470</i>&nbsp;        @Override
+<i>471</i>&nbsp;        public E next() {
+<b class="fc"><i>472</i>&nbsp;            if(ite&gt;=size) throw new NoSuchElementException();</b>
+<b class="fc"><i>473</i>&nbsp;            return physicalList.get(ite++);</b>
+<i>474</i>&nbsp;        }
+<i>475</i>&nbsp;    }
+<i>476</i>&nbsp;
+<i>477</i>&nbsp;    @Override
+<i>478</i>&nbsp;    public void visualize(JPanel panel) {
+<i>479</i>&nbsp;        try {
+<b class="fc"><i>480</i>&nbsp;            UncheckedException.assertTrue(false, &quot;调用错误，由子应用系统具体实现&quot;);</b>
+<b class="fc"><i>481</i>&nbsp;        }catch(UncheckedException e) {</b>
+<b class="fc"><i>482</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>483</i>&nbsp;            throw e;</b>
+<b class="nc"><i>484</i>&nbsp;        }</b>
+<b class="nc"><i>485</i>&nbsp;    }</b>
+<i>486</i>&nbsp;
+<i>487</i>&nbsp;    @Override
+<i>488</i>&nbsp;    public JPanel visualizeContentPanel() {
+<i>489</i>&nbsp;        try {
+<b class="fc"><i>490</i>&nbsp;            UncheckedException.assertTrue(false, &quot;调用错误，由子应用系统具体实现&quot;);</b>
+<b class="fc"><i>491</i>&nbsp;        } catch(UncheckedException e) {</b>
+<b class="fc"><i>492</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>493</i>&nbsp;            throw e;</b>
+<b class="nc"><i>494</i>&nbsp;        }</b>
+<b class="nc"><i>495</i>&nbsp;        return null;</b>
+<i>496</i>&nbsp;    }
+<i>497</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

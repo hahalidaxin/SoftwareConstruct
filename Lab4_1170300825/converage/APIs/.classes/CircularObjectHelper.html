@@ -1,0 +1,125 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CircularObjectHelper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">APIs</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CircularObjectHelper (APIs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CircularObjectHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package APIs;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import APIs.gui.LoggerFrame;
+<i>4</i>&nbsp;import circularOrbit.CircularOrbit;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import javax.swing.*;
+<i>7</i>&nbsp;
+<b class="nc"><i>8</i>&nbsp;public class CircularObjectHelper {</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    public static void visualize(CircularOrbit c) {
+<b class="fc"><i>11</i>&nbsp;        JFrame frame = new JFrame();</b>
+<b class="fc"><i>12</i>&nbsp;        frame.setSize(800,800);</b>
+<b class="fc"><i>13</i>&nbsp;        frame.getContentPane().add(c.visualizeContentPanel());</b>
+<b class="fc"><i>14</i>&nbsp;        frame.setVisible(true);</b>
+<b class="fc"><i>15</i>&nbsp;    }</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public static void main(String[] args) {
+<b class="fc"><i>18</i>&nbsp;        LoggerFrame frame = new LoggerFrame();</b>
+<b class="fc"><i>19</i>&nbsp;        frame.setSize(750,800);</b>
+<b class="fc"><i>20</i>&nbsp;        frame.setVisible(true);</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;//        JFrame jf = new JFrame(&quot;测试窗口&quot;);
+<i>23</i>&nbsp;//        jf.setSize(250, 250);
+<i>24</i>&nbsp;//        jf.setLocationRelativeTo(null);
+<i>25</i>&nbsp;//        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;//        // 创建文本区域组件
+<i>28</i>&nbsp;//        JTextArea textArea = new JTextArea();
+<i>29</i>&nbsp;//        textArea.setLineWrap(true);                         // 自动换行
+<i>30</i>&nbsp;//        textArea.setFont(new Font(null, Font.PLAIN, 18));   // 设置字体
+<i>31</i>&nbsp;//
+<i>32</i>&nbsp;//        // 创建滚动面板, 指定滚动显示的视图组件(textArea), 垂直滚动条一直显示, 水平滚动条从不显示
+<i>33</i>&nbsp;//        JScrollPane scrollPane = new JScrollPane(
+<i>34</i>&nbsp;//                textArea,
+<i>35</i>&nbsp;//                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+<i>36</i>&nbsp;//                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
+<i>37</i>&nbsp;//        );
+<i>38</i>&nbsp;//
+<i>39</i>&nbsp;//        jf.setContentPane(scrollPane);
+<i>40</i>&nbsp;//        jf.setVisible(true);
+<b class="fc"><i>41</i>&nbsp;    }</b>
+<i>42</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

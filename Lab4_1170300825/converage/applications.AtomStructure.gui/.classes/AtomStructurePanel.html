@@ -1,0 +1,769 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AtomStructurePanel</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.AtomStructure.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AtomStructurePanel (applications.AtomStructure.gui)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AtomStructurePanel</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 189)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AtomStructurePanel$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AtomStructurePanel$7</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 210)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Created by JFormDesigner on Sat Apr 20 15:40:57 CST 2019
+<i>3</i>&nbsp; */
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;package applications.AtomStructure.gui;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import APIs.gui.LoggerFrame;
+<i>8</i>&nbsp;import applications.AtomStructure.AtomStructure;
+<i>9</i>&nbsp;import net.miginfocom.swing.MigLayout;
+<i>10</i>&nbsp;import org.apache.log4j.Logger;
+<i>11</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import javax.swing.*;
+<i>14</i>&nbsp;import java.awt.*;
+<i>15</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>16</i>&nbsp;import java.awt.event.MouseEvent;
+<i>17</i>&nbsp;import java.util.List;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;/**
+<i>20</i>&nbsp; * @author Brainrain
+<i>21</i>&nbsp; */
+<b class="nc"><i>22</i>&nbsp;public class AtomStructurePanel extends JPanel {</b>
+<b class="nc"><i>23</i>&nbsp;    private static Logger logger = Logger.getLogger(AtomStructurePanel.class.getName());</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    AtomStructure atomStructure;
+<i>26</i>&nbsp;    List&lt;String&gt; trackList;
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;    public AtomStructurePanel(AtomStructure atomStructure) {</b>
+<b class="nc"><i>29</i>&nbsp;        this.atomStructure = atomStructure;</b>
+<b class="nc"><i>30</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public void reloadGameInfo(boolean state, double entropy, java.util.List&lt;String&gt; trackList, java.util.List&lt;String&gt; poList,List&lt;String&gt; history) {
+<b class="nc"><i>34</i>&nbsp;        this.trackList = trackList;</b>
+<b class="nc"><i>35</i>&nbsp;        String sysState = state?&quot;合法&quot;:&quot;不合法&quot;;</b>
+<b class="nc"><i>36</i>&nbsp;        this.labelState.setText(sysState);</b>
+<b class="nc"><i>37</i>&nbsp;        this.labelEntropy.setText(Double.toString(entropy));</b>
+<b class="nc"><i>38</i>&nbsp;        this.comboBoxRemovePO.removeAllItems();</b>
+<b class="nc"><i>39</i>&nbsp;        this.comboBoxRemoveTrack.removeAllItems();</b>
+<b class="nc"><i>40</i>&nbsp;        this.comboBoxSource.removeAllItems();</b>
+<b class="nc"><i>41</i>&nbsp;        this.comboBoxTarget.removeAllItems();</b>
+<b class="nc"><i>42</i>&nbsp;        for(String str:trackList) {</b>
+<b class="nc"><i>43</i>&nbsp;            this.comboBoxRemoveTrack.addItem(str);</b>
+<b class="nc"><i>44</i>&nbsp;            this.comboBoxRemovePO.addItem(str);</b>
+<b class="nc"><i>45</i>&nbsp;            this.comboBoxSource.addItem(str);</b>
+<b class="nc"><i>46</i>&nbsp;            this.comboBoxTarget.addItem(str);</b>
+<b class="nc"><i>47</i>&nbsp;        }</b>
+<b class="nc"><i>48</i>&nbsp;        this.comboBoxHistory.removeAllItems();</b>
+<b class="nc"><i>49</i>&nbsp;        for(String str:history) {</b>
+<b class="nc"><i>50</i>&nbsp;            this.comboBoxHistory.addItem(str);</b>
+<b class="nc"><i>51</i>&nbsp;        }</b>
+<b class="nc"><i>52</i>&nbsp;    }</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    private void processException(UncheckedException exept) {
+<b class="nc"><i>55</i>&nbsp;        logger.error(exept);</b>
+<b class="nc"><i>56</i>&nbsp;        JOptionPane.showMessageDialog(this,exept);</b>
+<b class="nc"><i>57</i>&nbsp;        atomStructure.reLoadAll();</b>
+<b class="nc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public JPanel getDrawPanel() {
+<b class="nc"><i>61</i>&nbsp;        return drawPanel;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    private void buttonRemoveTrackMousePressed(MouseEvent e) {
+<i>66</i>&nbsp;        try {
+<b class="nc"><i>67</i>&nbsp;            double rmRadius = Double.parseDouble((String) this.comboBoxRemoveTrack.getSelectedItem());</b>
+<b class="nc"><i>68</i>&nbsp;            atomStructure.removeTrack(rmRadius);</b>
+<b class="nc"><i>69</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>70</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>71</i>&nbsp;        }</b>
+<b class="nc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    private void buttonAddTrackMousePressed(MouseEvent e) {
+<i>75</i>&nbsp;        try {
+<b class="nc"><i>76</i>&nbsp;            double addRadius = Double.parseDouble(this.textFieldAddTrack.getText());</b>
+<b class="nc"><i>77</i>&nbsp;            atomStructure.addTrack(addRadius);</b>
+<b class="nc"><i>78</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>79</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>80</i>&nbsp;        }</b>
+<b class="nc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    private void buttonAddPOMousePressed(MouseEvent e) {
+<b class="nc"><i>84</i>&nbsp;        JFrame inputframe = new ElectronInfoFrame(this.atomStructure,this.trackList);</b>
+<b class="nc"><i>85</i>&nbsp;        inputframe.setVisible(true);</b>
+<i>86</i>&nbsp;//        inputframe = null;
+<b class="nc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    private void buttonRemovePOMousePressed(MouseEvent e) {
+<i>90</i>&nbsp;        try {
+<b class="nc"><i>91</i>&nbsp;            double rmRadius = Double.parseDouble((String) this.comboBoxRemovePO.getSelectedItem());</b>
+<b class="nc"><i>92</i>&nbsp;            atomStructure.removePhysicalObject(rmRadius);</b>
+<b class="nc"><i>93</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>94</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>95</i>&nbsp;        }</b>
+<b class="nc"><i>96</i>&nbsp;    }</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    private void buttonTransitMousePressed(MouseEvent e) {
+<i>99</i>&nbsp;        try {
+<i>100</i>&nbsp;//        System.out.println(this.comboBoxSource.getSelectedItem());
+<b class="nc"><i>101</i>&nbsp;            double source = Double.parseDouble((String) this.comboBoxSource.getSelectedItem());</b>
+<b class="nc"><i>102</i>&nbsp;            double target = Double.parseDouble((String) this.comboBoxTarget.getSelectedItem());</b>
+<b class="nc"><i>103</i>&nbsp;            atomStructure.electronTransit(source, target);</b>
+<b class="nc"><i>104</i>&nbsp;        } catch(UncheckedException exept) {</b>
+<b class="nc"><i>105</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>106</i>&nbsp;        }</b>
+<b class="nc"><i>107</i>&nbsp;    }</b>
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    private void buttonRebackMousePressed(MouseEvent e) {
+<i>110</i>&nbsp;        try {
+<b class="nc"><i>111</i>&nbsp;            int index = this.comboBoxHistory.getSelectedIndex();</b>
+<b class="nc"><i>112</i>&nbsp;            this.atomStructure.rebackHistory(index);</b>
+<b class="nc"><i>113</i>&nbsp;        } catch (UncheckedException exept) {</b>
+<b class="nc"><i>114</i>&nbsp;            processException(exept);</b>
+<b class="nc"><i>115</i>&nbsp;        }</b>
+<b class="nc"><i>116</i>&nbsp;    }</b>
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    private void buttonLogMousePressed(MouseEvent e) {
+<b class="nc"><i>119</i>&nbsp;        LoggerFrame frame = new LoggerFrame();</b>
+<b class="nc"><i>120</i>&nbsp;        frame.setSize(750,800);</b>
+<b class="nc"><i>121</i>&nbsp;        frame.setVisible(true);</b>
+<b class="nc"><i>122</i>&nbsp;    }</b>
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    private void initComponents() {
+<i>128</i>&nbsp;        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+<b class="nc"><i>129</i>&nbsp;        labelTitle = new JLabel();</b>
+<b class="nc"><i>130</i>&nbsp;        buttonLog = new JButton();</b>
+<b class="nc"><i>131</i>&nbsp;        drawPanel = new JPanel();</b>
+<b class="nc"><i>132</i>&nbsp;        rightPanel = new JPanel();</b>
+<b class="nc"><i>133</i>&nbsp;        infoPanel = new JPanel();</b>
+<b class="nc"><i>134</i>&nbsp;        label2 = new JLabel();</b>
+<b class="nc"><i>135</i>&nbsp;        labelState = new JLabel();</b>
+<b class="nc"><i>136</i>&nbsp;        label1 = new JLabel();</b>
+<b class="nc"><i>137</i>&nbsp;        labelEntropy = new JLabel();</b>
+<b class="nc"><i>138</i>&nbsp;        opratepanel = new JPanel();</b>
+<b class="nc"><i>139</i>&nbsp;        label11 = new JLabel();</b>
+<b class="nc"><i>140</i>&nbsp;        separator2 = new JSeparator();</b>
+<b class="nc"><i>141</i>&nbsp;        label4 = new JLabel();</b>
+<b class="nc"><i>142</i>&nbsp;        comboBoxRemoveTrack = new JComboBox&lt;&gt;();</b>
+<b class="nc"><i>143</i>&nbsp;        buttonRemoveTrack = new JButton();</b>
+<b class="nc"><i>144</i>&nbsp;        label5 = new JLabel();</b>
+<b class="nc"><i>145</i>&nbsp;        textFieldAddTrack = new JTextField();</b>
+<b class="nc"><i>146</i>&nbsp;        buttonAddTrack = new JButton();</b>
+<b class="nc"><i>147</i>&nbsp;        label6 = new JLabel();</b>
+<b class="nc"><i>148</i>&nbsp;        buttonAddPO = new JButton();</b>
+<b class="nc"><i>149</i>&nbsp;        label7 = new JLabel();</b>
+<b class="nc"><i>150</i>&nbsp;        comboBoxRemovePO = new JComboBox&lt;&gt;();</b>
+<b class="nc"><i>151</i>&nbsp;        buttonRemovePO = new JButton();</b>
+<b class="nc"><i>152</i>&nbsp;        label10 = new JLabel();</b>
+<b class="nc"><i>153</i>&nbsp;        separator1 = new JSeparator();</b>
+<b class="nc"><i>154</i>&nbsp;        label8 = new JLabel();</b>
+<b class="nc"><i>155</i>&nbsp;        label3 = new JLabel();</b>
+<b class="nc"><i>156</i>&nbsp;        comboBoxSource = new JComboBox();</b>
+<b class="nc"><i>157</i>&nbsp;        label9 = new JLabel();</b>
+<b class="nc"><i>158</i>&nbsp;        comboBoxTarget = new JComboBox();</b>
+<b class="nc"><i>159</i>&nbsp;        buttonTransit = new JButton();</b>
+<b class="nc"><i>160</i>&nbsp;        label12 = new JLabel();</b>
+<b class="nc"><i>161</i>&nbsp;        comboBoxHistory = new JComboBox();</b>
+<b class="nc"><i>162</i>&nbsp;        buttonReback = new JButton();</b>
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;        //======== this ========
+<b class="nc"><i>165</i>&nbsp;        setLayout(new MigLayout(</b>
+<i>166</i>&nbsp;            &quot;hidemode 3&quot;,
+<i>167</i>&nbsp;            // columns
+<i>168</i>&nbsp;            &quot;[fill]&quot; +
+<i>169</i>&nbsp;            &quot;[fill]&quot; +
+<i>170</i>&nbsp;            &quot;[fill]&quot; +
+<i>171</i>&nbsp;            &quot;[fill]&quot; +
+<i>172</i>&nbsp;            &quot;[fill]&quot; +
+<i>173</i>&nbsp;            &quot;[fill]&quot; +
+<i>174</i>&nbsp;            &quot;[fill]&quot; +
+<i>175</i>&nbsp;            &quot;[fill]&quot; +
+<i>176</i>&nbsp;            &quot;[fill]&quot; +
+<i>177</i>&nbsp;            &quot;[fill]&quot; +
+<i>178</i>&nbsp;            &quot;[fill]&quot; +
+<i>179</i>&nbsp;            &quot;[fill]&quot; +
+<i>180</i>&nbsp;            &quot;[fill]&quot; +
+<i>181</i>&nbsp;            &quot;[fill]&quot; +
+<i>182</i>&nbsp;            &quot;[fill]&quot; +
+<i>183</i>&nbsp;            &quot;[fill]&quot; +
+<i>184</i>&nbsp;            &quot;[fill]&quot; +
+<i>185</i>&nbsp;            &quot;[fill]&quot; +
+<i>186</i>&nbsp;            &quot;[fill]&quot; +
+<i>187</i>&nbsp;            &quot;[fill]&quot; +
+<i>188</i>&nbsp;            &quot;[fill]&quot; +
+<i>189</i>&nbsp;            &quot;[fill]&quot; +
+<i>190</i>&nbsp;            &quot;[fill]&quot; +
+<i>191</i>&nbsp;            &quot;[fill]&quot; +
+<i>192</i>&nbsp;            &quot;[fill]&quot; +
+<i>193</i>&nbsp;            &quot;[fill]&quot; +
+<i>194</i>&nbsp;            &quot;[fill]&quot; +
+<i>195</i>&nbsp;            &quot;[fill]&quot; +
+<i>196</i>&nbsp;            &quot;[fill]&quot; +
+<i>197</i>&nbsp;            &quot;[fill]&quot; +
+<i>198</i>&nbsp;            &quot;[fill]&quot; +
+<i>199</i>&nbsp;            &quot;[fill]&quot;,
+<i>200</i>&nbsp;            // rows
+<i>201</i>&nbsp;            &quot;[]&quot; +
+<i>202</i>&nbsp;            &quot;[]&quot; +
+<i>203</i>&nbsp;            &quot;[]&quot; +
+<i>204</i>&nbsp;            &quot;[]&quot; +
+<i>205</i>&nbsp;            &quot;[]&quot; +
+<i>206</i>&nbsp;            &quot;[]&quot; +
+<i>207</i>&nbsp;            &quot;[]&quot; +
+<i>208</i>&nbsp;            &quot;[]&quot; +
+<i>209</i>&nbsp;            &quot;[]&quot; +
+<i>210</i>&nbsp;            &quot;[]&quot; +
+<i>211</i>&nbsp;            &quot;[]&quot; +
+<i>212</i>&nbsp;            &quot;[]&quot; +
+<i>213</i>&nbsp;            &quot;[]&quot; +
+<i>214</i>&nbsp;            &quot;[]&quot; +
+<i>215</i>&nbsp;            &quot;[]&quot; +
+<i>216</i>&nbsp;            &quot;[]&quot; +
+<i>217</i>&nbsp;            &quot;[]&quot; +
+<i>218</i>&nbsp;            &quot;[]&quot; +
+<i>219</i>&nbsp;            &quot;[]&quot; +
+<i>220</i>&nbsp;            &quot;[]&quot; +
+<i>221</i>&nbsp;            &quot;[]&quot; +
+<i>222</i>&nbsp;            &quot;[]&quot; +
+<i>223</i>&nbsp;            &quot;[]&quot; +
+<i>224</i>&nbsp;            &quot;[]&quot; +
+<i>225</i>&nbsp;            &quot;[]&quot; +
+<i>226</i>&nbsp;            &quot;[]&quot; +
+<i>227</i>&nbsp;            &quot;[]&quot; +
+<i>228</i>&nbsp;            &quot;[]&quot; +
+<i>229</i>&nbsp;            &quot;[]&quot; +
+<i>230</i>&nbsp;            &quot;[]&quot; +
+<i>231</i>&nbsp;            &quot;[]&quot; +
+<i>232</i>&nbsp;            &quot;[]&quot; +
+<i>233</i>&nbsp;            &quot;[]&quot; +
+<i>234</i>&nbsp;            &quot;[]&quot; +
+<i>235</i>&nbsp;            &quot;[]&quot; +
+<i>236</i>&nbsp;            &quot;[]&quot; +
+<i>237</i>&nbsp;            &quot;[]&quot; +
+<i>238</i>&nbsp;            &quot;[]&quot; +
+<i>239</i>&nbsp;            &quot;[]&quot; +
+<i>240</i>&nbsp;            &quot;[]&quot; +
+<i>241</i>&nbsp;            &quot;[]&quot; +
+<i>242</i>&nbsp;            &quot;[]&quot; +
+<i>243</i>&nbsp;            &quot;[]&quot; +
+<i>244</i>&nbsp;            &quot;[]&quot;));
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;        //---- labelTitle ----
+<b class="nc"><i>247</i>&nbsp;        labelTitle.setText(&quot;AtomStructure-\u8f68\u9053\u7cfb\u7edf&quot;);</b>
+<b class="nc"><i>248</i>&nbsp;        labelTitle.setFont(labelTitle.getFont().deriveFont(labelTitle.getFont().getStyle() | Font.BOLD, labelTitle.getFont().getSize() + 9f));</b>
+<b class="nc"><i>249</i>&nbsp;        add(labelTitle, &quot;cell 7 5 3 5&quot;);</b>
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;        //---- buttonLog ----
+<b class="nc"><i>252</i>&nbsp;        buttonLog.setText(&quot;\u67e5\u770b\u65e5\u5fd7&quot;);</b>
+<b class="nc"><i>253</i>&nbsp;        buttonLog.addMouseListener(new MouseAdapter() {</b>
+<i>254</i>&nbsp;            @Override
+<i>255</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>256</i>&nbsp;                buttonLogMousePressed(e);</b>
+<b class="nc"><i>257</i>&nbsp;            }</b>
+<i>258</i>&nbsp;        });
+<b class="nc"><i>259</i>&nbsp;        add(buttonLog, &quot;cell 12 7&quot;);</b>
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;        //======== drawPanel ========
+<i>262</i>&nbsp;        {
+<b class="nc"><i>263</i>&nbsp;            drawPanel.setPreferredSize(new Dimension(800, 800));</b>
+<b class="nc"><i>264</i>&nbsp;            drawPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));</b>
+<i>265</i>&nbsp;        }
+<b class="nc"><i>266</i>&nbsp;        add(drawPanel, &quot;cell 0 16 31 28&quot;);</b>
+<i>267</i>&nbsp;
+<i>268</i>&nbsp;        //======== rightPanel ========
+<i>269</i>&nbsp;        {
+<b class="nc"><i>270</i>&nbsp;            rightPanel.setPreferredSize(new Dimension(400, 800));</b>
+<b class="nc"><i>271</i>&nbsp;            rightPanel.setBackground(new Color(204, 204, 204));</b>
+<b class="nc"><i>272</i>&nbsp;            rightPanel.setLayout(new MigLayout(</b>
+<i>273</i>&nbsp;                &quot;hidemode 3&quot;,
+<i>274</i>&nbsp;                // columns
+<i>275</i>&nbsp;                &quot;[fill]&quot; +
+<i>276</i>&nbsp;                &quot;[fill]&quot;,
+<i>277</i>&nbsp;                // rows
+<i>278</i>&nbsp;                &quot;[]&quot; +
+<i>279</i>&nbsp;                &quot;[]&quot; +
+<i>280</i>&nbsp;                &quot;[]&quot; +
+<i>281</i>&nbsp;                &quot;[]&quot; +
+<i>282</i>&nbsp;                &quot;[]&quot;));
+<i>283</i>&nbsp;
+<i>284</i>&nbsp;            //======== infoPanel ========
+<i>285</i>&nbsp;            {
+<b class="nc"><i>286</i>&nbsp;                infoPanel.setPreferredSize(new Dimension(400, 200));</b>
+<b class="nc"><i>287</i>&nbsp;                infoPanel.setBackground(new Color(153, 153, 153));</b>
+<b class="nc"><i>288</i>&nbsp;                infoPanel.setLayout(new MigLayout(</b>
+<i>289</i>&nbsp;                    &quot;hidemode 3&quot;,
+<i>290</i>&nbsp;                    // columns
+<i>291</i>&nbsp;                    &quot;[fill]&quot; +
+<i>292</i>&nbsp;                    &quot;[fill]&quot; +
+<i>293</i>&nbsp;                    &quot;[fill]&quot; +
+<i>294</i>&nbsp;                    &quot;[fill]&quot; +
+<i>295</i>&nbsp;                    &quot;[fill]&quot;,
+<i>296</i>&nbsp;                    // rows
+<i>297</i>&nbsp;                    &quot;[]&quot; +
+<i>298</i>&nbsp;                    &quot;[]&quot; +
+<i>299</i>&nbsp;                    &quot;[]&quot; +
+<i>300</i>&nbsp;                    &quot;[]&quot; +
+<i>301</i>&nbsp;                    &quot;[]&quot; +
+<i>302</i>&nbsp;                    &quot;[]&quot;));
+<i>303</i>&nbsp;
+<i>304</i>&nbsp;                //---- label2 ----
+<b class="nc"><i>305</i>&nbsp;                label2.setText(&quot;\u72b6\u6001\uff1a&quot;);</b>
+<b class="nc"><i>306</i>&nbsp;                label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD, label2.getFont().getSize() + 8f));</b>
+<b class="nc"><i>307</i>&nbsp;                label2.setForeground(Color.black);</b>
+<b class="nc"><i>308</i>&nbsp;                infoPanel.add(label2, &quot;cell 1 1&quot;);</b>
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;                //---- labelState ----
+<b class="nc"><i>311</i>&nbsp;                labelState.setFont(labelState.getFont().deriveFont(labelState.getFont().getSize() + 6f));</b>
+<b class="nc"><i>312</i>&nbsp;                infoPanel.add(labelState, &quot;cell 4 1&quot;);</b>
+<i>313</i>&nbsp;
+<i>314</i>&nbsp;                //---- label1 ----
+<b class="nc"><i>315</i>&nbsp;                label1.setText(&quot;\u71b5\u503c\uff1a&quot;);</b>
+<b class="nc"><i>316</i>&nbsp;                label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD, label1.getFont().getSize() + 8f));</b>
+<b class="nc"><i>317</i>&nbsp;                label1.setForeground(Color.black);</b>
+<b class="nc"><i>318</i>&nbsp;                infoPanel.add(label1, &quot;cell 1 5&quot;);</b>
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;                //---- labelEntropy ----
+<b class="nc"><i>321</i>&nbsp;                labelEntropy.setFont(labelEntropy.getFont().deriveFont(labelEntropy.getFont().getSize() + 6f));</b>
+<b class="nc"><i>322</i>&nbsp;                infoPanel.add(labelEntropy, &quot;cell 4 5&quot;);</b>
+<i>323</i>&nbsp;            }
+<b class="nc"><i>324</i>&nbsp;            rightPanel.add(infoPanel, &quot;cell 0 0 2 2&quot;);</b>
+<i>325</i>&nbsp;
+<i>326</i>&nbsp;            //======== opratepanel ========
+<i>327</i>&nbsp;            {
+<b class="nc"><i>328</i>&nbsp;                opratepanel.setPreferredSize(new Dimension(400, 600));</b>
+<b class="nc"><i>329</i>&nbsp;                opratepanel.setFont(opratepanel.getFont().deriveFont(opratepanel.getFont().getSize() + 8f));</b>
+<b class="nc"><i>330</i>&nbsp;                opratepanel.setLayout(new MigLayout(</b>
+<i>331</i>&nbsp;                    &quot;hidemode 3&quot;,
+<i>332</i>&nbsp;                    // columns
+<i>333</i>&nbsp;                    &quot;[fill]&quot; +
+<i>334</i>&nbsp;                    &quot;[fill]&quot; +
+<i>335</i>&nbsp;                    &quot;[fill]&quot; +
+<i>336</i>&nbsp;                    &quot;[fill]&quot; +
+<i>337</i>&nbsp;                    &quot;[fill]&quot; +
+<i>338</i>&nbsp;                    &quot;[fill]&quot; +
+<i>339</i>&nbsp;                    &quot;[fill]&quot; +
+<i>340</i>&nbsp;                    &quot;[fill]&quot; +
+<i>341</i>&nbsp;                    &quot;[fill]&quot; +
+<i>342</i>&nbsp;                    &quot;[fill]&quot; +
+<i>343</i>&nbsp;                    &quot;[fill]&quot; +
+<i>344</i>&nbsp;                    &quot;[fill]&quot; +
+<i>345</i>&nbsp;                    &quot;[fill]&quot; +
+<i>346</i>&nbsp;                    &quot;[fill]&quot; +
+<i>347</i>&nbsp;                    &quot;[fill]&quot; +
+<i>348</i>&nbsp;                    &quot;[fill]&quot; +
+<i>349</i>&nbsp;                    &quot;[fill]&quot; +
+<i>350</i>&nbsp;                    &quot;[fill]&quot; +
+<i>351</i>&nbsp;                    &quot;[fill]&quot; +
+<i>352</i>&nbsp;                    &quot;[fill]&quot; +
+<i>353</i>&nbsp;                    &quot;[fill]&quot; +
+<i>354</i>&nbsp;                    &quot;[fill]&quot; +
+<i>355</i>&nbsp;                    &quot;[fill]&quot; +
+<i>356</i>&nbsp;                    &quot;[fill]&quot; +
+<i>357</i>&nbsp;                    &quot;[fill]&quot; +
+<i>358</i>&nbsp;                    &quot;[fill]&quot; +
+<i>359</i>&nbsp;                    &quot;[fill]&quot; +
+<i>360</i>&nbsp;                    &quot;[fill]&quot;,
+<i>361</i>&nbsp;                    // rows
+<i>362</i>&nbsp;                    &quot;[]&quot; +
+<i>363</i>&nbsp;                    &quot;[]&quot; +
+<i>364</i>&nbsp;                    &quot;[]&quot; +
+<i>365</i>&nbsp;                    &quot;[]&quot; +
+<i>366</i>&nbsp;                    &quot;[]&quot; +
+<i>367</i>&nbsp;                    &quot;[]&quot; +
+<i>368</i>&nbsp;                    &quot;[]&quot; +
+<i>369</i>&nbsp;                    &quot;[]&quot; +
+<i>370</i>&nbsp;                    &quot;[]&quot; +
+<i>371</i>&nbsp;                    &quot;[]&quot; +
+<i>372</i>&nbsp;                    &quot;[]&quot; +
+<i>373</i>&nbsp;                    &quot;[]&quot; +
+<i>374</i>&nbsp;                    &quot;[]&quot; +
+<i>375</i>&nbsp;                    &quot;[]&quot; +
+<i>376</i>&nbsp;                    &quot;[]&quot; +
+<i>377</i>&nbsp;                    &quot;[]&quot; +
+<i>378</i>&nbsp;                    &quot;[]&quot; +
+<i>379</i>&nbsp;                    &quot;[]&quot; +
+<i>380</i>&nbsp;                    &quot;[]&quot; +
+<i>381</i>&nbsp;                    &quot;[]&quot; +
+<i>382</i>&nbsp;                    &quot;[]&quot; +
+<i>383</i>&nbsp;                    &quot;[]&quot; +
+<i>384</i>&nbsp;                    &quot;[]&quot; +
+<i>385</i>&nbsp;                    &quot;[]&quot; +
+<i>386</i>&nbsp;                    &quot;[]&quot;));
+<i>387</i>&nbsp;
+<i>388</i>&nbsp;                //---- label11 ----
+<b class="nc"><i>389</i>&nbsp;                label11.setText(&quot;\u6539\u53d8\u7cfb\u7edf&quot;);</b>
+<b class="nc"><i>390</i>&nbsp;                label11.setFont(label11.getFont().deriveFont(label11.getFont().getSize() + 12f));</b>
+<b class="nc"><i>391</i>&nbsp;                opratepanel.add(label11, &quot;cell 1 1&quot;);</b>
+<b class="nc"><i>392</i>&nbsp;                opratepanel.add(separator2, &quot;cell 1 2 17 1&quot;);</b>
+<i>393</i>&nbsp;
+<i>394</i>&nbsp;                //---- label4 ----
+<b class="nc"><i>395</i>&nbsp;                label4.setText(&quot;\u5220\u9664\u8f68\u9053&quot;);</b>
+<b class="nc"><i>396</i>&nbsp;                opratepanel.add(label4, &quot;cell 1 3&quot;);</b>
+<b class="nc"><i>397</i>&nbsp;                opratepanel.add(comboBoxRemoveTrack, &quot;cell 8 3&quot;);</b>
+<i>398</i>&nbsp;
+<i>399</i>&nbsp;                //---- buttonRemoveTrack ----
+<b class="nc"><i>400</i>&nbsp;                buttonRemoveTrack.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="nc"><i>401</i>&nbsp;                buttonRemoveTrack.setMinimumSize(new Dimension(50, 30));</b>
+<b class="nc"><i>402</i>&nbsp;                buttonRemoveTrack.setPreferredSize(new Dimension(50, 30));</b>
+<b class="nc"><i>403</i>&nbsp;                buttonRemoveTrack.addMouseListener(new MouseAdapter() {</b>
+<i>404</i>&nbsp;                    @Override
+<i>405</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>406</i>&nbsp;                        buttonRemoveTrackMousePressed(e);</b>
+<b class="nc"><i>407</i>&nbsp;                    }</b>
+<i>408</i>&nbsp;                });
+<b class="nc"><i>409</i>&nbsp;                opratepanel.add(buttonRemoveTrack, &quot;cell 17 3&quot;);</b>
+<i>410</i>&nbsp;
+<i>411</i>&nbsp;                //---- label5 ----
+<b class="nc"><i>412</i>&nbsp;                label5.setText(&quot;\u6dfb\u52a0\u8f68\u9053&quot;);</b>
+<b class="nc"><i>413</i>&nbsp;                opratepanel.add(label5, &quot;cell 1 4&quot;);</b>
+<i>414</i>&nbsp;
+<i>415</i>&nbsp;                //---- textFieldAddTrack ----
+<b class="nc"><i>416</i>&nbsp;                textFieldAddTrack.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));</b>
+<b class="nc"><i>417</i>&nbsp;                textFieldAddTrack.setToolTipText(&quot;\u8f68\u9053\u534a\u5f84&quot;);</b>
+<b class="nc"><i>418</i>&nbsp;                opratepanel.add(textFieldAddTrack, &quot;cell 8 4&quot;);</b>
+<i>419</i>&nbsp;
+<i>420</i>&nbsp;                //---- buttonAddTrack ----
+<b class="nc"><i>421</i>&nbsp;                buttonAddTrack.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="nc"><i>422</i>&nbsp;                buttonAddTrack.addMouseListener(new MouseAdapter() {</b>
+<i>423</i>&nbsp;                    @Override
+<i>424</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>425</i>&nbsp;                        buttonAddTrackMousePressed(e);</b>
+<b class="nc"><i>426</i>&nbsp;                    }</b>
+<i>427</i>&nbsp;                });
+<b class="nc"><i>428</i>&nbsp;                opratepanel.add(buttonAddTrack, &quot;cell 17 4&quot;);</b>
+<i>429</i>&nbsp;
+<i>430</i>&nbsp;                //---- label6 ----
+<b class="nc"><i>431</i>&nbsp;                label6.setText(&quot;\u6dfb\u52a0\u7269\u4f53&quot;);</b>
+<b class="nc"><i>432</i>&nbsp;                opratepanel.add(label6, &quot;cell 1 6&quot;);</b>
+<i>433</i>&nbsp;
+<i>434</i>&nbsp;                //---- buttonAddPO ----
+<b class="nc"><i>435</i>&nbsp;                buttonAddPO.setText(&quot;\u8f93\u5165&quot;);</b>
+<b class="nc"><i>436</i>&nbsp;                buttonAddPO.addMouseListener(new MouseAdapter() {</b>
+<i>437</i>&nbsp;                    @Override
+<i>438</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>439</i>&nbsp;                        buttonAddPOMousePressed(e);</b>
+<b class="nc"><i>440</i>&nbsp;                    }</b>
+<i>441</i>&nbsp;                });
+<b class="nc"><i>442</i>&nbsp;                opratepanel.add(buttonAddPO, &quot;cell 17 6&quot;);</b>
+<i>443</i>&nbsp;
+<i>444</i>&nbsp;                //---- label7 ----
+<b class="nc"><i>445</i>&nbsp;                label7.setText(&quot;\u5220\u9664\u7269\u4f53\uff08\u8f68\u9053\u4e0a\u4efb\u4e00\u4e2a\uff09&quot;);</b>
+<b class="nc"><i>446</i>&nbsp;                opratepanel.add(label7, &quot;cell 1 8&quot;);</b>
+<b class="nc"><i>447</i>&nbsp;                opratepanel.add(comboBoxRemovePO, &quot;cell 8 8&quot;);</b>
+<i>448</i>&nbsp;
+<i>449</i>&nbsp;                //---- buttonRemovePO ----
+<b class="nc"><i>450</i>&nbsp;                buttonRemovePO.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="nc"><i>451</i>&nbsp;                buttonRemovePO.addMouseListener(new MouseAdapter() {</b>
+<i>452</i>&nbsp;                    @Override
+<i>453</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>454</i>&nbsp;                        buttonRemovePOMousePressed(e);</b>
+<b class="nc"><i>455</i>&nbsp;                    }</b>
+<i>456</i>&nbsp;                });
+<b class="nc"><i>457</i>&nbsp;                opratepanel.add(buttonRemovePO, &quot;cell 17 8&quot;);</b>
+<i>458</i>&nbsp;
+<i>459</i>&nbsp;                //---- label10 ----
+<b class="nc"><i>460</i>&nbsp;                label10.setText(&quot;\u7279\u6b8a\u529f\u80fd&quot;);</b>
+<b class="nc"><i>461</i>&nbsp;                label10.setFont(label10.getFont().deriveFont(label10.getFont().getSize() + 11f));</b>
+<b class="nc"><i>462</i>&nbsp;                opratepanel.add(label10, &quot;cell 1 14&quot;);</b>
+<b class="nc"><i>463</i>&nbsp;                opratepanel.add(separator1, &quot;cell 1 15 17 2&quot;);</b>
+<i>464</i>&nbsp;
+<i>465</i>&nbsp;                //---- label8 ----
+<b class="nc"><i>466</i>&nbsp;                label8.setText(&quot;\u7535\u5b50\u8dc3\u8fc1\uff08\u8f68\u9053\u4e0a\u4efb\u4e00\u4e2a\uff09&quot;);</b>
+<b class="nc"><i>467</i>&nbsp;                opratepanel.add(label8, &quot;cell 1 17&quot;);</b>
+<i>468</i>&nbsp;
+<i>469</i>&nbsp;                //---- label3 ----
+<b class="nc"><i>470</i>&nbsp;                label3.setText(&quot;\u6e90\u8f68\u9053&quot;);</b>
+<b class="nc"><i>471</i>&nbsp;                opratepanel.add(label3, &quot;cell 2 17&quot;);</b>
+<b class="nc"><i>472</i>&nbsp;                opratepanel.add(comboBoxSource, &quot;cell 4 17&quot;);</b>
+<i>473</i>&nbsp;
+<i>474</i>&nbsp;                //---- label9 ----
+<b class="nc"><i>475</i>&nbsp;                label9.setText(&quot;\u76ee\u6807\u8f68\u9053&quot;);</b>
+<b class="nc"><i>476</i>&nbsp;                opratepanel.add(label9, &quot;cell 6 17&quot;);</b>
+<b class="nc"><i>477</i>&nbsp;                opratepanel.add(comboBoxTarget, &quot;cell 8 17&quot;);</b>
+<i>478</i>&nbsp;
+<i>479</i>&nbsp;                //---- buttonTransit ----
+<b class="nc"><i>480</i>&nbsp;                buttonTransit.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="nc"><i>481</i>&nbsp;                buttonTransit.addMouseListener(new MouseAdapter() {</b>
+<i>482</i>&nbsp;                    @Override
+<i>483</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>484</i>&nbsp;                        buttonTransitMousePressed(e);</b>
+<b class="nc"><i>485</i>&nbsp;                    }</b>
+<i>486</i>&nbsp;                });
+<b class="nc"><i>487</i>&nbsp;                opratepanel.add(buttonTransit, &quot;cell 17 17&quot;);</b>
+<i>488</i>&nbsp;
+<i>489</i>&nbsp;                //---- label12 ----
+<b class="nc"><i>490</i>&nbsp;                label12.setText(&quot;\u5386\u53f2\u56de\u6eda&quot;);</b>
+<b class="nc"><i>491</i>&nbsp;                opratepanel.add(label12, &quot;cell 1 19&quot;);</b>
+<b class="nc"><i>492</i>&nbsp;                opratepanel.add(comboBoxHistory, &quot;cell 4 19&quot;);</b>
+<i>493</i>&nbsp;
+<i>494</i>&nbsp;                //---- buttonReback ----
+<b class="nc"><i>495</i>&nbsp;                buttonReback.setText(&quot;\u786e\u8ba4&quot;);</b>
+<b class="nc"><i>496</i>&nbsp;                buttonReback.addMouseListener(new MouseAdapter() {</b>
+<i>497</i>&nbsp;                    @Override
+<i>498</i>&nbsp;                    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>499</i>&nbsp;                        buttonRebackMousePressed(e);</b>
+<b class="nc"><i>500</i>&nbsp;                    }</b>
+<i>501</i>&nbsp;                });
+<b class="nc"><i>502</i>&nbsp;                opratepanel.add(buttonReback, &quot;cell 17 19&quot;);</b>
+<i>503</i>&nbsp;            }
+<b class="nc"><i>504</i>&nbsp;            rightPanel.add(opratepanel, &quot;cell 1 2 1 3&quot;);</b>
+<i>505</i>&nbsp;        }
+<b class="nc"><i>506</i>&nbsp;        add(rightPanel, &quot;cell 31 16 1 28&quot;);</b>
+<i>507</i>&nbsp;        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+<b class="nc"><i>508</i>&nbsp;    }</b>
+<i>509</i>&nbsp;
+<i>510</i>&nbsp;    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+<i>511</i>&nbsp;    private JLabel labelTitle;
+<i>512</i>&nbsp;    private JButton buttonLog;
+<i>513</i>&nbsp;    private JPanel drawPanel;
+<i>514</i>&nbsp;    private JPanel rightPanel;
+<i>515</i>&nbsp;    private JPanel infoPanel;
+<i>516</i>&nbsp;    private JLabel label2;
+<i>517</i>&nbsp;    private JLabel labelState;
+<i>518</i>&nbsp;    private JLabel label1;
+<i>519</i>&nbsp;    private JLabel labelEntropy;
+<i>520</i>&nbsp;    private JPanel opratepanel;
+<i>521</i>&nbsp;    private JLabel label11;
+<i>522</i>&nbsp;    private JSeparator separator2;
+<i>523</i>&nbsp;    private JLabel label4;
+<i>524</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxRemoveTrack;
+<i>525</i>&nbsp;    private JButton buttonRemoveTrack;
+<i>526</i>&nbsp;    private JLabel label5;
+<i>527</i>&nbsp;    private JTextField textFieldAddTrack;
+<i>528</i>&nbsp;    private JButton buttonAddTrack;
+<i>529</i>&nbsp;    private JLabel label6;
+<i>530</i>&nbsp;    private JButton buttonAddPO;
+<i>531</i>&nbsp;    private JLabel label7;
+<i>532</i>&nbsp;    private JComboBox&lt;String&gt; comboBoxRemovePO;
+<i>533</i>&nbsp;    private JButton buttonRemovePO;
+<i>534</i>&nbsp;    private JLabel label10;
+<i>535</i>&nbsp;    private JSeparator separator1;
+<i>536</i>&nbsp;    private JLabel label8;
+<i>537</i>&nbsp;    private JLabel label3;
+<i>538</i>&nbsp;    private JComboBox comboBoxSource;
+<i>539</i>&nbsp;    private JLabel label9;
+<i>540</i>&nbsp;    private JComboBox comboBoxTarget;
+<i>541</i>&nbsp;    private JButton buttonTransit;
+<i>542</i>&nbsp;    private JLabel label12;
+<i>543</i>&nbsp;    private JComboBox comboBoxHistory;
+<i>544</i>&nbsp;    private JButton buttonReback;
+<i>545</i>&nbsp;    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<i>546</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

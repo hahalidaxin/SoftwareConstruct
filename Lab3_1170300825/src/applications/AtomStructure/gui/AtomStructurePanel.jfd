@@ -1,0 +1,249 @@
+JFDML JFormDesigner: "6.0.6.2.195" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "labelTitle"
+				"text": "AtomStructure-轨道系统"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 9, false )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 7 5 3 4"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+				"alignment": 0
+				"hgap": 0
+				"vgap": 0
+			} ) {
+				name: "drawPanel"
+				"preferredSize": new java.awt.Dimension( 800, 800 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 15 30 28"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill]"
+				"$rowConstraints": "[][][][][]"
+			} ) {
+				name: "rightPanel"
+				"preferredSize": new java.awt.Dimension( 400, 800 )
+				"background": new java.awt.Color( 204, 204, 204, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+					"$layoutConstraints": "hidemode 3"
+					"$columnConstraints": "[fill][fill][fill][fill][fill]"
+					"$rowConstraints": "[][][][][][]"
+				} ) {
+					name: "infoPanel"
+					"preferredSize": new java.awt.Dimension( 400, 200 )
+					"background": new java.awt.Color( 153, 153, 153, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "状态："
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 8, false )
+						"foreground": &Color0 new java.awt.Color( 0, 0, 0, 255 )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 1"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "labelState"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 4 1"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "熵值："
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 8, false )
+						"foreground": #Color0
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 5"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "labelEntropy"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 4 5"
+					} )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 0 2 2"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+					"$layoutConstraints": "hidemode 3"
+					"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+					"$rowConstraints": "[][][][][][][][][][][][][][][][][][][][][][][][][]"
+				} ) {
+					name: "opratepanel"
+					"preferredSize": new java.awt.Dimension( 400, 600 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 8, false )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label11"
+						"text": "改变系统"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 12, false )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 1"
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "separator2"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 2 17 1"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "删除轨道"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 3"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBoxRemoveTrack"
+						auxiliary() {
+							"JavaCodeGenerator.typeParameters": "String"
+						}
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 8 3"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonRemoveTrack"
+						"text": "确认"
+						"minimumSize": new java.awt.Dimension( 50, 30 )
+						"preferredSize": new java.awt.Dimension( 50, 30 )
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonRemoveTrackMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 3"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "添加轨道"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 4"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textFieldAddTrack"
+						"cursor": new java.awt.Cursor( 2 )
+						"toolTipText": "轨道半径"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 8 4"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonAddTrack"
+						"text": "确认"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonAddTrackMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 4"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "添加物体"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 6"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonAddPO"
+						"text": "输入"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonAddPOMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 6"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "删除物体（轨道上任一个）"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 8"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBoxRemovePO"
+						auxiliary() {
+							"JavaCodeGenerator.typeParameters": "String"
+						}
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 8 8"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonRemovePO"
+						"text": "确认"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonRemovePOMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 8"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": "特殊功能"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 11, false )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 14"
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "separator1"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 15 17 2"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "电子跃迁（轨道上任一个）"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 17"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "源轨道"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 2 17"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBoxSource"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 4 17"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label9"
+						"text": "目标轨道"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 6 17"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBoxTarget"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 8 17"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonTransit"
+						"text": "确认"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonTransitMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 17"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label12"
+						"text": "历史回滚"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 19"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBoxHistory"
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 4 19"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "buttonReback"
+						"text": "确认"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "buttonRebackMousePressed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 17 19"
+					} )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 1 2 1 3"
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 30 15 1 28"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1200, 1000 )
+		} )
+	}
+}

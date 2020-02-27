@@ -1,0 +1,27 @@
+CentralUser ::= <LI,30,M>
+
+Friend ::= <A,45,F>
+Friend ::= <B,53,M>
+Friend ::= <C,51,F>
+Friend ::= <D,8,F>
+Friend ::= <E,8,F>
+Friend ::= <F,8,F>
+Friend ::= <G,8,F>
+Friend ::= <H,8,F>
+Friend ::= <I,8,F>
+Friend ::= <K,8,F>
+Friend ::= <L,8,F>
+Friend ::= <M,8,F>
+
+SocialTie ::= <LI,A,0.3>
+SocialTie ::= <LI,B,0.2>
+SocialTie ::= <LI,C,0.9>
+SocialTie ::= <A,E,0.8>
+SocialTie ::= <B,F,0.7>
+SocialTie ::= <E,I,0.6>
+SocialTie ::= <E,H,0.5>
+SocialTie ::= <F,G,0.4>
+SocialTie ::= <I,H,0.9>
+SocialTie ::= <H,M,0.8>
+SocialTie ::= <G,L,0.7>
+SocialTie ::= <G,K,0.5>

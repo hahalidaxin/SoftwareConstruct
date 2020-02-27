@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LoggerFrame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">APIs.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LoggerFrame (APIs.gui)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggerFrame</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (4/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.1%
+  </span>
+  <span class="absValue">
+    (61/ 87)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LoggerFrame$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.9%
+  </span>
+  <span class="absValue">
+    (62/ 90)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Created by JFormDesigner on Thu May 16 21:56:55 CST 2019
+<i>3</i>&nbsp; */
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;package APIs.gui;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import net.miginfocom.swing.MigLayout;
+<i>8</i>&nbsp;import org.apache.log4j.Logger;
+<i>9</i>&nbsp;import otherDirectory.logparser.LogParser;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.swing.*;
+<i>12</i>&nbsp;import javax.swing.border.LineBorder;
+<i>13</i>&nbsp;import java.awt.*;
+<i>14</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>15</i>&nbsp;import java.awt.event.MouseEvent;
+<i>16</i>&nbsp;import java.time.Instant;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; * @author Brainrain
+<i>20</i>&nbsp; */
+<b class="nc"><i>21</i>&nbsp;public class LoggerFrame extends JFrame {</b>
+<b class="fc"><i>22</i>&nbsp;    private static Logger logger = Logger.getLogger(LoggerFrame.class.getName());</b>
+<i>23</i>&nbsp;    static final String ANY = &quot;任意&quot;;
+<b class="fc"><i>24</i>&nbsp;    LogParser parser = new LogParser();</b>
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;    public LoggerFrame() {</b>
+<b class="fc"><i>27</i>&nbsp;        initComponents();</b>
+<b class="fc"><i>28</i>&nbsp;        initComboBoxContent();</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    private void initComboBoxContent() {
+<b class="fc"><i>32</i>&nbsp;        this.comboBoxEType.addItem(ANY);</b>
+<b class="fc"><i>33</i>&nbsp;        parser.getAllETypes().forEach(et-&gt;this.comboBoxEType.addItem(et));</b>
+<b class="fc"><i>34</i>&nbsp;        this.comboBoxClass.addItem(ANY);</b>
+<b class="fc"><i>35</i>&nbsp;        parser.getAllClassNames().forEach(cn-&gt;this.comboBoxClass.addItem(cn));</b>
+<b class="fc"><i>36</i>&nbsp;        this.comboBoxMethod.addItem(ANY);</b>
+<b class="fc"><i>37</i>&nbsp;        parser.getAllMethodNames().forEach(mn-&gt;this.comboBoxMethod.addItem(mn));</b>
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    private void buttonSelectMousePressed(MouseEvent e) {
+<b class="nc"><i>41</i>&nbsp;        String etype = (String)this.comboBoxEType.getSelectedItem();</b>
+<b class="nc"><i>42</i>&nbsp;        String classname = (String) this.comboBoxClass.getSelectedItem();</b>
+<b class="nc"><i>43</i>&nbsp;        String methodname = (String) this.comboBoxMethod.getSelectedItem();</b>
+<b class="nc"><i>44</i>&nbsp;        String dateduration = (String) this.textAreaDate.getText();</b>
+<i>45</i>&nbsp;        try {
+<b class="nc"><i>46</i>&nbsp;            String content = parser.getFilterLogs(it -&gt; {</b>
+<b class="nc"><i>47</i>&nbsp;                boolean ans = true;</b>
+<b class="nc"><i>48</i>&nbsp;                if (!etype.equals(ANY)) {</b>
+<b class="nc"><i>49</i>&nbsp;                    ans = ans &amp;&amp; it.getLogType().equals(etype);</b>
+<i>50</i>&nbsp;                }
+<b class="nc"><i>51</i>&nbsp;                if (!classname.equals(ANY)) {</b>
+<b class="nc"><i>52</i>&nbsp;                    ans = ans &amp;&amp; it.getClassName().equals(classname);</b>
+<i>53</i>&nbsp;                }
+<b class="nc"><i>54</i>&nbsp;                if (!methodname.equals(ANY)) {</b>
+<b class="nc"><i>55</i>&nbsp;                    ans = ans &amp;&amp; it.getMethodName().equals(methodname);</b>
+<i>56</i>&nbsp;                }
+<b class="nc"><i>57</i>&nbsp;                if (dateduration != null &amp;&amp; dateduration.length() != 0) {</b>
+<b class="nc"><i>58</i>&nbsp;                    Instant timestart = Instant.parse(dateduration.split(&quot;,&quot;)[0].trim());</b>
+<b class="nc"><i>59</i>&nbsp;                    Instant timeend = Instant.parse(dateduration.split(&quot;,&quot;)[1].trim());</b>
+<b class="nc"><i>60</i>&nbsp;                    Instant itTime = it.getTime();</b>
+<b class="nc"><i>61</i>&nbsp;                    ans = ans &amp;&amp; itTime.compareTo(timestart) &gt;= 0 &amp;&amp; itTime.compareTo(timeend) &lt;= 0;</b>
+<i>62</i>&nbsp;                }
+<b class="nc"><i>63</i>&nbsp;                return ans;</b>
+<i>64</i>&nbsp;            });
+<b class="nc"><i>65</i>&nbsp;            this.textAreaLogContent.setRows(parser.getLogCount());</b>
+<b class="nc"><i>66</i>&nbsp;            this.textAreaLogContent.setText(content);</b>
+<b class="nc"><i>67</i>&nbsp;        } catch(RuntimeException exept) {</b>
+<b class="nc"><i>68</i>&nbsp;            logger.error(&quot;date输入格式错误&quot;);</b>
+<b class="nc"><i>69</i>&nbsp;            JOptionPane.showMessageDialog(this,&quot;date输入格式错误&quot;);</b>
+<b class="nc"><i>70</i>&nbsp;        }</b>
+<b class="nc"><i>71</i>&nbsp;    }</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    private void initComponents() {
+<i>74</i>&nbsp;        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+<b class="fc"><i>75</i>&nbsp;        label1 = new JLabel();</b>
+<b class="fc"><i>76</i>&nbsp;        buttonSelect = new JButton();</b>
+<b class="fc"><i>77</i>&nbsp;        separator1 = new JSeparator();</b>
+<b class="fc"><i>78</i>&nbsp;        label2 = new JLabel();</b>
+<b class="fc"><i>79</i>&nbsp;        comboBoxEType = new JComboBox();</b>
+<b class="fc"><i>80</i>&nbsp;        label3 = new JLabel();</b>
+<b class="fc"><i>81</i>&nbsp;        comboBoxClass = new JComboBox();</b>
+<b class="fc"><i>82</i>&nbsp;        label4 = new JLabel();</b>
+<b class="fc"><i>83</i>&nbsp;        comboBoxMethod = new JComboBox();</b>
+<b class="fc"><i>84</i>&nbsp;        label5 = new JLabel();</b>
+<b class="fc"><i>85</i>&nbsp;        textAreaDate = new JTextArea();</b>
+<b class="fc"><i>86</i>&nbsp;        label6 = new JLabel();</b>
+<b class="fc"><i>87</i>&nbsp;        scrollPane1 = new JScrollPane();</b>
+<b class="fc"><i>88</i>&nbsp;        textAreaLogContent = new JTextArea();</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        //======== this ========
+<b class="fc"><i>91</i>&nbsp;        setMinimumSize(new Dimension(600, 800));</b>
+<b class="fc"><i>92</i>&nbsp;        Container contentPane = getContentPane();</b>
+<b class="fc"><i>93</i>&nbsp;        contentPane.setLayout(new MigLayout(</b>
+<i>94</i>&nbsp;            &quot;hidemode 3&quot;,
+<i>95</i>&nbsp;            // columns
+<i>96</i>&nbsp;            &quot;[fill]&quot; +
+<i>97</i>&nbsp;            &quot;[fill]&quot; +
+<i>98</i>&nbsp;            &quot;[fill]&quot; +
+<i>99</i>&nbsp;            &quot;[fill]&quot; +
+<i>100</i>&nbsp;            &quot;[fill]&quot; +
+<i>101</i>&nbsp;            &quot;[fill]&quot; +
+<i>102</i>&nbsp;            &quot;[fill]&quot; +
+<i>103</i>&nbsp;            &quot;[fill]&quot;,
+<i>104</i>&nbsp;            // rows
+<i>105</i>&nbsp;            &quot;[]&quot; +
+<i>106</i>&nbsp;            &quot;[]&quot; +
+<i>107</i>&nbsp;            &quot;[]&quot; +
+<i>108</i>&nbsp;            &quot;[]&quot; +
+<i>109</i>&nbsp;            &quot;[]&quot; +
+<i>110</i>&nbsp;            &quot;[]&quot; +
+<i>111</i>&nbsp;            &quot;[]&quot; +
+<i>112</i>&nbsp;            &quot;[]&quot; +
+<i>113</i>&nbsp;            &quot;[]&quot;));
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;        //---- label1 ----
+<b class="fc"><i>116</i>&nbsp;        label1.setText(&quot;\u7a0b\u5e8f\u8fd0\u884c\u65e5\u5fd7&quot;);</b>
+<b class="fc"><i>117</i>&nbsp;        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 10f));</b>
+<b class="fc"><i>118</i>&nbsp;        contentPane.add(label1, &quot;cell 2 0 3 1&quot;);</b>
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;        //---- buttonSelect ----
+<b class="fc"><i>121</i>&nbsp;        buttonSelect.setText(&quot;\u7b5b\u9009&quot;);</b>
+<b class="fc"><i>122</i>&nbsp;        buttonSelect.addMouseListener(new MouseAdapter() {</b>
+<i>123</i>&nbsp;            @Override
+<i>124</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>125</i>&nbsp;                buttonSelectMousePressed(e);</b>
+<b class="nc"><i>126</i>&nbsp;            }</b>
+<i>127</i>&nbsp;        });
+<b class="fc"><i>128</i>&nbsp;        contentPane.add(buttonSelect, &quot;cell 6 0&quot;);</b>
+<b class="fc"><i>129</i>&nbsp;        contentPane.add(separator1, &quot;cell 2 1&quot;);</b>
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;        //---- label2 ----
+<b class="fc"><i>132</i>&nbsp;        label2.setText(&quot;\u7ea7\u522b&quot;);</b>
+<b class="fc"><i>133</i>&nbsp;        contentPane.add(label2, &quot;cell 3 2&quot;);</b>
+<b class="fc"><i>134</i>&nbsp;        contentPane.add(comboBoxEType, &quot;cell 4 2&quot;);</b>
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;        //---- label3 ----
+<b class="fc"><i>137</i>&nbsp;        label3.setText(&quot;\u7c7b\u540d&quot;);</b>
+<b class="fc"><i>138</i>&nbsp;        contentPane.add(label3, &quot;cell 3 3&quot;);</b>
+<b class="fc"><i>139</i>&nbsp;        contentPane.add(comboBoxClass, &quot;cell 4 3&quot;);</b>
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;        //---- label4 ----
+<b class="fc"><i>142</i>&nbsp;        label4.setText(&quot;\u65b9\u6cd5\u540d&quot;);</b>
+<b class="fc"><i>143</i>&nbsp;        contentPane.add(label4, &quot;cell 5 3&quot;);</b>
+<b class="fc"><i>144</i>&nbsp;        contentPane.add(comboBoxMethod, &quot;cell 6 3&quot;);</b>
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;        //---- label5 ----
+<b class="fc"><i>147</i>&nbsp;        label5.setText(&quot;\u65e5\u671f\u533a\u95f4&quot;);</b>
+<b class="fc"><i>148</i>&nbsp;        contentPane.add(label5, &quot;cell 3 5&quot;);</b>
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;        //---- textAreaDate ----
+<b class="fc"><i>151</i>&nbsp;        textAreaDate.setPreferredSize(new Dimension(20, 25));</b>
+<b class="fc"><i>152</i>&nbsp;        contentPane.add(textAreaDate, &quot;cell 4 5&quot;);</b>
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;        //---- label6 ----
+<b class="fc"><i>155</i>&nbsp;        label6.setText(&quot;(Instant\u5b57\u4e32\u683c\u5f0f)&quot;);</b>
+<b class="fc"><i>156</i>&nbsp;        contentPane.add(label6, &quot;cell 5 5&quot;);</b>
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;        //======== scrollPane1 ========
+<i>159</i>&nbsp;        {
+<b class="fc"><i>160</i>&nbsp;            scrollPane1.setBorder(new LineBorder(Color.lightGray, 2));</b>
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;            //---- textAreaLogContent ----
+<b class="fc"><i>163</i>&nbsp;            textAreaLogContent.setPreferredSize(new Dimension(560, 600));</b>
+<b class="fc"><i>164</i>&nbsp;            textAreaLogContent.setEditable(false);</b>
+<b class="fc"><i>165</i>&nbsp;            textAreaLogContent.setRows(258);</b>
+<b class="fc"><i>166</i>&nbsp;            scrollPane1.setViewportView(textAreaLogContent);</b>
+<i>167</i>&nbsp;        }
+<b class="fc"><i>168</i>&nbsp;        contentPane.add(scrollPane1, &quot;cell 2 8 6 1&quot;);</b>
+<b class="fc"><i>169</i>&nbsp;        pack();</b>
+<b class="fc"><i>170</i>&nbsp;        setLocationRelativeTo(getOwner());</b>
+<i>171</i>&nbsp;        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+<b class="fc"><i>172</i>&nbsp;    }</b>
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+<i>175</i>&nbsp;    private JLabel label1;
+<i>176</i>&nbsp;    private JButton buttonSelect;
+<i>177</i>&nbsp;    private JSeparator separator1;
+<i>178</i>&nbsp;    private JLabel label2;
+<i>179</i>&nbsp;    private JComboBox comboBoxEType;
+<i>180</i>&nbsp;    private JLabel label3;
+<i>181</i>&nbsp;    private JComboBox comboBoxClass;
+<i>182</i>&nbsp;    private JLabel label4;
+<i>183</i>&nbsp;    private JComboBox comboBoxMethod;
+<i>184</i>&nbsp;    private JLabel label5;
+<i>185</i>&nbsp;    private JTextArea textAreaDate;
+<i>186</i>&nbsp;    private JLabel label6;
+<i>187</i>&nbsp;    private JScrollPane scrollPane1;
+<i>188</i>&nbsp;    private JTextArea textAreaLogContent;
+<i>189</i>&nbsp;    // JFormDesigner - End of variables declaration  //GEN-END:variables
+<i>190</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

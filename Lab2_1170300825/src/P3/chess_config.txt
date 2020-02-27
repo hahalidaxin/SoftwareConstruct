@@ -1,0 +1,35 @@
+0 8
+16
+King 4 0
+Queen 3 0
+Rook 0 0
+Rook 7 0
+Bishop 2 0
+Bishop 5 0
+Knight 1 0
+Knight 6 0
+Pawn 0 1
+Pawn 1 1
+Pawn 2 1
+Pawn 3 1 
+Pawn 4 1
+Pawn 5 1
+Pawn 6 1
+Pawn 7 1
+16
+King 4 7
+Queen 3 7
+Rook 0 7
+Rook 7 7
+Bishop 2 7
+Bishop 5 7
+Knight 1 7
+Knight 6 7
+Pawn 0 6
+Pawn 1 6
+Pawn 2 6
+Pawn 3 6 
+Pawn 4 6
+Pawn 5 6
+Pawn 6 6
+Pawn 7 6

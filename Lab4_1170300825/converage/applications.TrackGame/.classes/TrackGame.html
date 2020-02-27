@@ -1,0 +1,499 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TrackGame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.TrackGame</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TrackGame (applications.TrackGame)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrackGame</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (18/ 21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.6%
+  </span>
+  <span class="absValue">
+    (200/ 231)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.TrackGame;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import APIs.CircularOrbitAPIs;
+<i>4</i>&nbsp;import applications.TrackGame.gui.TrackGamePanel;
+<i>5</i>&nbsp;import applications.TrackGame.strategy.AssignmentStrategy;
+<i>6</i>&nbsp;import applications.TrackGame.strategy.RandomStrategy;
+<i>7</i>&nbsp;import applications.TrackGame.strategy.SimpleStrategy;
+<i>8</i>&nbsp;import applications.TrackGame.strategy.SortedScoreStrategy;
+<i>9</i>&nbsp;import centralObject.CentralObject;
+<i>10</i>&nbsp;import circularOrbit.CircularOrbit;
+<i>11</i>&nbsp;import circularOrbit.ConcreteCircularOrbit;
+<i>12</i>&nbsp;import circularOrbit.Drawable;
+<i>13</i>&nbsp;import org.apache.log4j.Logger;
+<i>14</i>&nbsp;import otherDirectory.exception.CheckedException;
+<i>15</i>&nbsp;import otherDirectory.exception.GrammarException;
+<i>16</i>&nbsp;import otherDirectory.exception.SameLabelException;
+<i>17</i>&nbsp;import otherDirectory.exception.UncheckedException;
+<i>18</i>&nbsp;import track.Track;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;import javax.swing.*;
+<i>21</i>&nbsp;import java.io.BufferedReader;
+<i>22</i>&nbsp;import java.io.FileInputStream;
+<i>23</i>&nbsp;import java.io.IOException;
+<i>24</i>&nbsp;import java.io.InputStreamReader;
+<i>25</i>&nbsp;import java.util.*;
+<i>26</i>&nbsp;import java.util.regex.Matcher;
+<i>27</i>&nbsp;import java.util.regex.Pattern;
+<i>28</i>&nbsp;import java.util.stream.Collectors;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;/**
+<i>31</i>&nbsp; * 题目理解：
+<i>32</i>&nbsp; * 在TrackGame中忽略绝对位置
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;public class TrackGame implements Drawable {
+<b class="fc"><i>35</i>&nbsp;    private static Logger logger = Logger.getLogger(TrackGame.class.getName());</b>
+<i>36</i>&nbsp;
+<b class="fc"><i>37</i>&nbsp;    private static final double[] TRACKRADIUS = {1,2,3,4,5,6,7,8};</b>
+<i>38</i>&nbsp;
+<b class="fc"><i>39</i>&nbsp;    public List&lt;AssignmentStrategy&gt; strategies = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>40</i>&nbsp;    public List&lt;Runner&gt; runnerList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>41</i>&nbsp;    public List&lt;Integer&gt; gameTypes = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>42</i>&nbsp;    private List&lt;TrackCircularOrbit&gt; trackCircularOrbitList = new ArrayList&lt;&gt;();</b>
+<i>43</i>&nbsp;    public  int numofTracks;
+<i>44</i>&nbsp;    private String filename;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    private TrackGamePanel panel;
+<b class="fc"><i>47</i>&nbsp;    private int nowDisplayIndex = 1;</b>
+<i>48</i>&nbsp;
+<b class="fc"><i>49</i>&nbsp;    public TrackGame(String filename) {</b>
+<b class="fc"><i>50</i>&nbsp;        this.filename = filename;</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * 测试是否完全匹配
+<i>55</i>&nbsp;     * @param line 匹配行
+<i>56</i>&nbsp;     * @param regex 正则表达式
+<i>57</i>&nbsp;     * @return  是否 完全 匹配
+<i>58</i>&nbsp;     */
+<i>59</i>&nbsp;    private boolean testMatch(String line,String regex) {
+<b class="fc"><i>60</i>&nbsp;        Matcher matcher = Pattern.compile(regex).matcher(line);</b>
+<b class="fc"><i>61</i>&nbsp;        if(matcher.find()) {</b>
+<b class="fc"><i>62</i>&nbsp;            if(matcher.group(1).equals(line)) {</b>
+<b class="fc"><i>63</i>&nbsp;                return true;</b>
+<i>64</i>&nbsp;            } else {
+<b class="fc"><i>65</i>&nbsp;                return false;</b>
+<i>66</i>&nbsp;            }
+<i>67</i>&nbsp;        } else {
+<b class="fc"><i>68</i>&nbsp;            return false;</b>
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * 获得读入错误的具体失败原因
+<i>74</i>&nbsp;     * @param line 读入的行
+<i>75</i>&nbsp;     * @return 错误原因 如果没有出现代码中考虑的错误则直接返回错误信息“匹配失败：未知错误类型”
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    private String getReadFaultReason(String line) {
+<b class="fc"><i>78</i>&nbsp;        String[] splitStrs = line.split(&quot;::=&quot;);</b>
+<b class="fc"><i>79</i>&nbsp;        String label = splitStrs[0].trim();</b>
+<b class="fc"><i>80</i>&nbsp;        String content = splitStrs[1].trim();</b>
+<i>81</i>&nbsp;//        String athletePattern = &quot;Athlete\\s*::=\\s*&lt;([a-zA-Z]+),(\\d+),([A-Z]{3}),(\\d+),(\\d{1,2}\\.\\d{2})&gt;&quot;;
+<i>82</i>&nbsp;//        String gamePattern = &quot;Game\\s*::=\\s*(100|200|400)&quot;;
+<i>83</i>&nbsp;//        String tracksPattern = &quot;NumOfTracks\\s*::=\\s*([4-9]|10)&quot;;
+<i>84</i>&nbsp;
+<b class="fc"><i>85</i>&nbsp;        if(label.equals(&quot;Athlete&quot;)) {</b>
+<b class="fc"><i>86</i>&nbsp;            splitStrs = content.split(&quot;,&quot;);</b>
+<b class="fc"><i>87</i>&nbsp;            if(splitStrs.length!=5) {</b>
+<b class="fc"><i>88</i>&nbsp;                return String.format(&quot;匹配失败：只提供了 %d 个运动分量&quot;,splitStrs.length);</b>
+<i>89</i>&nbsp;            }
+<b class="fc"><i>90</i>&nbsp;            if(!testMatch(splitStrs[0],&quot;(&lt;[a-zA-Z]+)&quot;)) {</b>
+<b class="nc"><i>91</i>&nbsp;                return &quot;匹配失败：非法运动员名称&quot;;</b>
+<i>92</i>&nbsp;            }
+<b class="fc"><i>93</i>&nbsp;            if(!testMatch(splitStrs[1],&quot;(\\d+)&quot;)) {</b>
+<b class="fc"><i>94</i>&nbsp;                return &quot;匹配失败：非法运动员ID&quot;;</b>
+<i>95</i>&nbsp;            }
+<b class="fc"><i>96</i>&nbsp;            if(!testMatch(splitStrs[2],&quot;([A-Z]{3})&quot;)) {</b>
+<b class="fc"><i>97</i>&nbsp;                return &quot;匹配失败：非法运动员国家&quot;;</b>
+<i>98</i>&nbsp;            }
+<b class="fc"><i>99</i>&nbsp;            if(!testMatch(splitStrs[3],&quot;(\\d+)&quot;)) {</b>
+<b class="fc"><i>100</i>&nbsp;                return &quot;匹配失败：非法运动员年龄&quot;;</b>
+<i>101</i>&nbsp;            }
+<b class="fc"><i>102</i>&nbsp;            if(!testMatch(splitStrs[4],&quot;(\\d{1,2}\\.\\d{2}&gt;)&quot;)) {</b>
+<b class="fc"><i>103</i>&nbsp;                return &quot;匹配失败：非法运动员最好成绩&quot;;</b>
+<i>104</i>&nbsp;            }
+<b class="fc"><i>105</i>&nbsp;        } else if(label.equals(&quot;Game&quot;)) {</b>
+<i>106</i>&nbsp;            try {
+<b class="nc"><i>107</i>&nbsp;                int length = Integer.parseInt(content);</b>
+<b class="nc"><i>108</i>&nbsp;                if(length!=100 &amp;&amp; length!=200 &amp;&amp; length!=800) {</b>
+<b class="nc"><i>109</i>&nbsp;                    return &quot;匹配失败：没有对应的场地长度&quot;;</b>
+<i>110</i>&nbsp;                }
+<b class="nc"><i>111</i>&nbsp;            } catch (NumberFormatException e) {</b>
+<b class="nc"><i>112</i>&nbsp;                return &quot;匹配失败：非法输入格式&quot;;</b>
+<b class="nc"><i>113</i>&nbsp;            }</b>
+<b class="fc"><i>114</i>&nbsp;        } else if(label.equals(&quot;NumOfTracks&quot;)) {</b>
+<i>115</i>&nbsp;            try {
+<b class="fc"><i>116</i>&nbsp;                int num = Integer.parseInt(content);</b>
+<b class="fc"><i>117</i>&nbsp;                if(!(num&gt;=4 &amp;&amp; num&lt;=9)) {</b>
+<b class="fc"><i>118</i>&nbsp;                    return &quot;匹配失败：非法比赛轨道数目&quot;;</b>
+<i>119</i>&nbsp;                }
+<b class="fc"><i>120</i>&nbsp;            } catch (NumberFormatException e) {</b>
+<b class="fc"><i>121</i>&nbsp;                return &quot;匹配失败：非法输入格式&quot;;</b>
+<b class="nc"><i>122</i>&nbsp;            }</b>
+<i>123</i>&nbsp;        } else {
+<b class="fc"><i>124</i>&nbsp;            return &quot;匹配失败：标签错误&quot;;</b>
+<i>125</i>&nbsp;        }
+<b class="nc"><i>126</i>&nbsp;        return &quot;匹配失败：未知类型错误&quot;;</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    /**
+<i>130</i>&nbsp;     * 读入文件配置
+<i>131</i>&nbsp;     * 利用正则表达式进行解析
+<i>132</i>&nbsp;     * 初始化所有的运动员 、 比赛类型 、 轨道数目
+<i>133</i>&nbsp;     */
+<i>134</i>&nbsp;    public void loadConfig() throws CheckedException {
+<b class="fc"><i>135</i>&nbsp;        BufferedReader reader = null;</b>
+<i>136</i>&nbsp;        String faultReason;
+<b class="fc"><i>137</i>&nbsp;        Set&lt;String&gt; runnerNamePool = new HashSet&lt;&gt;();</b>
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;        try {
+<i>140</i>&nbsp;//            reader = new BufferedReader(new FileReader( new File(filename|)));
+<b class="fc"><i>141</i>&nbsp;            InputStreamReader isr = new InputStreamReader(new FileInputStream(filename), &quot;UTF-8&quot;);</b>
+<b class="fc"><i>142</i>&nbsp;            reader = new BufferedReader(isr);</b>
+<b class="fc"><i>143</i>&nbsp;            String line = reader.readLine();</b>
+<i>144</i>&nbsp;            String[] splitStrs;
+<b class="fc"><i>145</i>&nbsp;            while(line!=null) {</b>
+<b class="fc"><i>146</i>&nbsp;                if(line.length()==0) {</b>
+<b class="nc"><i>147</i>&nbsp;                    line = reader.readLine();</b>
+<b class="nc"><i>148</i>&nbsp;                    continue;</b>
+<i>149</i>&nbsp;                }
+<b class="fc"><i>150</i>&nbsp;                line = line.trim();</b>
+<b class="fc"><i>151</i>&nbsp;                String athletePattern = &quot;^Athlete\\s*::=\\s*&lt;([a-zA-Z]+),(\\d+),([A-Z]{3}),(\\d+),(\\d{1,2}\\.\\d{2})&gt;\\s*$&quot;;</b>
+<b class="fc"><i>152</i>&nbsp;                String gamePattern = &quot;^Game\\s*::=\\s*(100|200|400)\\s*$&quot;;</b>
+<b class="fc"><i>153</i>&nbsp;                String tracksPattern = &quot;^NumOfTracks\\s*::=\\s*([4-9]|10)\\s*$&quot;;</b>
+<i>154</i>&nbsp;                // 创建 Pattern 对象
+<b class="fc"><i>155</i>&nbsp;                Matcher athleteMatcher = Pattern.compile(athletePattern).matcher(line);</b>
+<b class="fc"><i>156</i>&nbsp;                Matcher gameMatcher = Pattern.compile(gamePattern).matcher(line);</b>
+<b class="fc"><i>157</i>&nbsp;                Matcher tracksMatcher = Pattern.compile(tracksPattern).matcher(line);</b>
+<i>158</i>&nbsp;
+<b class="fc"><i>159</i>&nbsp;                if(athleteMatcher.find()) {</b>
+<b class="fc"><i>160</i>&nbsp;                    String obName = athleteMatcher.group(1);</b>
+<b class="fc"><i>161</i>&nbsp;                    int id = Integer.parseInt(athleteMatcher.group(2));</b>
+<b class="fc"><i>162</i>&nbsp;                    String country = athleteMatcher.group(3);</b>
+<b class="fc"><i>163</i>&nbsp;                    int age = Integer.parseInt(athleteMatcher.group(4));</b>
+<b class="fc"><i>164</i>&nbsp;                    double bestScore = Double.parseDouble(athleteMatcher.group(5));</b>
+<i>165</i>&nbsp;
+<b class="fc"><i>166</i>&nbsp;                    SameLabelException.assertTrue(!runnerNamePool.contains(obName),&quot;出现两个相同名称的运动员&quot;);</b>
+<i>167</i>&nbsp;
+<b class="fc"><i>168</i>&nbsp;                    runnerNamePool.add(obName);</b>
+<i>169</i>&nbsp;
+<b class="fc"><i>170</i>&nbsp;                    Runner runner = Runner.getInstance(obName,id,age,bestScore,country);</b>
+<b class="fc"><i>171</i>&nbsp;                    runnerList.add(runner);</b>
+<i>172</i>&nbsp;
+<b class="fc"><i>173</i>&nbsp;                } else if(gameMatcher.find()) {</b>
+<b class="fc"><i>174</i>&nbsp;                    splitStrs = gameMatcher.group(1).split(&quot;\\|&quot;);</b>
+<b class="fc"><i>175</i>&nbsp;                    for(int i=0;i&lt;splitStrs.length;i++) {</b>
+<b class="fc"><i>176</i>&nbsp;                        gameTypes.add(Integer.parseInt(splitStrs[i]));</b>
+<i>177</i>&nbsp;                    }
+<b class="fc"><i>178</i>&nbsp;                } else if(tracksMatcher.find()) {</b>
+<b class="fc"><i>179</i>&nbsp;                    numofTracks = Integer.parseInt(tracksMatcher.group(1));</b>
+<i>180</i>&nbsp;                } else {
+<i>181</i>&nbsp;//                    定位匹配失败原因
+<b class="fc"><i>182</i>&nbsp;                    GrammarException.assertTrue(false,getReadFaultReason(line));</b>
+<i>183</i>&nbsp;                }
+<i>184</i>&nbsp;
+<b class="fc"><i>185</i>&nbsp;                line = reader.readLine();</b>
+<b class="fc"><i>186</i>&nbsp;            }</b>
+<b class="nc"><i>187</i>&nbsp;        } catch(IOException e) {</b>
+<b class="nc"><i>188</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>189</i>&nbsp;        } catch(CheckedException e) {</b>
+<b class="fc"><i>190</i>&nbsp;            logger.error(e);</b>
+<b class="fc"><i>191</i>&nbsp;            throw e;</b>
+<i>192</i>&nbsp;        }
+<i>193</i>&nbsp;        finally {
+<b class="fc"><i>194</i>&nbsp;            try {</b>
+<b class="fc"><i>195</i>&nbsp;                if(reader!=null)</b>
+<b class="fc"><i>196</i>&nbsp;                    reader.close();</b>
+<b class="nc"><i>197</i>&nbsp;            } catch(IOException e) {</b>
+<b class="nc"><i>198</i>&nbsp;                e.printStackTrace();</b>
+<b class="fc"><i>199</i>&nbsp;            }</b>
+<b class="fc"><i>200</i>&nbsp;        }</b>
+<b class="fc"><i>201</i>&nbsp;    }</b>
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    /**
+<i>204</i>&nbsp;     * 将所有的runner根据传入的编排策略进行划分
+<i>205</i>&nbsp;     * @param assignmentStrategy 比赛编排策略
+<i>206</i>&nbsp;     */
+<i>207</i>&nbsp;    public void divideIntoGroups(AssignmentStrategy assignmentStrategy) {
+<b class="fc"><i>208</i>&nbsp;        UncheckedException.assertTrue(!runnerList.isEmpty(),&quot;需要先进行loadConfig&quot;);</b>
+<i>209</i>&nbsp;
+<b class="fc"><i>210</i>&nbsp;        List&lt;Track&gt; trackList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>211</i>&nbsp;        for(int i=0;i&lt;numofTracks;i++) {</b>
+<b class="fc"><i>212</i>&nbsp;            trackList.add(new Track(TRACKRADIUS[i]));</b>
+<i>213</i>&nbsp;        }
+<i>214</i>&nbsp;
+<b class="fc"><i>215</i>&nbsp;        List&lt;Map&lt;Track,Runner&gt;&gt; runnerGroups = assignmentStrategy.assign(trackList,runnerList);</b>
+<b class="fc"><i>216</i>&nbsp;        List&lt;TrackCircularOrbit&gt; trackCircularOrbits = new ArrayList&lt;&gt;();</b>
+<i>217</i>&nbsp;
+<b class="fc"><i>218</i>&nbsp;        for(Map&lt;Track,Runner&gt; group:runnerGroups) {</b>
+<b class="fc"><i>219</i>&nbsp;            TrackCircularOrbitBuilder trackBuilder = new TrackCircularOrbitBuilder();</b>
+<b class="fc"><i>220</i>&nbsp;            trackBuilder.createConcreteCircularOrbit(null);</b>
+<b class="fc"><i>221</i>&nbsp;            trackBuilder.buildTracks(trackList);</b>
+<b class="fc"><i>222</i>&nbsp;            Map&lt;Track,List&lt;Runner&gt;&gt; newGroup = group.keySet().stream()</b>
+<b class="fc"><i>223</i>&nbsp;                    .collect(Collectors.toMap(x-&gt;x,x-&gt;</b>
+<b class="fc"><i>224</i>&nbsp;                        Arrays.asList(group.get(x))));</b>
+<b class="fc"><i>225</i>&nbsp;            for (int i = group.size(); i &lt; numofTracks; i++) {</b>
+<b class="fc"><i>226</i>&nbsp;                newGroup.put(Track.getInstance(TRACKRADIUS[i]),new ArrayList&lt;&gt;());</b>
+<i>227</i>&nbsp;            }
+<b class="fc"><i>228</i>&nbsp;            trackBuilder.buildObjects(null,newGroup);</b>
+<b class="fc"><i>229</i>&nbsp;            trackBuilder.buildRelation(new ArrayList&lt;&gt;(),new HashMap&lt;&gt;());</b>
+<b class="fc"><i>230</i>&nbsp;            ConcreteCircularOrbit&lt;CentralObject, Runner&gt; tmp = trackBuilder.getConcreteCircularOrbit();</b>
+<b class="fc"><i>231</i>&nbsp;            if(tmp instanceof TrackCircularOrbit) {</b>
+<b class="fc"><i>232</i>&nbsp;                trackCircularOrbits.add((TrackCircularOrbit) tmp);</b>
+<i>233</i>&nbsp;            }
+<b class="fc"><i>234</i>&nbsp;        }</b>
+<b class="fc"><i>235</i>&nbsp;        this.trackCircularOrbitList = trackCircularOrbits;</b>
+<b class="fc"><i>236</i>&nbsp;    }</b>
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;    public List&lt;Runner&gt; getRunnerList() {
+<b class="fc"><i>239</i>&nbsp;        return runnerList;</b>
+<i>240</i>&nbsp;    }
+<i>241</i>&nbsp;
+<i>242</i>&nbsp;    ///////////////////////////////////////////////////////////////////
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;    private Runner getPhysicalObjByObName(String obname, ConcreteCircularOrbit circularOrbit) {
+<b class="fc"><i>245</i>&nbsp;        Iterator&lt;Runner&gt; ite = circularOrbit.iterator();</b>
+<b class="fc"><i>246</i>&nbsp;        List&lt;Runner&gt;  physicalObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>247</i>&nbsp;        while(ite.hasNext()) {</b>
+<b class="fc"><i>248</i>&nbsp;            Runner tmp = ite.next();</b>
+<b class="fc"><i>249</i>&nbsp;            if(tmp.getObName().equals(obname)) {</b>
+<b class="fc"><i>250</i>&nbsp;                physicalObjs.add(tmp);</b>
+<b class="fc"><i>251</i>&nbsp;                break;</b>
+<i>252</i>&nbsp;            }
+<b class="fc"><i>253</i>&nbsp;        }</b>
+<b class="fc"><i>254</i>&nbsp;        Collections.shuffle(physicalObjs);</b>
+<b class="fc"><i>255</i>&nbsp;        return physicalObjs.get(0);</b>
+<i>256</i>&nbsp;    }
+<i>257</i>&nbsp;    /**
+<i>258</i>&nbsp;     * 向轨道系统co中添加轨道tk
+<i>259</i>&nbsp;     */
+<i>260</i>&nbsp;    public void addTrack(double addRadius) {
+<b class="fc"><i>261</i>&nbsp;        trackCircularOrbitList.get(nowDisplayIndex-1).addTrack(Track.getInstance(addRadius));</b>
+<b class="nc"><i>262</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>263</i>&nbsp;    }</b>
+<i>264</i>&nbsp;    /**
+<i>265</i>&nbsp;     * 在轨道系统co中移除轨道tk
+<i>266</i>&nbsp;     */
+<i>267</i>&nbsp;    public void removeTrack(double rmRadius) {
+<b class="nc"><i>268</i>&nbsp;        trackCircularOrbitList.get(nowDisplayIndex-1).removeTrack(Track.getInstance(rmRadius));</b>
+<b class="nc"><i>269</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>270</i>&nbsp;    }</b>
+<i>271</i>&nbsp;    /**
+<i>272</i>&nbsp;     * 向co的tk轨道添加运动员runner
+<i>273</i>&nbsp;     * @param runner
+<i>274</i>&nbsp;     */
+<i>275</i>&nbsp;    public void addPhysicalObject(Runner runner,double tkRadius) {
+<b class="nc"><i>276</i>&nbsp;        trackCircularOrbitList.get(nowDisplayIndex - 1).addPhysicalObj2Track(runner, Track.getInstance(tkRadius));</b>
+<b class="nc"><i>277</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>278</i>&nbsp;    }</b>
+<i>279</i>&nbsp;    /**
+<i>280</i>&nbsp;     * 在轨道系统co中移除运动员runner
+<i>281</i>&nbsp;     */
+<i>282</i>&nbsp;    public void removePhysicalObject(String rmObName) {
+<b class="nc"><i>283</i>&nbsp;        TrackCircularOrbit circularOrbit = trackCircularOrbitList.get(nowDisplayIndex-1);</b>
+<b class="nc"><i>284</i>&nbsp;        Runner runner = getPhysicalObjByObName(rmObName,circularOrbit);</b>
+<b class="nc"><i>285</i>&nbsp;        circularOrbit.removePhysicalObject(runner);</b>
+<b class="nc"><i>286</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>287</i>&nbsp;    }</b>
+<i>288</i>&nbsp;
+<i>289</i>&nbsp;    public List&lt;TrackCircularOrbit&gt; getTrackCircularOrbitList() {
+<b class="fc"><i>290</i>&nbsp;        return trackCircularOrbitList;</b>
+<i>291</i>&nbsp;    }
+<i>292</i>&nbsp;
+<i>293</i>&nbsp;    @Override
+<i>294</i>&nbsp;    public void initialize() throws CheckedException{
+<b class="fc"><i>295</i>&nbsp;        strategies.add(new SimpleStrategy());</b>
+<b class="fc"><i>296</i>&nbsp;        strategies.add(new RandomStrategy());</b>
+<b class="fc"><i>297</i>&nbsp;        strategies.add(new SortedScoreStrategy());</b>
+<i>298</i>&nbsp;
+<b class="fc"><i>299</i>&nbsp;        loadConfig();</b>
+<b class="fc"><i>300</i>&nbsp;    }</b>
+<i>301</i>&nbsp;
+<i>302</i>&nbsp;    @Override
+<i>303</i>&nbsp;    public void draw(JFrame frame) {
+<b class="fc"><i>304</i>&nbsp;        panel = new TrackGamePanel(this);</b>
+<i>305</i>&nbsp;
+<b class="fc"><i>306</i>&nbsp;        panel.initComboBoxStrategyItems(strategies.stream()</b>
+<b class="fc"><i>307</i>&nbsp;                .map(AssignmentStrategy::getStrategyName).collect(Collectors.toList()));</b>
+<i>308</i>&nbsp;
+<b class="fc"><i>309</i>&nbsp;        frame.getContentPane().add(panel);</b>
+<b class="fc"><i>310</i>&nbsp;    }</b>
+<i>311</i>&nbsp;    public void reLoadAll() {
+<b class="fc"><i>312</i>&nbsp;        if(panel==null) return;</b>
+<b class="fc"><i>313</i>&nbsp;        CircularOrbitAPIs&lt;CentralObject,Runner&gt; apis = new CircularOrbitAPIs&lt;&gt;();</b>
+<b class="fc"><i>314</i>&nbsp;        CircularOrbit&lt;CentralObject,Runner&gt; nowCircularOrbit = trackCircularOrbitList.get(nowDisplayIndex-1);</b>
+<b class="fc"><i>315</i>&nbsp;        boolean state = apis.checkOrbitAvailable(nowCircularOrbit);</b>
+<b class="fc"><i>316</i>&nbsp;        double entropy = apis.getObjectDistributionEntropy(nowCircularOrbit);</b>
+<b class="fc"><i>317</i>&nbsp;        List&lt;String&gt; trackList = nowCircularOrbit.getTrackRadiusList();</b>
+<b class="fc"><i>318</i>&nbsp;        Iterator&lt;Runner&gt; ite = ((TrackCircularOrbit) nowCircularOrbit).iterator();</b>
+<b class="fc"><i>319</i>&nbsp;        List&lt;String&gt; physicalObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>320</i>&nbsp;        while(ite.hasNext()) {</b>
+<b class="fc"><i>321</i>&nbsp;            physicalObjs.add(ite.next().getObName());</b>
+<i>322</i>&nbsp;        }
+<b class="fc"><i>323</i>&nbsp;        List&lt;String&gt; otherGroupObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>324</i>&nbsp;        for(int i=1;i&lt;=trackCircularOrbitList.size();i++) if(i!=nowDisplayIndex){</b>
+<b class="fc"><i>325</i>&nbsp;            Iterator&lt;Runner&gt; ite2 = trackCircularOrbitList.get(i-1).iterator();</b>
+<b class="fc"><i>326</i>&nbsp;            while(ite2.hasNext()) {</b>
+<b class="fc"><i>327</i>&nbsp;                Runner r = ite2.next();</b>
+<b class="fc"><i>328</i>&nbsp;                otherGroupObjs.add(String.format(&quot;%d::%s&quot;,i,r.getObName()));</b>
+<b class="fc"><i>329</i>&nbsp;            }</b>
+<i>330</i>&nbsp;        }
+<i>331</i>&nbsp;
+<b class="fc"><i>332</i>&nbsp;        panel.reloadGameInfo(state,entropy,trackList,physicalObjs,otherGroupObjs);</b>
+<b class="fc"><i>333</i>&nbsp;        nowCircularOrbit.visualize(panel.getDrawPanel());</b>
+<b class="fc"><i>334</i>&nbsp;    }</b>
+<i>335</i>&nbsp;
+<i>336</i>&nbsp;//////////////////////////////////////////////////////////////////////////////////////////////
+<i>337</i>&nbsp;
+<i>338</i>&nbsp;    public void visualizeOrbit(Integer index) {
+<b class="fc"><i>339</i>&nbsp;        nowDisplayIndex = index;</b>
+<b class="fc"><i>340</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>341</i>&nbsp;    }</b>
+<i>342</i>&nbsp;    public void selecttedGameStrategy(String strategyName) {
+<b class="fc"><i>343</i>&nbsp;        for(AssignmentStrategy strategy:strategies)</b>
+<b class="fc"><i>344</i>&nbsp;            if(strategy.getStrategyName().equals(strategyName)) {</b>
+<b class="fc"><i>345</i>&nbsp;                divideIntoGroups(strategy);</b>
+<i>346</i>&nbsp;            }
+<b class="fc"><i>347</i>&nbsp;        List&lt;String&gt; groups = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>348</i>&nbsp;        for(int i=1;i&lt;=trackCircularOrbitList.size();i++) {</b>
+<b class="fc"><i>349</i>&nbsp;            groups.add(Integer.toString(i));</b>
+<i>350</i>&nbsp;        }
+<b class="fc"><i>351</i>&nbsp;        this.panel.initComboBoxGroupSelectItems(groups);</b>
+<b class="fc"><i>352</i>&nbsp;    }</b>
+<i>353</i>&nbsp;    /**
+<i>354</i>&nbsp;     * 交换选手ra和rb的比赛组
+<i>355</i>&nbsp;     */
+<i>356</i>&nbsp;    public void exchangeGroup(String raName,String rbName) {
+<b class="fc"><i>357</i>&nbsp;        Runner ra = getPhysicalObjByObName(raName,trackCircularOrbitList.get(nowDisplayIndex-1));</b>
+<b class="fc"><i>358</i>&nbsp;        Runner rb = getPhysicalObjByObName(rbName.split(&quot;::&quot;)[1],</b>
+<b class="fc"><i>359</i>&nbsp;                trackCircularOrbitList.get(Integer.parseInt(rbName.split(&quot;::&quot;)[0])-1));</b>
+<b class="fc"><i>360</i>&nbsp;        TrackCircularOrbit tcoa = null,tcob = null;</b>
+<b class="fc"><i>361</i>&nbsp;        Track tka = null,tkb = null;</b>
+<b class="fc"><i>362</i>&nbsp;        for(TrackCircularOrbit tco:trackCircularOrbitList) {</b>
+<b class="fc"><i>363</i>&nbsp;            Track tmp = tco.getTrackForPO(ra);</b>
+<b class="fc"><i>364</i>&nbsp;            if(tmp!=null) {</b>
+<b class="fc"><i>365</i>&nbsp;                tcoa = tco;</b>
+<b class="fc"><i>366</i>&nbsp;                tka = tmp;</b>
+<i>367</i>&nbsp;            }
+<b class="fc"><i>368</i>&nbsp;            tmp = tco.getTrackForPO(rb);</b>
+<b class="fc"><i>369</i>&nbsp;            if(tmp!=null) {</b>
+<b class="fc"><i>370</i>&nbsp;                tcob = tco;</b>
+<b class="fc"><i>371</i>&nbsp;                tkb = tmp;</b>
+<i>372</i>&nbsp;            }
+<b class="fc"><i>373</i>&nbsp;        }</b>
+<b class="fc"><i>374</i>&nbsp;        UncheckedException.assertTrue(tcoa!=null &amp;&amp; tcob!=null,&quot;有runner不存在所有game中&quot;);</b>
+<i>375</i>&nbsp;
+<b class="fc"><i>376</i>&nbsp;        tcoa.removePhysicalObject(ra);</b>
+<b class="fc"><i>377</i>&nbsp;        tcob.removePhysicalObject(rb);</b>
+<b class="fc"><i>378</i>&nbsp;        tcoa.addPhysicalObj2Track(rb,tka);</b>
+<b class="fc"><i>379</i>&nbsp;        tcob.addPhysicalObj2Track(ra,tkb);</b>
+<i>380</i>&nbsp;
+<b class="fc"><i>381</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>382</i>&nbsp;    }</b>
+<i>383</i>&nbsp;
+<i>384</i>&nbsp;    /**
+<i>385</i>&nbsp;     * 交换选手ra和rb的赛道
+<i>386</i>&nbsp;     * 前提：ra与rb必须要在同一组中
+<i>387</i>&nbsp;     */
+<i>388</i>&nbsp;    public void exchangeTrack(String raName,String rbName) {
+<b class="fc"><i>389</i>&nbsp;        TrackCircularOrbit circularOrbit  = trackCircularOrbitList.get(nowDisplayIndex-1);</b>
+<b class="fc"><i>390</i>&nbsp;        Runner ra = getPhysicalObjByObName(raName,circularOrbit);</b>
+<b class="fc"><i>391</i>&nbsp;        Runner rb = getPhysicalObjByObName(rbName,circularOrbit);</b>
+<b class="fc"><i>392</i>&nbsp;        TrackCircularOrbit tcoE = null;</b>
+<b class="fc"><i>393</i>&nbsp;        Track tka = null,tkb = null;</b>
+<b class="fc"><i>394</i>&nbsp;        boolean probFlag = false;</b>
+<b class="fc"><i>395</i>&nbsp;        for(TrackCircularOrbit tco:trackCircularOrbitList) {</b>
+<b class="fc"><i>396</i>&nbsp;            if(tco.getTrackForPO(rb)!=null &amp;&amp; tco.getTrackForPO(ra)!=null) {</b>
+<b class="fc"><i>397</i>&nbsp;                tka = tco.getTrackForPO(ra);</b>
+<b class="fc"><i>398</i>&nbsp;                tkb = tco.getTrackForPO(rb);</b>
+<b class="fc"><i>399</i>&nbsp;                tcoE = tco;</b>
+<b class="fc"><i>400</i>&nbsp;                probFlag = true;</b>
+<b class="fc"><i>401</i>&nbsp;                break;</b>
+<i>402</i>&nbsp;            }
+<b class="nc"><i>403</i>&nbsp;        }</b>
+<b class="fc"><i>404</i>&nbsp;        UncheckedException.assertTrue(probFlag,&quot;无法将ra与rb确定为同一轨道的两个物体&quot;);</b>
+<i>405</i>&nbsp;
+<b class="fc"><i>406</i>&nbsp;        tcoE.removePhysicalObject(ra);</b>
+<b class="fc"><i>407</i>&nbsp;        tcoE.removePhysicalObject(rb);</b>
+<b class="fc"><i>408</i>&nbsp;        tcoE.addPhysicalObj2Track(ra,tkb);</b>
+<b class="fc"><i>409</i>&nbsp;        tcoE.addPhysicalObj2Track(rb,tka);</b>
+<i>410</i>&nbsp;
+<b class="fc"><i>411</i>&nbsp;        if(panel==null) return ;</b>
+<b class="nc"><i>412</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>413</i>&nbsp;    }</b>
+<i>414</i>&nbsp;
+<i>415</i>&nbsp;
+<i>416</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

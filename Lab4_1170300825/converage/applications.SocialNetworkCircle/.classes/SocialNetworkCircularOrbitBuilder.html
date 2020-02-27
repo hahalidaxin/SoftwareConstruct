@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SocialNetworkCircularOrbitBuilder</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.SocialNetworkCircle</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SocialNetworkCircularOrbitBuilder (applications.SocialNetworkCircle)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SocialNetworkCircularOrbitBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.SocialNetworkCircle;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import circularOrbit.ConcreteCircularOrbit;
+<i>4</i>&nbsp;import circularOrbit.ConcreteCircularOrbitBuilder;
+<i>5</i>&nbsp;import otherDirectory.Relation;
+<i>6</i>&nbsp;import track.Track;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;import java.util.Map;
+<i>10</i>&nbsp;
+<b class="fc"><i>11</i>&nbsp;public class SocialNetworkCircularOrbitBuilder extends ConcreteCircularOrbitBuilder&lt;CentralUser,Friend&gt; {</b>
+<i>12</i>&nbsp;    @Override
+<i>13</i>&nbsp;    public ConcreteCircularOrbit&lt;CentralUser, Friend&gt; getConcreteCircularOrbit() {
+<b class="fc"><i>14</i>&nbsp;        this.concreteCircularOrbit = new SocialNetworkCircularOrbit(centralUser,physicalObjMap,relOfCentralObjs,relfOf2TraObjs);</b>
+<b class="fc"><i>15</i>&nbsp;        return this.concreteCircularOrbit;</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    @Override
+<i>19</i>&nbsp;    public void buildTracks(List&lt;Track&gt; tracks) {
+<b class="fc"><i>20</i>&nbsp;        super.buildTracks(tracks);</b>
+<b class="fc"><i>21</i>&nbsp;    }</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @Override
+<i>24</i>&nbsp;    public void buildObjects(CentralUser centralObjects, Map&lt;Track, List&lt;Friend&gt;&gt; physicalObjMap) {
+<b class="fc"><i>25</i>&nbsp;        super.buildObjects(centralObjects, physicalObjMap);</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public void buildRelation(List&lt;Relation&lt;CentralUser,Friend&gt;&gt; relOfCentralObjs, Map&lt;Friend,List&lt;Relation&lt;Friend,Friend&gt;&gt;&gt; friendMap) {
+<b class="fc"><i>30</i>&nbsp;        super.buildRelation(relOfCentralObjs,friendMap);</b>
+<i>31</i>&nbsp;//        relOfCentralObjs.stream().forEach((rel)-&gt;{
+<i>32</i>&nbsp;//            concreteCircularOrbit.addRelationOfCentralObj2TrackObj(rel.getObju(),rel.getObjv(),rel.getWeight());
+<i>33</i>&nbsp;//        });
+<i>34</i>&nbsp;//        for(Map.Entry&lt;Friend,List&lt;Relation&lt;Friend,Friend&gt;&gt;&gt; entry:friendMap.entrySet()) {
+<i>35</i>&nbsp;//            Friend friend = entry.getKey();
+<i>36</i>&nbsp;//            for(Relation&lt;Friend,Friend&gt; rel:entry.getValue()) {
+<i>37</i>&nbsp;//                concreteCircularOrbit.addRelationOf2TrackObs(friend,rel.getObjv(),rel.getWeight());
+<i>38</i>&nbsp;//            }
+<i>39</i>&nbsp;//        }
+<b class="fc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>

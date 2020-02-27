@@ -1,0 +1,388 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AtomStructure</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">applications.AtomStructure</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AtomStructure (applications.AtomStructure)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AtomStructure</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.6%
+  </span>
+  <span class="absValue">
+    (120/ 147)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package applications.AtomStructure;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import APIs.CircularOrbitAPIs;
+<i>4</i>&nbsp;import applications.AtomStructure.gui.AtomStructurePanel;
+<i>5</i>&nbsp;import applications.AtomStructure.memento.ElectronTransitCareTaker;
+<i>6</i>&nbsp;import circularOrbit.CircularOrbit;
+<i>7</i>&nbsp;import circularOrbit.ConcreteCircularOrbit;
+<i>8</i>&nbsp;import circularOrbit.Drawable;
+<i>9</i>&nbsp;import org.apache.log4j.Logger;
+<i>10</i>&nbsp;import otherDirectory.exception.CheckedException;
+<i>11</i>&nbsp;import otherDirectory.exception.DependencyException;
+<i>12</i>&nbsp;import otherDirectory.exception.GrammarException;
+<i>13</i>&nbsp;import track.Track;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import javax.swing.*;
+<i>16</i>&nbsp;import java.io.BufferedReader;
+<i>17</i>&nbsp;import java.io.FileInputStream;
+<i>18</i>&nbsp;import java.io.IOException;
+<i>19</i>&nbsp;import java.io.InputStreamReader;
+<i>20</i>&nbsp;import java.util.*;
+<i>21</i>&nbsp;import java.util.function.Predicate;
+<i>22</i>&nbsp;import java.util.regex.Matcher;
+<i>23</i>&nbsp;import java.util.regex.Pattern;
+<i>24</i>&nbsp;import java.util.stream.Collectors;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;public class AtomStructure implements Drawable {
+<i>27</i>&nbsp;
+<b class="fc"><i>28</i>&nbsp;    private static Logger logger = Logger.getLogger(AtomStructure.class.getName());</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    private String filename;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;//    读入的文件配置
+<i>33</i>&nbsp;    String elementName;
+<i>34</i>&nbsp;    int numofTracks;
+<b class="fc"><i>35</i>&nbsp;    List&lt;Integer&gt; trackIdList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>36</i>&nbsp;    List&lt;Integer&gt; electronNumList = new ArrayList&lt;&gt;();</b>
+<i>37</i>&nbsp;    Map&lt;Track,List&lt;Electron&gt;&gt; physicalObjMap;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    //    生成的构造配置
+<b class="fc"><i>40</i>&nbsp;    List&lt;Track&gt; trackList = new ArrayList&lt;&gt;();</b>
+<i>41</i>&nbsp;    AtomCircularOrbit atomCircularOrbit;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    AtomStructurePanel panel;
+<b class="fc"><i>44</i>&nbsp;    ElectronTransitCareTaker careTaker = new ElectronTransitCareTaker();</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;
+<b class="fc"><i>47</i>&nbsp;    public AtomStructure(String filename) {</b>
+<b class="fc"><i>48</i>&nbsp;        this.filename = filename;</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * 测试是否完全匹配
+<i>53</i>&nbsp;     * @param line 匹配行
+<i>54</i>&nbsp;     * @param regex 正则表达式
+<i>55</i>&nbsp;     * @return  是否 完全 匹配
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    private boolean testMatch(String line,String regex) {
+<b class="fc"><i>58</i>&nbsp;        Matcher matcher = Pattern.compile(regex).matcher(line);</b>
+<b class="fc"><i>59</i>&nbsp;        if(matcher.find()) {</b>
+<b class="fc"><i>60</i>&nbsp;            if(matcher.group(1).equals(line)) {</b>
+<b class="nc"><i>61</i>&nbsp;                return true;</b>
+<i>62</i>&nbsp;            } else {
+<b class="fc"><i>63</i>&nbsp;                return false;</b>
+<i>64</i>&nbsp;            }
+<i>65</i>&nbsp;        } else {
+<b class="fc"><i>66</i>&nbsp;            return false;</b>
+<i>67</i>&nbsp;        }
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * 获得读入错误的具体失败原因
+<i>72</i>&nbsp;     * @param line 读入的行
+<i>73</i>&nbsp;     * @return 错误原因 如果没有出现代码中考虑的错误则直接返回错误信息“匹配失败：未知错误类型”
+<i>74</i>&nbsp;     */
+<i>75</i>&nbsp;    private String getReadFaultReason(String line) {
+<b class="fc"><i>76</i>&nbsp;        String[] splitStrs = line.split(&quot;::=&quot;);</b>
+<b class="fc"><i>77</i>&nbsp;        String label = splitStrs[0].trim();</b>
+<b class="fc"><i>78</i>&nbsp;        String content = splitStrs[1].trim();</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;//        String elementNamePattern = &quot;ElementName\\s*::=\\s*([A-Z]{1}[a-z]{0,1})&quot;;
+<i>81</i>&nbsp;//        String tracksPattern = &quot;NumberOfTracks\\s*::=\\s*(\\d+)&quot;;
+<i>82</i>&nbsp;//        String electronPattern = &quot;NumberOfElectron\\s*::=\\s*((?:(?:\\d+\\/\\d+)|;)+)&quot;;
+<i>83</i>&nbsp;
+<b class="fc"><i>84</i>&nbsp;        if(label.equals(&quot;ElementName&quot;)) {</b>
+<b class="fc"><i>85</i>&nbsp;            if(!testMatch(content,&quot;([A-Z]{1}[a-z]{0,1})&quot;)) {</b>
+<b class="fc"><i>86</i>&nbsp;                return &quot;匹配错误：原子名称错误&quot;;</b>
+<i>87</i>&nbsp;            }
+<b class="fc"><i>88</i>&nbsp;        } else if(label.equals(&quot;NumberOfElectron&quot;)) {</b>
+<b class="fc"><i>89</i>&nbsp;            if(!testMatch(content,&quot;((?:(?:\\\\d+\\\\/\\\\d+)|;)+)&quot;)) {</b>
+<b class="fc"><i>90</i>&nbsp;                return &quot;匹配错误：非法轨道电子数目形式&quot;;</b>
+<i>91</i>&nbsp;            }
+<b class="fc"><i>92</i>&nbsp;        } else if(label.equals(&quot;NumberOfTracks&quot;)) {</b>
+<b class="fc"><i>93</i>&nbsp;            if(!testMatch(content,&quot;(\\\\d+)&quot;)) {</b>
+<b class="fc"><i>94</i>&nbsp;                return &quot;匹配错误：非法轨道数目&quot;;</b>
+<i>95</i>&nbsp;            }
+<i>96</i>&nbsp;        } else {
+<b class="fc"><i>97</i>&nbsp;            return &quot;匹配失败：标签错误&quot;;</b>
+<i>98</i>&nbsp;        }
+<b class="nc"><i>99</i>&nbsp;        return &quot;匹配失败：未知类型错误&quot;;</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    /**
+<i>103</i>&nbsp;     * 读入文件配置
+<i>104</i>&nbsp;     * 利用正则表达式进行解析
+<i>105</i>&nbsp;     * */
+<i>106</i>&nbsp;    public void loadConfig() throws CheckedException {
+<b class="fc"><i>107</i>&nbsp;        BufferedReader reader = null;</b>
+<i>108</i>&nbsp;        try {
+<i>109</i>&nbsp;//            reader = new BufferedReader(new FileReader( new File(filename)));
+<b class="fc"><i>110</i>&nbsp;            InputStreamReader isr = new InputStreamReader(new FileInputStream(filename), &quot;UTF-8&quot;);</b>
+<b class="fc"><i>111</i>&nbsp;            reader = new BufferedReader(isr);</b>
+<b class="fc"><i>112</i>&nbsp;            String line = reader.readLine();</b>
+<i>113</i>&nbsp;            String[] splitStrs;
+<b class="fc"><i>114</i>&nbsp;            int realNumOfTracks=0;</b>
+<i>115</i>&nbsp;
+<b class="fc"><i>116</i>&nbsp;            while(line!=null) {</b>
+<b class="fc"><i>117</i>&nbsp;                if(line.length()==0) {</b>
+<b class="nc"><i>118</i>&nbsp;                    line = reader.readLine();</b>
+<b class="nc"><i>119</i>&nbsp;                    continue;</b>
+<i>120</i>&nbsp;                }
+<b class="fc"><i>121</i>&nbsp;                line = line.trim();</b>
+<b class="fc"><i>122</i>&nbsp;                String elementNamePattern = &quot;^ElementName\\s*::=\\s*([A-Z]{1}[a-z]{0,1})$&quot;;</b>
+<b class="fc"><i>123</i>&nbsp;                String tracksPattern = &quot;^NumberOfTracks\\s*::=\\s*(\\d+)$&quot;;</b>
+<b class="fc"><i>124</i>&nbsp;                String electronPattern = &quot;^NumberOfElectron\\s*::=\\s*((?:(?:\\d+\\/\\d+)|;)+)$&quot;;</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;                // 创建 Pattern 对象
+<b class="fc"><i>127</i>&nbsp;                Matcher electronMatcher = Pattern.compile(electronPattern).matcher(line);</b>
+<b class="fc"><i>128</i>&nbsp;                Matcher elementNameMatcher = Pattern.compile(elementNamePattern).matcher(line);</b>
+<b class="fc"><i>129</i>&nbsp;                Matcher tracksMatcher = Pattern.compile(tracksPattern).matcher(line);</b>
+<i>130</i>&nbsp;
+<b class="fc"><i>131</i>&nbsp;                if(electronMatcher.find()) {</b>
+<b class="fc"><i>132</i>&nbsp;                    splitStrs = electronMatcher.group(1).trim().split(&quot;;&quot;);</b>
+<b class="fc"><i>133</i>&nbsp;                    realNumOfTracks = splitStrs.length;</b>
+<b class="fc"><i>134</i>&nbsp;                    for(int i=0;i&lt;splitStrs.length;i++) {</b>
+<b class="fc"><i>135</i>&nbsp;                        int trackId = Integer.parseInt(splitStrs[i].split(&quot;/&quot;)[0]);</b>
+<b class="fc"><i>136</i>&nbsp;                        int electronNum = Integer.parseInt(splitStrs[i].split(&quot;/&quot;)[1]);</b>
+<b class="fc"><i>137</i>&nbsp;                        trackIdList.add(trackId);</b>
+<b class="fc"><i>138</i>&nbsp;                        electronNumList.add(electronNum);</b>
+<i>139</i>&nbsp;                    }
+<b class="fc"><i>140</i>&nbsp;                } else if(elementNameMatcher.find()) {</b>
+<b class="fc"><i>141</i>&nbsp;                    elementName = elementNameMatcher.group(1).trim();</b>
+<b class="fc"><i>142</i>&nbsp;                } else if(tracksMatcher.find()) {</b>
+<b class="fc"><i>143</i>&nbsp;                    numofTracks = Integer.parseInt(tracksMatcher.group(1).trim());</b>
+<i>144</i>&nbsp;                } else {
+<b class="fc"><i>145</i>&nbsp;                    GrammarException.assertTrue(false, getReadFaultReason(line));</b>
+<i>146</i>&nbsp;                }
+<i>147</i>&nbsp;
+<b class="fc"><i>148</i>&nbsp;                line = reader.readLine();</b>
+<b class="fc"><i>149</i>&nbsp;            }</b>
+<b class="fc"><i>150</i>&nbsp;            DependencyException.assertTrue(realNumOfTracks==numofTracks,&quot;声明轨道数目和真实轨道数目不符&quot;);</b>
+<i>151</i>&nbsp;
+<b class="nc"><i>152</i>&nbsp;        } catch(IOException e) {</b>
+<b class="nc"><i>153</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>154</i>&nbsp;        } catch(CheckedException e) {</b>
+<b class="fc"><i>155</i>&nbsp;            logger.error(e);</b>
+<i>156</i>&nbsp;        } finally {
+<b class="nc"><i>157</i>&nbsp;            try {</b>
+<b class="fc"><i>158</i>&nbsp;                if(reader!=null)</b>
+<b class="fc"><i>159</i>&nbsp;                    reader.close();</b>
+<b class="nc"><i>160</i>&nbsp;            } catch(IOException e) {</b>
+<b class="nc"><i>161</i>&nbsp;                e.printStackTrace();</b>
+<b class="fc"><i>162</i>&nbsp;            }</b>
+<b class="nc"><i>163</i>&nbsp;        }</b>
+<b class="fc"><i>164</i>&nbsp;    }</b>
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    /**
+<i>167</i>&nbsp;     * 根据文件中的配置
+<i>168</i>&nbsp;     * 初始化轨道系统
+<i>169</i>&nbsp;     */
+<i>170</i>&nbsp;    public void initCircularOrbit() {
+<b class="fc"><i>171</i>&nbsp;        AtomCircularOrbitBuilder builder = new AtomCircularOrbitBuilder();</b>
+<b class="fc"><i>172</i>&nbsp;        builder.createConcreteCircularOrbit(elementName);</b>
+<i>173</i>&nbsp;//        这里把轨道号直接当做其半径
+<i>174</i>&nbsp;
+<b class="fc"><i>175</i>&nbsp;        for(int i=0;i&lt;numofTracks;i++) {</b>
+<b class="fc"><i>176</i>&nbsp;            trackList.add(Track.getInstance(i+1));</b>
+<i>177</i>&nbsp;        }
+<b class="fc"><i>178</i>&nbsp;        builder.buildTracks(trackList);</b>
+<b class="fc"><i>179</i>&nbsp;        physicalObjMap = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>180</i>&nbsp;        int cnt=0;</b>
+<b class="fc"><i>181</i>&nbsp;        for(int i=0;i&lt;trackIdList.size();i++) {</b>
+<b class="fc"><i>182</i>&nbsp;            Track track = trackList.get(trackIdList.get(i)-1);</b>
+<b class="fc"><i>183</i>&nbsp;            int eleNum = electronNumList.get(i);</b>
+<b class="fc"><i>184</i>&nbsp;            if(!physicalObjMap.containsKey(track)) {</b>
+<b class="fc"><i>185</i>&nbsp;                physicalObjMap.put(track,new ArrayList&lt;&gt;());</b>
+<i>186</i>&nbsp;            }
+<b class="fc"><i>187</i>&nbsp;            for(int j=0;j&lt;eleNum;j++) {</b>
+<b class="fc"><i>188</i>&nbsp;                physicalObjMap.get(track).add(Electron.getInstance());</b>
+<i>189</i>&nbsp;            }
+<i>190</i>&nbsp;        }
+<i>191</i>&nbsp;
+<b class="fc"><i>192</i>&nbsp;        builder.buildObjects(AtomCore.getInstance(),physicalObjMap);</b>
+<b class="fc"><i>193</i>&nbsp;        builder.buildRelation(new ArrayList&lt;&gt;(),new HashMap&lt;&gt;());</b>
+<b class="fc"><i>194</i>&nbsp;        ConcreteCircularOrbit&lt;AtomCore, Electron&gt; tmp = builder.getConcreteCircularOrbit();</b>
+<b class="fc"><i>195</i>&nbsp;        if(tmp instanceof AtomCircularOrbit) {</b>
+<b class="fc"><i>196</i>&nbsp;            atomCircularOrbit = (AtomCircularOrbit) tmp;</b>
+<i>197</i>&nbsp;        }
+<b class="fc"><i>198</i>&nbsp;    }</b>
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;//    @Override
+<i>201</i>&nbsp;//    public void initialize() {
+<i>202</i>&nbsp;//        loadConfig();
+<i>203</i>&nbsp;//        initCircularOrbit();
+<i>204</i>&nbsp;//    }
+<i>205</i>&nbsp;//
+<i>206</i>&nbsp;//    @Override
+<i>207</i>&nbsp;//    public void draw(JFrame frame) {
+<i>208</i>&nbsp;//        panel = new AtomStructurePanel(this);
+<i>209</i>&nbsp;//        frame.getContentPane().add(panel);
+<i>210</i>&nbsp;//        atomCircularOrbit.visualize(panel.getDrawPanel());
+<i>211</i>&nbsp;//    }
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    //////////////////////////////////////////////////////////////////////////////////////////////////
+<i>215</i>&nbsp;    private Electron getPhysicalObjByObName(Predicate&lt;Electron&gt; predicate, ConcreteCircularOrbit circularOrbit) {
+<b class="fc"><i>216</i>&nbsp;        Iterator&lt;Electron&gt; ite = circularOrbit.iterator();</b>
+<b class="fc"><i>217</i>&nbsp;        List&lt;Electron&gt;  physicalObjs = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>218</i>&nbsp;        while(ite.hasNext()) {</b>
+<b class="fc"><i>219</i>&nbsp;            Electron tmp = ite.next();</b>
+<b class="fc"><i>220</i>&nbsp;            physicalObjs.add(tmp);</b>
+<b class="fc"><i>221</i>&nbsp;        }</b>
+<b class="fc"><i>222</i>&nbsp;        Collections.shuffle(physicalObjs);</b>
+<b class="fc"><i>223</i>&nbsp;        return physicalObjs.stream().filter(predicate)</b>
+<b class="fc"><i>224</i>&nbsp;                .collect(Collectors.toList()).get(0);</b>
+<i>225</i>&nbsp;    }
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    /**
+<i>228</i>&nbsp;     * 向轨道系统co中添加轨道tk
+<i>229</i>&nbsp;     */
+<i>230</i>&nbsp;    public void addTrack(double addRadius) {
+<b class="fc"><i>231</i>&nbsp;        atomCircularOrbit.addTrack(Track.getInstance(addRadius));</b>
+<b class="fc"><i>232</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>233</i>&nbsp;    }</b>
+<i>234</i>&nbsp;    /**
+<i>235</i>&nbsp;     * 在轨道系统co中移除轨道tk
+<i>236</i>&nbsp;     */
+<i>237</i>&nbsp;    public void removeTrack(double rmRadius) {
+<b class="fc"><i>238</i>&nbsp;        atomCircularOrbit.removeTrack(Track.getInstance(rmRadius));</b>
+<b class="fc"><i>239</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>240</i>&nbsp;    }</b>
+<i>241</i>&nbsp;    /**
+<i>242</i>&nbsp;     * 向co的tk轨道添加运动员Electron
+<i>243</i>&nbsp;     */
+<i>244</i>&nbsp;    public void addPhysicalObject(Electron electron,double tkRadius) {
+<b class="fc"><i>245</i>&nbsp;        atomCircularOrbit.addPhysicalObj2Track(electron, Track.getInstance(tkRadius));</b>
+<b class="fc"><i>246</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>247</i>&nbsp;    }</b>
+<i>248</i>&nbsp;    /**
+<i>249</i>&nbsp;     * 在轨道系统co中移除运动员Electron
+<i>250</i>&nbsp;     */
+<i>251</i>&nbsp;    public void removePhysicalObject(double rmRadius) {
+<b class="fc"><i>252</i>&nbsp;        Track tk = Track.getInstance(rmRadius);</b>
+<b class="fc"><i>253</i>&nbsp;        Electron electron = getPhysicalObjByObName(x-&gt;atomCircularOrbit.getTrackForPO(x).equals(tk)</b>
+<i>254</i>&nbsp;                ,atomCircularOrbit);
+<b class="fc"><i>255</i>&nbsp;        atomCircularOrbit.removePhysicalObject(electron);</b>
+<b class="fc"><i>256</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>257</i>&nbsp;    }</b>
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    @Override
+<i>260</i>&nbsp;    public void initialize() throws CheckedException{
+<b class="fc"><i>261</i>&nbsp;        loadConfig();</b>
+<b class="fc"><i>262</i>&nbsp;        initCircularOrbit();</b>
+<b class="fc"><i>263</i>&nbsp;    }</b>
+<i>264</i>&nbsp;
+<i>265</i>&nbsp;    @Override
+<i>266</i>&nbsp;    public void draw(JFrame frame) {
+<b class="nc"><i>267</i>&nbsp;        panel = new AtomStructurePanel(this);</b>
+<b class="nc"><i>268</i>&nbsp;        frame.getContentPane().add(panel);</b>
+<b class="nc"><i>269</i>&nbsp;        atomCircularOrbit.visualize(panel.getDrawPanel());</b>
+<b class="nc"><i>270</i>&nbsp;        reLoadAll();</b>
+<b class="nc"><i>271</i>&nbsp;    }</b>
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;    public void reLoadAll() {
+<b class="fc"><i>274</i>&nbsp;        if(panel==null) return;</b>
+<b class="nc"><i>275</i>&nbsp;        CircularOrbitAPIs&lt;AtomCore,Electron&gt; apis = new CircularOrbitAPIs&lt;&gt;();</b>
+<b class="nc"><i>276</i>&nbsp;        CircularOrbit&lt;AtomCore, Electron&gt; nowCircularOrbit = atomCircularOrbit;</b>
+<b class="nc"><i>277</i>&nbsp;        boolean state = apis.checkOrbitAvailable(nowCircularOrbit);</b>
+<b class="nc"><i>278</i>&nbsp;        double entropy = apis.getObjectDistributionEntropy(nowCircularOrbit);</b>
+<b class="nc"><i>279</i>&nbsp;        List&lt;String&gt; trackList = nowCircularOrbit.getTrackRadiusList();</b>
+<b class="nc"><i>280</i>&nbsp;        Iterator&lt;Electron&gt; ite = ((AtomCircularOrbit) nowCircularOrbit).iterator();</b>
+<b class="nc"><i>281</i>&nbsp;        List&lt;String&gt; physicalObjs = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>282</i>&nbsp;        while(ite.hasNext()) {</b>
+<b class="nc"><i>283</i>&nbsp;            physicalObjs.add(ite.next().getObName());</b>
+<i>284</i>&nbsp;        }
+<b class="nc"><i>285</i>&nbsp;        panel.reloadGameInfo(state,entropy,trackList,physicalObjs,careTaker.getAllHistory());</b>
+<b class="nc"><i>286</i>&nbsp;        nowCircularOrbit.visualize(panel.getDrawPanel());</b>
+<b class="nc"><i>287</i>&nbsp;    }</b>
+<i>288</i>&nbsp;    //////////////////////////////////////////////////////////////////////////////////////////
+<i>289</i>&nbsp;
+<i>290</i>&nbsp;    public void electronTransit(double source,double target) {
+<b class="fc"><i>291</i>&nbsp;        Track sourceTrack = Track.getInstance(source);</b>
+<b class="fc"><i>292</i>&nbsp;        Track targetTrack = Track.getInstance(target);</b>
+<i>293</i>&nbsp;
+<b class="fc"><i>294</i>&nbsp;        Electron electron = getPhysicalObjByObName(x-&gt;atomCircularOrbit.getTrackForPO(x).equals(sourceTrack)</b>
+<i>295</i>&nbsp;                ,atomCircularOrbit);
+<b class="fc"><i>296</i>&nbsp;        atomCircularOrbit.removePhysicalObject(electron);</b>
+<b class="fc"><i>297</i>&nbsp;        atomCircularOrbit.addPhysicalObj2Track(electron,targetTrack);</b>
+<b class="fc"><i>298</i>&nbsp;        careTaker.addMemento(electron,sourceTrack,targetTrack);</b>
+<b class="fc"><i>299</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>300</i>&nbsp;    }</b>
+<i>301</i>&nbsp;    public void rebackHistory(int index) {
+<b class="fc"><i>302</i>&nbsp;        atomCircularOrbit.reback(careTaker.rebackMemento(index));</b>
+<b class="fc"><i>303</i>&nbsp;        reLoadAll();</b>
+<b class="fc"><i>304</i>&nbsp;    }</b>
+<i>305</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-05-18 10:58</div>
+</div>
+</body>
+</html>
